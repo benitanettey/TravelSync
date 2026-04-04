@@ -1,0 +1,50 @@
+/* CARD HOVER */
+.trip-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.trip-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* TEXT STYLING */
+.trip-location {
+  margin: 6px 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trip-duration {
+  margin: 0;
+  font-size: 13px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trip-seats {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #d97706;
+  font-weight: 500;
+}
+
+/* BUTTON STYLING */
+.trip-button {
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #1e3a8a);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.trip-button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #1e40af, #1e3a8a);
+}
