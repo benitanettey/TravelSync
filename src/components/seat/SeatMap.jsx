@@ -1,14 +1,18 @@
 "use client";
 
-import { WifiOutlined } from "@ant-design/icons";
+import SeatItem from "./SeatItem";
 
-export default function SeatMap({ selectedSeats, setSelectedSeats, busType = "premium" }) {
+export default function SeatMap({
+  selectedSeats,
+  setSelectedSeats,
+  busType = "premium",
+  bookedSeats = ["A2", "C1", "C2", "D3"],
+}) {
   // TODO: BACKEND - Fetch booked seats from API in real-time
   // Endpoint: GET /api/trips/:tripId/seats
   // Should return: array of seat statuses { seatNumber, status: 'available'|'booked'|'reserved' }
   // TODO: BACKEND - Implement WebSocket connection for real-time seat updates
   // When another user books a seat, update the UI immediately
-  const bookedSeats = ["A2", "C1", "C2", "D3"];
 
   // TODO: BACKEND - Fetch bus layout configuration from API
   // Endpoint: GET /api/buses/:busId/layout
@@ -33,17 +37,20 @@ export default function SeatMap({ selectedSeats, setSelectedSeats, busType = "pr
 
   const rows = busType === "premium" ? premiumRows : standardRows;
 
-  const toggleSeat = (seat) => {
-    if (bookedSeats.includes(seat)) return;
-    setSelectedSeats((prev) =>
-      prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
-    );
-  };
+  const allSeats = rows.flatMap((r) => r.seats.filter((s) => s !== null));
+  const availableCount = allSeats.filter((s) => !bookedSeats.includes(s)).length;
 
-  const getSeatClass = (seat) => {
+  const toggleSeat = (seat) => {
+  if (bookedSeats.includes(seat)) return;
+  setSelectedSeats((prev) =>
+    prev.includes(seat) ? prev.filter((s) => s !== seat) : [...prev, seat]
+  );
+};
+
+  const getStatus = (seat) => {
     if (bookedSeats.includes(seat)) return "booked";
     if (selectedSeats.includes(seat)) return "selected";
-    return "";
+    return "available";
   };
 
   return (
@@ -65,21 +72,21 @@ export default function SeatMap({ selectedSeats, setSelectedSeats, busType = "pr
               seat === null ? (
                 <div key={`aisle-${idx}`} className="aisle" />
               ) : (
-                <div
+                <SeatItem
                   key={seat}
-                  className={`seat ${getSeatClass(seat)}`}
-                  onClick={() => toggleSeat(seat)}
-                >
-                  {busType === "premium" && !bookedSeats.includes(seat) && (
-                    <WifiOutlined className="seat-icon" />
-                  )}
-                  <span className="seat-label">{seat}</span>
-                </div>
+                  seat={seat}
+                  status={getStatus(seat)}
+                  busType={busType}
+                  onClick={toggleSeat}
+                />
               )
             )}
           </div>
         ))}
       </div>
+
+      {/* AVAILABLE COUNT */}
+      <p className="available-count">{availableCount} seats available</p>
 
       <style jsx>{`
         .bus-layout {
@@ -157,89 +164,13 @@ export default function SeatMap({ selectedSeats, setSelectedSeats, busType = "pr
           width: 20px;
         }
 
-        .seat {
-          width: 56px;
-          height: 62px;
-          background: linear-gradient(180deg, #a7f3d0 0%, #6ee7b7 100%);
-          border: 2px solid #34d399;
-          border-radius: 10px 10px 6px 6px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
+        .available-count {
+          text-align: center;
+          margin: 14px 0 0;
+          font-size: 12px;
           font-weight: 600;
-          font-size: 11px;
-          color: #065f46;
-          transition: all 0.2s ease;
-          position: relative;
-          gap: 2px;
-        }
-
-        .bus-layout.standard .seat {
-          background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
-          border-color: #f59e0b;
-          color: #92400e;
-          width: 52px;
-          height: 56px;
-        }
-
-        .seat::before {
-          content: "";
-          position: absolute;
-          top: -5px;
-          left: 6px;
-          right: 6px;
-          height: 5px;
-          background: linear-gradient(180deg, #6ee7b7 0%, #34d399 100%);
-          border-radius: 4px 4px 0 0;
-        }
-
-        .bus-layout.standard .seat::before {
-          background: linear-gradient(180deg, #fde68a 0%, #f59e0b 100%);
-        }
-
-        .seat:hover:not(.booked) {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(52, 211, 153, 0.3);
-        }
-
-        .bus-layout.standard .seat:hover:not(.booked) {
-          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-
-        .seat.selected {
-          background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%) !important;
-          border-color: #60a5fa !important;
-          color: #1d4ed8 !important;
-        }
-
-        .seat.selected::before {
-          background: linear-gradient(180deg, #bfdbfe 0%, #60a5fa 100%) !important;
-        }
-
-        .seat.booked {
-          background: #e2e8f0;
-          border-color: #cbd5e1;
-          color: #94a3b8;
-          cursor: not-allowed;
-        }
-
-        .seat.booked::before {
-          background: #cbd5e1;
-        }
-
-        .seat-icon {
-          font-size: 14px;
-          opacity: 0.7;
-        }
-
-        .seat.booked .seat-icon {
-          display: none;
-        }
-
-        .seat-label {
-          font-size: 11px;
+          color: #64748b;
+          letter-spacing: 0.3px;
         }
       `}</style>
     </div>
