@@ -13,6 +13,7 @@ import {
   Form,
   message,
   Empty,
+  Space,
 } from "antd";
 import {
   SearchOutlined,
@@ -59,7 +60,9 @@ export default function MyBookingsPage() {
       messageApi.warning("Please enter a booking reference or phone number.");
       return;
     }
-    const found = findBookings({ reference: searchRef, phone: searchPhone });
+    // Prepend +254 to phone if user entered a number
+    const phoneToSearch = searchPhone ? `+254${searchPhone.replace(/\s/g, "")}` : "";
+    const found = findBookings({ reference: searchRef, phone: phoneToSearch });
     setResults(found);
     setHasSearched(true);
   };
@@ -89,7 +92,8 @@ export default function MyBookingsPage() {
     setCancelModalId(null);
 
     // Re-run search
-    const found = findBookings({ reference: searchRef, phone: searchPhone });
+    const phoneToSearch = searchPhone ? `+254${searchPhone.replace(/\s/g, "")}` : "";
+    const found = findBookings({ reference: searchRef, phone: phoneToSearch });
     setResults(found);
   };
 
@@ -152,7 +156,8 @@ export default function MyBookingsPage() {
     setModifyLoading(false);
     setModifyBooking(null);
 
-    const found = findBookings({ reference: searchRef, phone: searchPhone });
+    const phoneToSearch = searchPhone ? `+254${searchPhone.replace(/\s/g, "")}` : "";
+    const found = findBookings({ reference: searchRef, phone: phoneToSearch });
     setResults(found);
   };
 
@@ -163,20 +168,20 @@ export default function MyBookingsPage() {
   };
 
   const inputStyle = {
-    background: "#f5f7fa",
-    border: "1px solid #e8ecf1",
+    background: "var(--ts-input-bg)",
+    border: "1px solid var(--ts-input-border)",
     borderRadius: 8,
     height: 48,
   };
 
   return (
-    <div style={{ background: "#f8fafc", minHeight: "100vh" }}>
+    <div style={{ background: "var(--ts-bg)", minHeight: "100vh" }}>
       {ctx}
 
       {/* Hero */}
       <div
         style={{
-          background: "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
+          background: "var(--ts-bg-hero)",
           padding: "60px 20px",
           textAlign: "center",
         }}
@@ -194,9 +199,9 @@ export default function MyBookingsPage() {
               margin: "0 auto 20px",
             }}
           >
-            <SearchOutlined style={{ fontSize: 32, color: "#7FE3C5" }} />
+            <SearchOutlined style={{ fontSize: 32, color: "var(--ts-accent-green)" }} />
           </div>
-          <Title level={1} style={{ color: "white", margin: 0, fontStyle: "italic" }}>
+          <Title level={1} style={{ color: "var(--ts-text-on-hero)", margin: 0, fontStyle: "italic" }}>
             My Bookings
           </Title>
           <Paragraph style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 12 }}>
@@ -208,12 +213,12 @@ export default function MyBookingsPage() {
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 20px" }}>
         {/* Search Card */}
         <Card
-          style={{ borderRadius: 16, border: "1px solid #e2e8f0", marginBottom: 32 }}
+          style={{ borderRadius: 16, border: "1px solid var(--ts-border)", background: "var(--ts-bg-card)", marginBottom: 32 }}
           styles={{ body: { padding: 28 } }}
         >
           <Row gutter={16} align="bottom">
             <Col xs={24} sm={9}>
-              <Text style={{ fontWeight: 500, color: "#334155", fontSize: 13, display: "block", marginBottom: 6 }}>
+              <Text style={{ fontWeight: 500, color: "var(--ts-text-primary)", fontSize: 13, display: "block", marginBottom: 6 }}>
                 Booking Reference
               </Text>
               <Input
@@ -225,19 +230,26 @@ export default function MyBookingsPage() {
               />
             </Col>
             <Col xs={24} sm={2} style={{ textAlign: "center", padding: "12px 0" }}>
-              <Text type="secondary" style={{ fontSize: 13 }}>or</Text>
+              <Text style={{ fontSize: 13, color: "var(--ts-text-secondary)" }}>or</Text>
             </Col>
             <Col xs={24} sm={9}>
-              <Text style={{ fontWeight: 500, color: "#334155", fontSize: 13, display: "block", marginBottom: 6 }}>
+              <Text style={{ fontWeight: 500, color: "var(--ts-text-primary)", fontSize: 13, display: "block", marginBottom: 6 }}>
                 Phone Number
               </Text>
-              <Input
-                placeholder="e.g. +254 712 345 678"
-                value={searchPhone}
-                onChange={(e) => setSearchPhone(e.target.value)}
-                onPressEnter={handleSearch}
-                style={inputStyle}
-              />
+              <Space.Compact style={{ width: "100%" }}>
+                <Input
+                  style={{ ...inputStyle, width: 70, textAlign: "center", flexShrink: 0 }}
+                  value="+254"
+                  disabled
+                />
+                <Input
+                  placeholder="712 345 678"
+                  value={searchPhone}
+                  onChange={(e) => setSearchPhone(e.target.value)}
+                  onPressEnter={handleSearch}
+                  style={{ ...inputStyle, flex: 1 }}
+                />
+              </Space.Compact>
             </Col>
             <Col xs={24} sm={4}>
               <Button
@@ -250,7 +262,7 @@ export default function MyBookingsPage() {
                   height: 48,
                   borderRadius: 8,
                   fontWeight: 600,
-                  background: "#1677ff",
+                  background: "var(--ts-accent)",
                 }}
               >
                 Search

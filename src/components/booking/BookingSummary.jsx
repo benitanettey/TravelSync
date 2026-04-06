@@ -34,63 +34,62 @@ export default function BookingSummary({
           {/* Header */}
           <div className="bs-header">
             <FileTextOutlined style={{ fontSize: 18 }} />
-            <Title level={5} style={{ margin: 0, color: "#0d1f3c" }}>
+            <Title level={5} style={{ margin: 0, color: "var(--ts-text-primary)" }}>
               Booking Summary
             </Title>
           </div>
 
-          <Divider style={{ margin: "16px 0", borderColor: "#e2e8f0" }} />
+          <Divider style={{ margin: "16px 0", borderColor: "var(--ts-border)" }} />
 
           {/* Info rows */}
           <div className="bs-info-row">
-            <Text type="secondary">Bus Type</Text>
-            <Text strong style={{ color: isPremium ? "#1677ff" : "#f59e0b" }}>
+            <Text style={{ color: "var(--ts-text-secondary)" }}>Bus Type</Text>
+            <Text strong style={{ color: isPremium ? "var(--ts-accent)" : "#f59e0b" }}>
               {isPremium ? "Executive Gold Liner" : "Standard Liner"}
             </Text>
           </div>
 
           <div className="bs-info-row">
-            <Text type="secondary">Selected Seats</Text>
+            <Text style={{ color: "var(--ts-text-secondary)" }}>Selected Seats</Text>
             <div style={{ display: "flex", gap: 6 }}>
               {count > 0 ? (
                 selectedSeats.map((seat) => (
                   <Tag
                     key={seat}
-                    color="#0d1f3c"
-                    style={{ margin: 0, borderRadius: 4 }}
+                    style={{ margin: 0, borderRadius: 4, background: "var(--ts-text-primary)", color: "var(--ts-bg)" }}
                   >
                     {seat}
                   </Tag>
                 ))
               ) : (
-                <Text type="secondary">—</Text>
+                <Text style={{ color: "var(--ts-text-secondary)" }}>—</Text>
               )}
             </div>
           </div>
 
           <div className="bs-info-row">
-            <Text type="secondary">Total Passengers</Text>
-            <Text strong>
+            <Text style={{ color: "var(--ts-text-secondary)" }}>Total Passengers</Text>
+            <Text strong style={{ color: "var(--ts-text-primary)" }}>
               {count > 0 ? `0${count} Adult${count > 1 ? "s" : ""}` : "—"}
             </Text>
           </div>
 
-          <Divider style={{ margin: "16px 0", borderColor: "#e2e8f0" }} />
+          <Divider style={{ margin: "16px 0", borderColor: "var(--ts-border)" }} />
 
           {/* Price breakdown */}
           <div className="bs-info-row">
-            <Text type="secondary">Base Fare (x{count})</Text>
-            <Text>KES {subtotal.toLocaleString()}.00</Text>
+            <Text style={{ color: "var(--ts-text-secondary)" }}>Base Fare (x{count})</Text>
+            <Text style={{ color: "var(--ts-text-primary)" }}>KES {subtotal.toLocaleString()}.00</Text>
           </div>
 
           <div className="bs-info-row">
-            <Text type="secondary">Booking Fee</Text>
-            <Text>KES {taxesFees.toLocaleString()}.00</Text>
+            <Text style={{ color: "var(--ts-text-secondary)" }}>Booking Fee</Text>
+            <Text style={{ color: "var(--ts-text-primary)" }}>KES {taxesFees.toLocaleString()}.00</Text>
           </div>
 
           <div className="bs-total-row">
-            <Text strong style={{ fontSize: 15 }}>Total Amount</Text>
-            <Text strong style={{ fontSize: 22, color: "#0d1f3c" }}>
+            <Text strong style={{ fontSize: 15, color: "var(--ts-text-primary)" }}>Total Amount</Text>
+            <Text strong style={{ fontSize: 22, color: "var(--ts-text-primary)" }}>
               KES {total.toLocaleString()}.00
             </Text>
           </div>
@@ -106,8 +105,6 @@ export default function BookingSummary({
               marginTop: 20,
               height: 48,
               borderRadius: 24,
-              background: "#0d1f3c",
-              borderColor: "#0d1f3c",
               fontWeight: 600,
             }}
           >
@@ -116,7 +113,7 @@ export default function BookingSummary({
 
           <div className="bs-terms">
             BY CLICKING CONFIRM, YOU AGREE TO OUR{" "}
-            <Link href="/support" style={{ color: "#0d1f3c", textDecoration: "underline" }}>
+            <Link href="/support" style={{ color: "var(--ts-accent)", textDecoration: "underline" }}>
               TERMS & CONDITIONS
             </Link>
             .
@@ -139,11 +136,11 @@ export default function BookingSummary({
         {/* ASSIST CARD */}
         <Link href="/support" style={{ textDecoration: "none" }}>
           <div className="bs-assist">
-            <CustomerServiceOutlined style={{ fontSize: 20, color: "#64748b" }} />
+            <CustomerServiceOutlined style={{ fontSize: 20, color: "var(--ts-text-secondary)" }} />
             <div>
-              <Text strong>Need assistance?</Text>
+              <Text strong style={{ color: "var(--ts-text-primary)" }}>Need assistance?</Text>
               <br />
-              <Text type="secondary">Talk to a concierge expert.</Text>
+              <Text style={{ color: "var(--ts-text-secondary)" }}>Talk to a concierge expert.</Text>
             </div>
           </div>
         </Link>
@@ -160,20 +157,19 @@ export default function BookingSummary({
         .bs-card {
           border-radius: 12px;
           padding: 20px;
-          background: #fff;
-          border: 1px solid #e2e8f0;
+          background: var(--ts-bg-card);
+          border: 1px solid var(--ts-border);
         }
 
         .bs-card.standard {
           border-color: #fde68a;
-          background: #fffefb;
         }
 
         .bs-header {
           display: flex;
           align-items: center;
           gap: 10px;
-          color: #0d1f3c;
+          color: var(--ts-text-primary);
         }
 
         .bs-info-row {
@@ -193,7 +189,7 @@ export default function BookingSummary({
         .bs-terms {
           margin-top: 16px;
           font-size: 10px;
-          color: #94a3b8;
+          color: var(--ts-text-secondary);
           text-align: center;
           letter-spacing: 0.3px;
         }
@@ -210,19 +206,19 @@ export default function BookingSummary({
 
         .bs-assist {
           padding: 16px;
-          border: 1px solid #e2e8f0;
+          border: 1px solid var(--ts-border);
           border-radius: 12px;
           display: flex;
           gap: 12px;
           align-items: center;
           cursor: pointer;
           transition: all 0.2s ease;
-          background: #fff;
+          background: var(--ts-bg-card);
         }
 
         .bs-assist:hover {
-          border-color: #0d1f3c;
-          background: #f8fafc;
+          border-color: var(--ts-accent);
+          background: var(--ts-bg-elevated);
         }
       `}</style>
     </>

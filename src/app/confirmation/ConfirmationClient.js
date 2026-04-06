@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { Card, Typography, Button, Row, Col, Tag } from "antd";
 import {
   CheckCircleFilled,
@@ -9,11 +9,15 @@ import {
   CalendarOutlined,
   EnvironmentOutlined,
   InfoCircleOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTravelData } from "@/hooks/useTravelData";
 import { fetchBookingById } from "@/services/seatDataService";
+import { QRCodeSVG } from "qrcode.react";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -41,18 +45,57 @@ export default function ConfirmationPage() {
   );
 }
 
+// Generate .ics calendar file content
+function generateICSFile(bookingData) {
+  const { from, to, departure, travelDate, bookingRef, departureStation } = bookingData;
+  
+  // Parse date and time for calendar event
+  const eventDate = new Date(travelDate);
+  const [time, period] = departure.split(" ");
+  const [hours, minutes] = time.split(":");
+  let hour24 = parseInt(hours);
+  if (period === "PM" && hour24 !== 12) hour24 += 12;
+  if (period === "AM" && hour24 === 12) hour24 = 0;
+  
+  eventDate.setHours(hour24, parseInt(minutes), 0);
+  
+  // Format dates for ICS (YYYYMMDDTHHMMSS)
+  const formatICSDate = (date) => {
+    return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  };
+  
+  const startDate = formatICSDate(eventDate);
+  const endDate = formatICSDate(new Date(eventDate.getTime() + 6 * 60 * 60 * 1000)); // +6 hours
+  const now = formatICSDate(new Date());
+  
+  const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TravelSync//Bus Booking//EN
+BEGIN:VEVENT
+UID:${bookingRef}@travelsync.com
+DTSTAMP:${now}
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:🚌 TravelSync: ${from} → ${to}
+DESCRIPTION:Booking Reference: ${bookingRef}\\nFrom: ${from}\\nTo: ${to}\\nDeparture: ${departure}\\n\\nPresent your QR code to the driver upon boarding.
+LOCATION:${departureStation.name}, ${departureStation.address}
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+  
+  return icsContent;
+}
+
 function ConfirmationPageContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const ticketRef = useRef(null);
   const { getBookingById, upsertBookingFromServer } = useTravelData();
-
-  // TODO: BACKEND - Fetch booking details from API using bookingId
-  // Endpoint: GET /api/bookings/:bookingId
-  // Should return: full booking object with trip details, passenger info, payment status
-  // Redirect to error page if booking not found or unauthorized
 
   const bookingId = searchParams.get("bookingId") || "";
   const [isMounted, setIsMounted] = useState(false);
   const [remoteBooking, setRemoteBooking] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
   const localBooking = isMounted && bookingId ? getBookingById(bookingId) : null;
   const booking = remoteBooking || localBooking;
 
@@ -116,19 +159,77 @@ function ConfirmationPageContent() {
 
   const departureStation = getStationInfo(from);
 
-  // TODO: BACKEND - Implement download ticket functionality
-  // Endpoint: GET /api/bookings/:bookingId/ticket
-  // Should return: PDF file with e-ticket containing QR code
+  // QR code data - compact ticket info that's easy to scan
+  const qrData = `TravelSync Ticket
+${bookingRef}
+${name}
+${from} > ${to}
+${travelDate} ${departure}
+Seats: ${seats.join(", ")}
+${isPremium ? "Executive" : "Standard"}`;
 
-  // TODO: BACKEND - Implement add to calendar functionality
-  // Generate .ics file with trip details for calendar import
+  // Download ticket as PDF
+  const handleDownloadTicket = async () => {
+    if (!ticketRef.current) return;
+    
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(ticketRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+      });
+      
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [canvas.width, canvas.height],
+      });
+      
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`TravelSync-Ticket-${bookingRef.replace("#", "")}.pdf`);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Failed to download ticket. Please try again.");
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
-  // TODO: BACKEND - Generate actual QR code with booking data
-  // Use a QR code library (e.g., qrcode.react) with booking reference
-  // QR should encode: { bookingRef, passengerName, tripId, seats }
+  // Print ticket
+  const handlePrintTicket = () => {
+    window.print();
+  };
+
+  // Add to calendar
+  const handleAddToCalendar = () => {
+    const icsContent = generateICSFile({
+      from,
+      to,
+      departure,
+      travelDate,
+      bookingRef,
+      departureStation,
+    });
+    
+    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `TravelSync-${bookingRef.replace("#", "")}.ics`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  };
+
+  // Navigate back to home
+  const handleBackToHome = () => {
+    router.push("/");
+  };
 
   return (
-    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingBottom: 60 }}>
+    <div style={{ background: "var(--ts-bg)", minHeight: "100vh", paddingBottom: 60 }}>
       <div style={{ maxWidth: 1000, margin: "0 auto", padding: "48px 20px" }}>
         {/* HEADER */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
@@ -137,7 +238,7 @@ function ConfirmationPageContent() {
               width: 56,
               height: 56,
               borderRadius: "50%",
-              background: "#7FE3C5",
+              background: "var(--ts-accent-green)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -146,10 +247,10 @@ function ConfirmationPageContent() {
           >
             <CheckCircleFilled style={{ fontSize: 28, color: "white" }} />
           </div>
-          <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "#0d1f3c" }}>
+          <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "var(--ts-text-primary)" }}>
             Booking Confirmed
           </Title>
-          <Paragraph type="secondary" style={{ marginBottom: 0 }}>
+          <Paragraph style={{ marginBottom: 0, color: "var(--ts-text-secondary)" }}>
             Your journey with TravelSync is ready. Safe travels!
           </Paragraph>
         </div>
@@ -158,11 +259,13 @@ function ConfirmationPageContent() {
           {/* LEFT - TICKET CARD */}
           <Col xs={24} lg={15}>
             <Card
+              ref={ticketRef}
               style={{
                 borderRadius: 16,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--ts-border)",
                 overflow: "hidden",
                 marginBottom: 24,
+                background: "var(--ts-bg-card)",
               }}
               styles={{ body: { padding: 0 } }}
             >
@@ -173,82 +276,82 @@ function ConfirmationPageContent() {
                   {/* Bus type and booking ref */}
                   <Row justify="space-between" style={{ marginBottom: 28 }}>
                     <Col>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block" }}>BUS TYPE</Text>
-                      <div style={{ color: "#0d1f3c", fontWeight: 600, fontSize: 15 }}>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block" }}>BUS TYPE</Text>
+                      <div style={{ color: "var(--ts-text-primary)", fontWeight: 600, fontSize: 15 }}>
                         {isPremium ? "Executive Gold Liner" : "Standard Traveller"}
                       </div>
                     </Col>
                     <Col>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block" }}>BOOKING REF</Text>
-                      <div style={{ color: "#0d1f3c", fontWeight: 700, fontSize: 15 }}>{bookingRef}</div>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block" }}>BOOKING REF</Text>
+                      <div style={{ color: "var(--ts-text-primary)", fontWeight: 700, fontSize: 15 }}>{bookingRef}</div>
                     </Col>
                   </Row>
 
                   {/* Route display */}
                   <div style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
                     <div style={{ flex: 1 }}>
-                      <Title level={2} style={{ margin: 0, color: "#0d1f3c", fontSize: 28 }}>{from}</Title>
-                      <Text type="secondary" style={{ fontSize: 12 }}>{departureStation.name}</Text>
+                      <Title level={2} style={{ margin: 0, color: "var(--ts-text-primary)", fontSize: 28 }}>{from}</Title>
+                      <Text style={{ fontSize: 12, color: "var(--ts-text-secondary)" }}>{departureStation.name}</Text>
                     </div>
 
                     <div style={{ textAlign: "center", padding: "0 16px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <div style={{ width: 40, height: 1, background: "#cbd5e1" }} />
+                        <div style={{ width: 40, height: 1, background: "var(--ts-border)" }} />
                         <div
                           style={{
                             width: 36,
                             height: 36,
                             borderRadius: 8,
-                            background: "#f1f5f9",
+                            background: "var(--ts-bg)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
                           }}
                         >
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="#64748b">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--ts-text-secondary)">
                             <path d="M4 16c0 .88.39 1.67 1 2.22V20c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h8v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1.78c.61-.55 1-1.34 1-2.22V6c0-3.5-3.58-4-8-4s-8 .5-8 4v10zm3.5 1c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H6V6h12v5z"/>
                           </svg>
                         </div>
-                        <div style={{ width: 40, height: 1, background: "#cbd5e1" }} />
+                        <div style={{ width: 40, height: 1, background: "var(--ts-border)" }} />
                       </div>
-                      <Text style={{ fontSize: 11, color: "#64748b" }}>{duration}</Text>
+                      <Text style={{ fontSize: 11, color: "var(--ts-text-secondary)" }}>{duration}</Text>
                     </div>
 
                     <div style={{ flex: 1, textAlign: "right" }}>
-                      <Title level={2} style={{ margin: 0, color: "#0d1f3c", fontSize: 28 }}>{to}</Title>
-                      <Text type="secondary" style={{ fontSize: 12 }}>{getStationInfo(to).name}</Text>
+                      <Title level={2} style={{ margin: 0, color: "var(--ts-text-primary)", fontSize: 28 }}>{to}</Title>
+                      <Text style={{ fontSize: 12, color: "var(--ts-text-secondary)" }}>{getStationInfo(to).name}</Text>
                     </div>
                   </div>
 
                   {/* Times */}
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 28 }}>
-                    <Title level={3} style={{ margin: 0, color: "#0d1f3c" }}>{departure}</Title>
-                    <Title level={3} style={{ margin: 0, color: "#0d1f3c" }}>{arrivalTime}</Title>
+                    <Title level={3} style={{ margin: 0, color: "var(--ts-text-primary)" }}>{departure}</Title>
+                    <Title level={3} style={{ margin: 0, color: "var(--ts-text-primary)" }}>{arrivalTime}</Title>
                   </div>
 
                   {/* Passenger and date */}
                   <Row gutter={24} style={{ marginBottom: 20 }}>
                     <Col span={12}>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block" }}>PASSENGER</Text>
-                      <div style={{ color: "#0d1f3c", fontWeight: 600, fontSize: 15 }}>{name}</div>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block" }}>PASSENGER</Text>
+                      <div style={{ color: "var(--ts-text-primary)", fontWeight: 600, fontSize: 15 }}>{name}</div>
                     </Col>
                     <Col span={12}>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block" }}>DATE</Text>
-                      <div style={{ color: "#0d1f3c", fontWeight: 600, fontSize: 15 }}>{travelDate}</div>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block" }}>DATE</Text>
+                      <div style={{ color: "var(--ts-text-primary)", fontWeight: 600, fontSize: 15 }}>{travelDate}</div>
                     </Col>
                   </Row>
 
                   {/* Seats and class */}
                   <Row gutter={24}>
                     <Col span={12}>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block", marginBottom: 6 }}>SEATS</Text>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block", marginBottom: 6 }}>SEATS</Text>
                       <div>
                         {seats.map((seat) => (
                           <Tag
                             key={seat}
                             style={{
-                              background: "#0d1f3c",
-                              color: "white",
+                              background: "var(--ts-text-primary)",
+                              color: "var(--ts-bg)",
                               border: "none",
                               borderRadius: 4,
                               fontWeight: 600,
@@ -262,10 +365,10 @@ function ConfirmationPageContent() {
                       </div>
                     </Col>
                     <Col span={12}>
-                      <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, display: "block", marginBottom: 6 }}>CLASS</Text>
+                      <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, display: "block", marginBottom: 6 }}>CLASS</Text>
                       <Tag
                         style={{
-                          background: isPremium ? "#7FE3C5" : "#fef3c7",
+                          background: isPremium ? "var(--ts-accent-green)" : "#fef3c7",
                           color: isPremium ? "#0d1f3c" : "#92400e",
                           border: "none",
                           borderRadius: 4,
@@ -284,7 +387,7 @@ function ConfirmationPageContent() {
                 <div
                   style={{
                     width: 1,
-                    background: "repeating-linear-gradient(to bottom, #e2e8f0 0px, #e2e8f0 8px, transparent 8px, transparent 16px)",
+                    background: "repeating-linear-gradient(to bottom, var(--ts-border) 0px, var(--ts-border) 8px, transparent 8px, transparent 16px)",
                     margin: "24px 0",
                   }}
                 />
@@ -300,14 +403,14 @@ function ConfirmationPageContent() {
                     justifyContent: "center",
                   }}
                 >
-                  <Text style={{ fontSize: 10, color: "#64748b", letterSpacing: 0.5, marginBottom: 12 }}>
+                  <Text style={{ fontSize: 10, color: "var(--ts-text-secondary)", letterSpacing: 0.5, marginBottom: 12 }}>
                     BOARDING PASS
                   </Text>
                   <div
                     style={{
                       width: 110,
                       height: 110,
-                      background: "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
+                      background: "var(--ts-bg-hero)",
                       borderRadius: 12,
                       display: "flex",
                       alignItems: "center",
@@ -316,60 +419,15 @@ function ConfirmationPageContent() {
                       marginBottom: 12,
                     }}
                   >
-                    {/* QR Code Pattern */}
-                    <svg width="85" height="85" viewBox="0 0 80 80" fill="none">
-                      <rect x="0" y="0" width="24" height="24" fill="#7FE3C5"/>
-                      <rect x="4" y="4" width="16" height="16" fill="#0d1f3c"/>
-                      <rect x="8" y="8" width="8" height="8" fill="#7FE3C5"/>
-                      <rect x="56" y="0" width="24" height="24" fill="#7FE3C5"/>
-                      <rect x="60" y="4" width="16" height="16" fill="#0d1f3c"/>
-                      <rect x="64" y="8" width="8" height="8" fill="#7FE3C5"/>
-                      <rect x="0" y="56" width="24" height="24" fill="#7FE3C5"/>
-                      <rect x="4" y="60" width="16" height="16" fill="#0d1f3c"/>
-                      <rect x="8" y="64" width="8" height="8" fill="#7FE3C5"/>
-                      <rect x="28" y="0" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="36" y="0" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="44" y="0" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="8" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="40" y="8" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="48" y="8" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="36" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="44" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="52" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="0" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="8" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="16" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="0" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="12" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="40" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="0" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="8" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="44" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="60" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="68" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="76" y="28" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="60" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="72" y="36" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="60" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="76" y="44" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="56" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="36" y="56" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="44" y="56" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="56" y="56" width="24" height="24" fill="#7FE3C5"/>
-                      <rect x="60" y="60" width="8" height="8" fill="#0d1f3c"/>
-                      <rect x="72" y="60" width="4" height="4" fill="#0d1f3c"/>
-                      <rect x="60" y="72" width="4" height="4" fill="#0d1f3c"/>
-                      <rect x="72" y="72" width="4" height="4" fill="#0d1f3c"/>
-                      <rect x="28" y="64" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="40" y="64" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="28" y="72" width="4" height="4" fill="#7FE3C5"/>
-                      <rect x="36" y="72" width="4" height="4" fill="#7FE3C5"/>
-                    </svg>
+                    <QRCodeSVG
+                      value={qrData}
+                      size={85}
+                      bgColor="transparent"
+                      fgColor="var(--ts-accent-green)"
+                      level="M"
+                    />
                   </div>
-                  <Text style={{ fontSize: 11, color: "#64748b", textAlign: "center", lineHeight: 1.4 }}>
+                  <Text style={{ fontSize: 11, color: "var(--ts-text-secondary)", textAlign: "center", lineHeight: 1.4 }}>
                     Present this code to the driver upon boarding.
                   </Text>
                 </div>
@@ -384,28 +442,15 @@ function ConfirmationPageContent() {
                 type="primary"
                 size="large"
                 icon={<DownloadOutlined />}
+                loading={isDownloading}
                 style={{
                   height: 52,
                   borderRadius: 8,
                   fontWeight: 600,
-                  background: "#1677ff",
+                  background: "var(--ts-accent)",
                 }}
                 block
-                onClick={() => downloadTicket({
-                  bookingRef,
-                  from,
-                  to,
-                  departure,
-                  arrivalTime,
-                  duration,
-                  name,
-                  travelDate,
-                  seats,
-                  busType,
-                  isPremium,
-                  departureStation,
-                  total: booking?.total,
-                })}
+                onClick={handleDownloadTicket}
               >
                 Download Ticket
               </Button>
@@ -416,9 +461,12 @@ function ConfirmationPageContent() {
                   height: 52,
                   borderRadius: 8,
                   fontWeight: 500,
-                  border: "1px solid #e2e8f0",
+                  border: "1px solid var(--ts-border)",
+                  background: "var(--ts-bg-card)",
+                  color: "var(--ts-text-primary)",
                 }}
                 block
+                onClick={handlePrintTicket}
               >
                 Print
               </Button>
@@ -429,11 +477,31 @@ function ConfirmationPageContent() {
                   height: 52,
                   borderRadius: 8,
                   fontWeight: 500,
-                  border: "1px solid #e2e8f0",
+                  border: "1px solid var(--ts-border)",
+                  background: "var(--ts-bg-card)",
+                  color: "var(--ts-text-primary)",
                 }}
                 block
+                onClick={handleAddToCalendar}
               >
                 Add to Calendar
+              </Button>
+              <Button
+                size="large"
+                icon={<HomeOutlined />}
+                style={{
+                  height: 52,
+                  borderRadius: 8,
+                  fontWeight: 500,
+                  border: "1px solid var(--ts-border)",
+                  background: "var(--ts-bg-card)",
+                  color: "var(--ts-text-primary)",
+                  marginTop: 8,
+                }}
+                block
+                onClick={handleBackToHome}
+              >
+                Back to Home
               </Button>
             </div>
 
@@ -441,15 +509,16 @@ function ConfirmationPageContent() {
             <Card
               style={{
                 borderRadius: 12,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--ts-border)",
+                background: "var(--ts-bg-card)",
               }}
               styles={{ body: { padding: 20 } }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
-                <InfoCircleOutlined style={{ color: "#7FE3C5", fontSize: 16 }} />
-                <Text strong style={{ color: "#0d1f3c" }}>Travel Tips</Text>
+                <InfoCircleOutlined style={{ color: "var(--ts-accent-green)", fontSize: 16 }} />
+                <Text strong style={{ color: "var(--ts-text-primary)" }}>Travel Tips</Text>
               </div>
-              <ul style={{ margin: 0, paddingLeft: 20, color: "#64748b", fontSize: 13, lineHeight: 1.8 }}>
+              <ul style={{ margin: 0, paddingLeft: 20, color: "var(--ts-text-secondary)", fontSize: 13, lineHeight: 1.8 }}>
                 <li>Arrive at the station at least <strong>20 minutes</strong> before departure.</li>
                 <li>Two pieces of luggage (20kg each) are included in your ticket.</li>
                 <li>Enjoy complimentary high-speed WiFi and refreshments on board.</li>
@@ -460,14 +529,15 @@ function ConfirmationPageContent() {
 
         {/* DEPARTURE POINT MAP */}
         <div style={{ marginTop: 40 }}>
-          <Title level={4} style={{ color: "#0d1f3c", fontStyle: "italic", marginBottom: 16 }}>
+          <Title level={4} style={{ color: "var(--ts-text-primary)", fontStyle: "italic", marginBottom: 16 }}>
             Departure Point
           </Title>
           <Card
             style={{
               borderRadius: 16,
               overflow: "hidden",
-              border: "1px solid #e2e8f0",
+              border: "1px solid var(--ts-border)",
+              background: "var(--ts-bg-card)",
             }}
             styles={{ body: { padding: 0 } }}
           >
@@ -475,11 +545,7 @@ function ConfirmationPageContent() {
             <div
               style={{
                 height: 220,
-                background: `
-                  linear-gradient(rgba(248,250,252,0.95), rgba(248,250,252,0.8)),
-                  repeating-linear-gradient(0deg, #e2e8f0 0px, #e2e8f0 1px, transparent 1px, transparent 24px),
-                  repeating-linear-gradient(90deg, #e2e8f0 0px, #e2e8f0 1px, transparent 1px, transparent 24px)
-                `,
+                background: "var(--ts-bg-elevated)",
                 position: "relative",
                 display: "flex",
                 alignItems: "center",
@@ -492,7 +558,7 @@ function ConfirmationPageContent() {
                   width: 52,
                   height: 52,
                   borderRadius: "50%",
-                  background: "#1677ff",
+                  background: "var(--ts-accent)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -508,16 +574,17 @@ function ConfirmationPageContent() {
                   position: "absolute",
                   bottom: 20,
                   left: 20,
-                  background: "white",
+                  background: "var(--ts-bg-card)",
                   borderRadius: 10,
                   padding: "14px 18px",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+                  boxShadow: "var(--ts-shadow)",
+                  border: "1px solid var(--ts-border)",
                 }}
               >
-                <Text strong style={{ color: "#0d1f3c", display: "block", fontSize: 15 }}>
+                <Text strong style={{ color: "var(--ts-text-primary)", display: "block", fontSize: 15 }}>
                   {departureStation.name}
                 </Text>
-                <Text type="secondary" style={{ fontSize: 13 }}>
+                <Text style={{ fontSize: 13, color: "var(--ts-text-secondary)" }}>
                   {departureStation.address}
                 </Text>
               </div>

@@ -136,14 +136,14 @@ function BookingPageContent() {
   const isPremium = busType === "premium";
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 20px" }}>
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 20px", background: "var(--ts-bg)", minHeight: "100vh" }}>
       {messageContextHolder}
       {/* HEADER */}
       <div style={{ marginBottom: 32 }}>
         <Link
           href="/seats"
           style={{
-            color: "#64748b",
+            color: "var(--ts-text-secondary)",
             fontSize: 14,
             display: "inline-flex",
             alignItems: "center",
@@ -154,10 +154,10 @@ function BookingPageContent() {
           <ArrowLeftOutlined /> Back to seat selection
         </Link>
 
-        <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "#0d1f3c" }}>
+        <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "var(--ts-text-primary)" }}>
           Review Your Journey
         </Title>
-        <Paragraph type="secondary" style={{ marginBottom: 0 }}>
+        <Paragraph style={{ marginBottom: 0, color: "var(--ts-text-secondary)" }}>
           Complete your passenger details to secure your {isPremium ? "executive" : "standard"} seat.
         </Paragraph>
       </div>
@@ -167,12 +167,12 @@ function BookingPageContent() {
         <Col xs={24} lg={14}>
           {/* PASSENGER FORM CARD */}
           <Card
-            style={{ borderRadius: 12, marginBottom: 24 }}
+            style={{ borderRadius: 12, marginBottom: 24, background: "var(--ts-bg-card)", border: "1px solid var(--ts-border)" }}
             styles={{ body: { padding: 24 } }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-              <UserOutlined style={{ fontSize: 18, color: "#0d1f3c" }} />
-              <Title level={5} style={{ margin: 0, color: "#0d1f3c" }}>
+              <UserOutlined style={{ fontSize: 18, color: "var(--ts-text-primary)" }} />
+              <Title level={5} style={{ margin: 0, color: "var(--ts-text-primary)" }}>
                 Passenger Details
               </Title>
             </div>
@@ -188,7 +188,7 @@ function BookingPageContent() {
           <Card
             style={{
               borderRadius: 16,
-              background: "#0d1f3c",
+              background: "var(--ts-bg-hero)",
               color: "white",
               overflow: "hidden",
             }}

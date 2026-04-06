@@ -109,12 +109,12 @@ function SeatsPageContent() {
   };
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 20px" }}>
+    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 20px", background: "var(--ts-bg)", minHeight: "100vh" }}>
       {/* BACK LINK */}
       <Button
         type="link"
         icon={<ArrowLeftOutlined />}
-        style={{ padding: 0, marginBottom: 16 }}
+        style={{ padding: 0, marginBottom: 16, color: "var(--ts-text-primary)" }}
         onClick={() => router.push("/trips")}
       >
         Back to Trips
@@ -125,7 +125,8 @@ function SeatsPageContent() {
         style={{
           borderRadius: 12,
           marginBottom: 24,
-          background: "#fff",
+          background: "var(--ts-bg-card)",
+          border: "1px solid var(--ts-border)",
         }}
         styles={{ body: { padding: "24px 32px" } }}
       >
@@ -134,17 +135,17 @@ function SeatsPageContent() {
             <Text type="success" style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1 }}>
               ACTIVE JOURNEY
             </Text>
-            <Title level={2} style={{ margin: "4px 0 8px" }}>
+            <Title level={2} style={{ margin: "4px 0 8px", color: "var(--ts-text-primary)" }}>
               {from} to {to}
             </Title>
             <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
               <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <CalendarOutlined style={{ color: "#64748b" }} />
-                <Text type="secondary">Today</Text>
+                <CalendarOutlined style={{ color: "var(--ts-text-secondary)" }} />
+                <Text style={{ color: "var(--ts-text-secondary)" }}>Today</Text>
               </span>
               <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <ClockCircleOutlined style={{ color: "#64748b" }} />
-                <Text type="secondary">{departure} Departure</Text>
+                <ClockCircleOutlined style={{ color: "var(--ts-text-secondary)" }} />
+                <Text style={{ color: "var(--ts-text-secondary)" }}>{departure} Departure</Text>
               </span>
               <Tag color={busType === "premium" ? "blue" : "green"}>
                 {busType === "premium" ? "PREMIUM BUS" : "STANDARD BUS"}
@@ -157,7 +158,7 @@ function SeatsPageContent() {
               <Col>
                 <div
                   style={{
-                    background: "#0d1f3c",
+                    background: "var(--ts-bg-hero)",
                     color: "white",
                     padding: "16px 24px",
                     borderRadius: 8,
@@ -176,18 +177,18 @@ function SeatsPageContent() {
               <Col>
                 <div
                   style={{
-                    background: "#f8fafc",
-                    border: "1px solid #e2e8f0",
+                    background: "var(--ts-bg-elevated)",
+                    border: "1px solid var(--ts-border)",
                     padding: "16px 24px",
                     borderRadius: 8,
                     textAlign: "center",
                     minWidth: 100,
                   }}
                 >
-                  <Text style={{ color: "#64748b", fontSize: 10, display: "block" }}>
+                  <Text style={{ color: "var(--ts-text-secondary)", fontSize: 10, display: "block" }}>
                     FARES FROM
                   </Text>
-                  <Text style={{ color: "#0d1f3c", fontSize: 20, fontWeight: 700 }}>
+                  <Text style={{ color: "var(--ts-text-primary)", fontSize: 20, fontWeight: 700 }}>
                     KES {price}
                   </Text>
                 </div>

@@ -70,7 +70,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div>
+    <div style={{ background: "var(--ts-bg)", minHeight: "100vh", padding: "20px" }}>
       {/* HERO SECTION WITH BUS BACKGROUND */}
       <div
         style={{
@@ -128,7 +128,7 @@ export default function HomePage() {
             }}
             onClick={() => router.push("/trips")}
           >
-            Book Premium
+            Book Now
           </Button>
           <Button
             size="large"
@@ -141,16 +141,16 @@ export default function HomePage() {
               color: "white",
               fontWeight: "600",
             }}
-            onClick={() => router.push("/trips")}
+            onClick={() => router.push("/my-bookings")}
           >
-            Book Standard
+            View My Tickets
           </Button>
         </div>
       </div>
 
       {/* HOW IT WORKS */}
       <div style={{ marginBottom: "48px" }}>
-        <Title level={2} style={{ textAlign: "center", marginBottom: "32px" }}>
+        <Title level={2} style={{ textAlign: "center", marginBottom: "32px", color: "var(--ts-text-primary)" }}>
           How It Works
         </Title>
 
@@ -162,14 +162,16 @@ export default function HomePage() {
                   textAlign: "center",
                   borderRadius: "12px",
                   height: "100%",
+                  background: "var(--ts-bg-card)",
+                  borderColor: "var(--ts-border)",
                 }}
                 styles={{ body: { padding: "32px 24px" } }}
               >
                 <div style={{ marginBottom: "16px" }}>{step.icon}</div>
-                <Title level={4} style={{ marginBottom: "8px" }}>
+                <Title level={4} style={{ marginBottom: "8px", color: "var(--ts-text-primary)" }}>
                   {step.title}
                 </Title>
-                <Paragraph type="secondary">{step.description}</Paragraph>
+                <Paragraph style={{ color: "var(--ts-text-secondary)" }}>{step.description}</Paragraph>
               </Card>
             </Col>
           ))}
@@ -179,13 +181,14 @@ export default function HomePage() {
       {/* WHY TRAVELSYNC */}
       <div
         style={{
-          background: "#f5f5f5",
+          background: "var(--ts-bg-elevated)",
           borderRadius: "12px",
           padding: "48px 40px",
           marginBottom: "48px",
+          border: "1px solid var(--ts-border)",
         }}
       >
-        <Title level={2} style={{ textAlign: "center", marginBottom: "32px" }}>
+        <Title level={2} style={{ textAlign: "center", marginBottom: "32px", color: "var(--ts-text-primary)" }}>
           Why TravelSync?
         </Title>
 
@@ -195,10 +198,10 @@ export default function HomePage() {
               <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
                 <div>{feat.icon}</div>
                 <div>
-                  <Title level={5} style={{ marginBottom: "4px" }}>
+                  <Title level={5} style={{ marginBottom: "4px", color: "var(--ts-text-primary)" }}>
                     {feat.title}
                   </Title>
-                  <Paragraph type="secondary" style={{ marginBottom: 0 }}>
+                  <Paragraph style={{ marginBottom: 0, color: "var(--ts-text-secondary)" }}>
                     {feat.description}
                   </Paragraph>
                 </div>
@@ -211,14 +214,14 @@ export default function HomePage() {
       {/* CTA BANNER */}
       <div
         style={{
-          background: "#0d1f3c",
+          background: "var(--ts-bg-hero)",
           color: "white",
           borderRadius: "12px",
           padding: "48px 40px",
           textAlign: "center",
         }}
       >
-        <Title level={3} style={{ color: "white", marginBottom: "8px" }}>
+        <Title level={3} style={{ color: "var(--ts-text-on-hero)", marginBottom: "8px" }}>
           Ready to travel?
         </Title>
         <Paragraph style={{ color: "rgba(255,255,255,0.8)", marginBottom: "24px" }}>

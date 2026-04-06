@@ -16,6 +16,59 @@
   --ts-shadow-hover: 0 12px 30px rgba(0,0,0,0.15);
 }
 
+/* === BASE BODY STYLING === */
+html, body {
+  background: var(--ts-bg) !important;
+  color: var(--ts-text-primary);
+  min-height: 100vh;
+}
+
+/* === ANT DESIGN OVERRIDES FOR THEMING === */
+.ant-card {
+  background: var(--ts-bg-card) !important;
+  border-color: var(--ts-border) !important;
+}
+
+.ant-input, .ant-input-affix-wrapper, .ant-select-selector, .ant-picker {
+  background: var(--ts-input-bg) !important;
+  border-color: var(--ts-input-border) !important;
+  color: var(--ts-text-primary) !important;
+}
+
+.ant-input::placeholder, .ant-input-affix-wrapper input::placeholder {
+  color: var(--ts-text-secondary) !important;
+}
+
+.ant-input-group-addon, .ant-input-disabled {
+  background: var(--ts-bg-elevated) !important;
+  border-color: var(--ts-input-border) !important;
+  color: var(--ts-text-secondary) !important;
+}
+
+.ant-modal-content {
+  background: var(--ts-bg-card) !important;
+}
+
+.ant-modal-header {
+  background: var(--ts-bg-card) !important;
+}
+
+.ant-modal-title {
+  color: var(--ts-text-primary) !important;
+}
+
+.ant-form-item-label > label {
+  color: var(--ts-text-primary) !important;
+}
+
+.ant-typography {
+  color: var(--ts-text-primary);
+}
+
+.ant-typography.ant-typography-secondary {
+  color: var(--ts-text-secondary) !important;
+}
+
 /* === GLOBAL TRANSITION === */
 body, main, nav, footer,
 .ant-card, .ant-modal-content, .ant-btn {
