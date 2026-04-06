@@ -238,7 +238,7 @@ export default function SupportPage() {
 
             <Collapse
               accordion
-              expandIconPosition="end"
+              expandIconPlacement="end"
               style={{
                 background: "white",
                 borderRadius: 12,
@@ -274,7 +274,7 @@ export default function SupportPage() {
                   Send us a message
                 </Title>
                 <Text type="secondary">
-                  Can't find what you're looking for? We're here to help.
+                  Can&apos;t find what you&apos;re looking for? We&apos;re here to help.
                 </Text>
               </div>
 
@@ -282,7 +282,7 @@ export default function SupportPage() {
                 <div style={{ textAlign: "center", padding: "40px 0" }}>
                   <CheckCircleFilled style={{ fontSize: 48, color: "#7FE3C5", marginBottom: 16 }} />
                   <Title level={5} style={{ color: "#0d1f3c" }}>Message Sent!</Title>
-                  <Text type="secondary">We'll get back to you within 24 hours.</Text>
+                  <Text type="secondary">We&apos;ll get back to you within 24 hours.</Text>
                 </div>
               ) : (
                 <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false}>

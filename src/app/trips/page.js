@@ -1,67 +1,25 @@
 "use client";
 
 import { Row, Col, Typography } from "antd";
+import { useMemo } from "react";
 import SearchForm from "../../components/trip/SearchForm";
 import TripCard from "../../components/trip/TripCard";
 import FiltersSidebar from "../../components/trip/FiltersSidebar";
+import { useTravelData } from "@/hooks/useTravelData";
 
 const { Title } = Typography;
 
 export default function TripsPage() {
+  const { buses, getAvailableSeatCount } = useTravelData();
 
-  // TODO: BACKEND - Replace mock data with API call to fetch trips
-  // Endpoint: GET /api/trips
-  // Query params: from, to, date, passengers
-  // Should return: array of trip objects with id, from, to, departure, arrival, duration, price, availableSeats, busType
-  // TODO: BACKEND - Add loading state while fetching trips
-  // TODO: BACKEND - Add error handling for failed API calls
-  // TODO: BACKEND - Implement pagination for large result sets
-  const trips = [
-    {
-      id: 1,
-      from: "Nairobi",
-      to: "Mombasa",
-      departure: "08:00 AM",
-      arrival: "02:00 PM",
-      duration: "6h",
-      price: 2500,
-      seats: 5,
-      type: "Premium",
-    },
-    {
-      id: 2,
-      from: "Nairobi",
-      to: "Kisumu",
-      departure: "09:30 AM",
-      arrival: "03:30 PM",
-      duration: "6h",
-      price: 2200,
-      seats: 8,
-      type: "Premium",
-    },
-    {
-      id: 3,
-      from: "Nairobi",
-      to: "Nakuru",
-      departure: "10:00 AM",
-      arrival: "01:00 PM",
-      duration: "3h",
-      price: 1200,
-      seats: 12,
-      type: "Standard",
-    },
-    {
-      id: 4,
-      from: "Nairobi",
-      to: "Eldoret",
-      departure: "07:00 AM",
-      arrival: "01:30 PM",
-      duration: "6h 30m",
-      price: 1800,
-      seats: 3,
-      type: "Standard",
-    },
-  ];
+  const trips = useMemo(
+    () =>
+      buses.map((bus) => ({
+        ...bus,
+        seats: getAvailableSeatCount(bus.id),
+      })),
+    [buses, getAvailableSeatCount]
+  );
 
   return (
     <div>

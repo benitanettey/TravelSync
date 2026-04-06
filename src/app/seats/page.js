@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { Row, Col, Card, Button, Typography, Select, Tag, Segmented } from "antd";
 import {
   ArrowLeftOutlined,
@@ -9,37 +11,66 @@ import {
   WifiOutlined,
 } from "@ant-design/icons";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import SeatMap from "@/components/seat/SeatMap";
 import BookingSummary from "@/components/booking/BookingSummary";
+import { useTravelData } from "@/hooks/useTravelData";
+import { fetchSeatStatuses } from "@/services/seatDataService";
 
 const { Text, Title } = Typography;
 
 export default function SeatsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { getBusById, getBookedSeats, syncSeatStatuses } = useTravelData();
 
-  // TODO: BACKEND - Fetch trip details from API using tripId from URL params
-  // Endpoint: GET /api/trips/:tripId
-  // Should return: trip details including route, times, bus info, pricing
-  const from = searchParams.get("from") || "Nairobi";
-  const to = searchParams.get("to") || "Mombasa";
-  const departure = searchParams.get("departure") || "08:00 AM";
-  const basePrice = Number(searchParams.get("price")) || 2500;
+  const busId = searchParams.get("busId") || "";
+  const bus = getBusById(busId);
+
+  const from = bus?.from || searchParams.get("from") || "Nairobi";
+  const to = bus?.to || searchParams.get("to") || "Mombasa";
+  const departure = bus?.departure || searchParams.get("departure") || "08:00 AM";
+  const basePrice = bus?.price || Number(searchParams.get("price")) || 2500;
+
+  const queryBusType = searchParams.get("busType");
+  const normalizedBusType = queryBusType === "standard" || queryBusType === "premium"
+    ? queryBusType
+    : bus?.type === "Premium"
+      ? "premium"
+      : "standard";
 
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [busType, setBusType] = useState("premium");
+  const [busType, setBusType] = useState(normalizedBusType);
 
-  // TODO: BACKEND - Fetch real-time seat availability from API
-  // Endpoint: GET /api/trips/:tripId/seats
-  // Should return: array of seat objects with seatNumber, status (available/booked), price
-  // TODO: BACKEND - Implement WebSocket for real-time seat availability updates
-  // to prevent double-booking when multiple users are selecting seats simultaneously
+  useEffect(() => {
+    if (!busId) {
+      return;
+    }
+
+    let isMounted = true;
+
+    async function refreshSeatData() {
+      const seatStatuses = await fetchSeatStatuses(busId);
+      if (!isMounted || !seatStatuses) {
+        return;
+      }
+
+      syncSeatStatuses(busId, seatStatuses);
+    }
+
+    refreshSeatData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [busId, syncSeatStatuses]);
 
   // TODO: BACKEND - Fetch boarding/arriving station options from API
   // Endpoint: GET /api/routes/:routeId/stations
   // Should return: array of station options for boarding and arriving
+
+  const bookedSeats = useMemo(() => getBookedSeats(busId), [busId, getBookedSeats]);
 
   const price = busType === "premium" ? basePrice : Math.round(basePrice * 0.7);
   const duration = "6h 45m";
@@ -55,6 +86,7 @@ export default function SeatsPage() {
     params.set("departure", departure);
     params.set("price", price);
     params.set("seats", selectedSeats.join(","));
+    params.set("busId", busId);
     params.set("busType", busType);
     router.push(`/booking?${params.toString()}`);
   };
@@ -293,6 +325,7 @@ export default function SeatsPage() {
               selectedSeats={selectedSeats}
               setSelectedSeats={setSelectedSeats}
               busType={busType}
+              bookedSeats={bookedSeats}
             />
 
             {/* AMENITIES */}

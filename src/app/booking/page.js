@@ -1,27 +1,42 @@
 "use client";
 
-import { Row, Col, Card, Typography, Tag, Checkbox } from "antd";
+export const dynamic = "force-dynamic";
+
+import { Row, Col, Card, Typography, Tag, Checkbox, message } from "antd";
 import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import PassengerForm from "@/components/booking/PassengerForm";
 import BookingSummary from "@/components/booking/BookingSummary";
+import { useTravelData } from "@/hooks/useTravelData";
+import { createBookingRequest } from "@/services/seatDataService";
 
 const { Title, Text, Paragraph } = Typography;
 
 export default function BookingPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const {
+    getBusById,
+    reserveSeatsOptimistic,
+    rollbackReservedSeats,
+    upsertBookingFromServer,
+    syncSeatStatuses,
+  } = useTravelData();
+  const [messageApi, messageContextHolder] = message.useMessage();
 
   // TODO: BACKEND - Verify seat reservation is still valid
   // Endpoint: GET /api/reservations/:sessionId
   // If reservation expired, redirect back to seat selection with error message
 
-  const from = searchParams.get("from") || "Nairobi";
-  const to = searchParams.get("to") || "Mombasa";
-  const departure = searchParams.get("departure") || "08:00 AM";
-  const price = Number(searchParams.get("price")) || 2500;
+  const busId = searchParams.get("busId") || "";
+  const bus = getBusById(busId);
+
+  const from = bus?.from || searchParams.get("from") || "Nairobi";
+  const to = bus?.to || searchParams.get("to") || "Mombasa";
+  const departure = bus?.departure || searchParams.get("departure") || "08:00 AM";
+  const price = bus?.price || Number(searchParams.get("price")) || 2500;
   const seatsParam = searchParams.get("seats") || "";
   const seats = seatsParam ? seatsParam.split(",") : [];
   const busType = searchParams.get("busType") || "premium";
@@ -30,7 +45,7 @@ export default function BookingPage() {
   // Endpoint: GET /api/users/me/profile
   // Should return: firstName, lastName, email, phone, idType, idNumber
 
-  const handleConfirm = (passengerData) => {
+  const handleConfirm = async (passengerData) => {
     // TODO: BACKEND - Submit booking to API
     // Endpoint: POST /api/bookings
     // Body: {
@@ -49,18 +64,65 @@ export default function BookingPage() {
     // Trigger email with booking details, QR code, and e-ticket PDF
 
     const taxesFees = busType === "premium" ? 350 : 200;
-    const total = price * seats.length + taxesFees;
-    const fullName = `${passengerData.firstName || ""} ${passengerData.lastName || ""}`.trim();
+
+    const optimistic = reserveSeatsOptimistic(busId, seats);
+    if (!optimistic.ok) {
+      messageApi.error(optimistic.message || "Seat selection is outdated. Please reselect.");
+      return;
+    }
+
+    const result = await createBookingRequest({
+      busId,
+      seatNumbers: seats,
+      passenger: passengerData,
+      busType,
+      pricePerSeat: price,
+      taxesFees,
+    });
+
+    if (!result.ok) {
+      rollbackReservedSeats(busId, seats);
+
+      if (result.seats.length > 0) {
+        syncSeatStatuses(busId, result.seats);
+      }
+
+      if (result.status === 409) {
+        const conflictText = result.conflictSeats.length > 0
+          ? `Conflicting seats: ${result.conflictSeats.join(", ")}`
+          : "Your selected seats were just taken.";
+        messageApi.error(`Booking conflict detected. ${conflictText}`);
+        return;
+      }
+
+      messageApi.error(result.message || "Booking could not be completed. Please retry.");
+      return;
+    }
+
+    if (result.seats.length > 0) {
+      syncSeatStatuses(busId, result.seats);
+    }
+
+    const booking = upsertBookingFromServer(result.booking);
+    if (!booking?.id) {
+      messageApi.error("Booking was created but could not be stored locally.");
+      return;
+    }
 
     const params = new URLSearchParams();
+    params.set("bookingId", booking.id);
     params.set("from", from);
     params.set("to", to);
     params.set("departure", departure);
     params.set("seats", seats.join(","));
-    params.set("total", total);
-    params.set("name", fullName);
-    params.set("email", passengerData.email || "");
     params.set("busType", busType);
+    params.set("name", `${passengerData.firstName || ""} ${passengerData.lastName || ""}`.trim());
+    params.set("date", new Date().toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    }));
     router.push(`/confirmation?${params.toString()}`);
   };
 
@@ -68,6 +130,7 @@ export default function BookingPage() {
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 20px" }}>
+      {messageContextHolder}
       {/* HEADER */}
       <div style={{ marginBottom: 32 }}>
         <Link

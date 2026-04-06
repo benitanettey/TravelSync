@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { Card, Typography, Button, Row, Col, Tag } from "antd";
 import {
   CheckCircleFilled,
@@ -10,6 +12,9 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useTravelData } from "@/hooks/useTravelData";
+import { fetchBookingById } from "@/services/seatDataService";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -31,29 +36,76 @@ function getStationInfo(city) {
 
 export default function ConfirmationPage() {
   const searchParams = useSearchParams();
+  const { getBookingById, upsertBookingFromServer } = useTravelData();
 
   // TODO: BACKEND - Fetch booking details from API using bookingId
   // Endpoint: GET /api/bookings/:bookingId
   // Should return: full booking object with trip details, passenger info, payment status
   // Redirect to error page if booking not found or unauthorized
 
-  const from = searchParams.get("from") || "Nairobi";
-  const to = searchParams.get("to") || "Mombasa";
-  const departure = searchParams.get("departure") || "08:00 AM";
+  const bookingId = searchParams.get("bookingId") || "";
+  const [isMounted, setIsMounted] = useState(false);
+  const [remoteBooking, setRemoteBooking] = useState(null);
+  const localBooking = isMounted && bookingId ? getBookingById(bookingId) : null;
+  const booking = remoteBooking || localBooking;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!bookingId) {
+      return;
+    }
+
+    let isMounted = true;
+
+    async function loadBookingFromApi() {
+      const fetched = await fetchBookingById(bookingId);
+      if (!isMounted || !fetched) {
+        return;
+      }
+
+      const upserted = upsertBookingFromServer(fetched);
+      setRemoteBooking(upserted || fetched);
+    }
+
+    loadBookingFromApi();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [bookingId, upsertBookingFromServer]);
+
+  const from = booking?.route?.from || searchParams.get("from") || "Nairobi";
+  const to = booking?.route?.to || searchParams.get("to") || "Mombasa";
+  const departure = booking?.route?.departure || searchParams.get("departure") || "08:00 AM";
   const seatsParam = searchParams.get("seats") || "";
-  const seats = seatsParam ? seatsParam.split(",") : [];
-  const name = searchParams.get("name") || "Guest";
-  const busType = searchParams.get("busType") || "premium";
+  const seats = booking?.seatNumbers || (seatsParam ? seatsParam.split(",") : []);
+  const name = booking?.passenger
+    ? `${booking.passenger.firstName || ""} ${booking.passenger.lastName || ""}`.trim() || "Guest"
+    : searchParams.get("name") || "Guest";
+  const busType = booking?.busType || searchParams.get("busType") || "premium";
 
   // TODO: BACKEND - Get actual booking reference from API response
-  const bookingRef = `#TS-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
+  const bookingRef = booking?.reference
+    ? `#${booking.reference}`
+    : bookingId
+      ? `#TS-${bookingId.slice(-8).toUpperCase()}`
+      : "#TS-PENDING";
   const isPremium = busType === "premium";
   
   // TODO: BACKEND - Get actual arrival time from trip data
   const arrivalTime = "14:30";
   const duration = "6h 30m";
-  const today = new Date();
-  const travelDate = today.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  const travelDate = booking?.createdAt
+    ? new Date(booking.createdAt).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        timeZone: "UTC",
+      })
+    : searchParams.get("date") || "Today";
 
   const departureStation = getStationInfo(from);
 
