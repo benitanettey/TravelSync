@@ -1,17 +1,41 @@
-/* CARD HOVER */
+/* === THEME DEFAULTS (set by ThemeContext JS, these are fallbacks) === */
+:root {
+  --ts-bg: #f8fafc;
+  --ts-bg-elevated: #ffffff;
+  --ts-bg-card: #ffffff;
+  --ts-text-primary: #0d1f3c;
+  --ts-text-secondary: #64748b;
+  --ts-border: #e2e8f0;
+  --ts-accent: #1677ff;
+  --ts-nav-bg: rgba(255,255,255,0.75);
+  --ts-nav-border: rgba(0,0,0,0.05);
+  --ts-footer-border: #eeeeee;
+  --ts-input-bg: #f5f7fa;
+  --ts-input-border: #e8ecf1;
+  --ts-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --ts-shadow-hover: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* === GLOBAL TRANSITION === */
+body, main, nav, footer,
+.ant-card, .ant-modal-content, .ant-btn {
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* === CARD HOVER === */
 .trip-card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--ts-shadow);
 }
 
 .trip-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--ts-shadow-hover);
 }
 
-/* TEXT STYLING */
+/* === TEXT STYLING === */
 .trip-location {
   margin: 6px 0;
-  color: #555;
+  color: var(--ts-text-secondary);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -20,7 +44,7 @@
 .trip-duration {
   margin: 0;
   font-size: 13px;
-  color: #888;
+  color: var(--ts-text-secondary);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -33,7 +57,7 @@
   font-weight: 500;
 }
 
-/* BUTTON STYLING */
+/* === BUTTON STYLING === */
 .trip-button {
   margin-top: 10px;
   border-radius: 8px;
@@ -47,4 +71,37 @@
 .trip-button:hover {
   transform: scale(1.05);
   background: linear-gradient(135deg, #1e40af, #1e3a8a);
+}
+
+/* === ACCESSIBILITY: FOCUS OUTLINES === */
+*:focus-visible {
+  outline: 3px solid var(--ts-accent);
+  outline-offset: 2px;
+}
+
+/* === ACCESSIBILITY: REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .trip-card:hover {
+    transform: none;
+  }
+  .trip-button:hover {
+    transform: none;
+  }
+}
+
+/* === SCROLLBAR THEMING === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ts-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ts-text-secondary);
+  border-radius: 4px;
 }

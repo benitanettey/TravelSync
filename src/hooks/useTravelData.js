@@ -297,6 +297,72 @@ export function TravelDataProvider({ children }) {
     [data.bookings]
   );
 
+  const findBookings = useCallback(
+    ({ reference, phone }) => {
+      return data.bookings.filter((booking) => {
+        if (reference) {
+          const ref = reference.toUpperCase().replace(/^#/, "");
+          if (booking.reference?.toUpperCase().includes(ref)) return true;
+        }
+        if (phone && booking.passenger?.phone) {
+          const normalize = (p) => p.replace(/[\s\-\+\(\)]/g, "");
+          if (normalize(booking.passenger.phone).includes(normalize(phone))) return true;
+        }
+        return false;
+      });
+    },
+    [data.bookings]
+  );
+
+  const cancelBookingLocal = useCallback(
+    (bookingId) => {
+      const booking = data.bookings.find((b) => b.id === bookingId);
+      if (!booking) return;
+
+      updateData((prev) => ({
+        ...prev,
+        bookings: prev.bookings.map((b) =>
+          b.id === bookingId ? { ...b, status: "cancelled" } : b
+        ),
+        seats: prev.seats.map((seat) => {
+          if (seat.busId === booking.busId && booking.seatNumbers.includes(seat.seatNumber)) {
+            return { ...seat, status: "available" };
+          }
+          return seat;
+        }),
+      }));
+    },
+    [data.bookings, updateData]
+  );
+
+  const modifyBookingLocal = useCallback(
+    (bookingId, updatedBooking) => {
+      const oldBooking = data.bookings.find((b) => b.id === bookingId);
+      if (!oldBooking) return;
+
+      const releasedSeats = oldBooking.seatNumbers.filter(
+        (sn) => !updatedBooking.seatNumbers.includes(sn)
+      );
+      const claimedSeats = updatedBooking.seatNumbers.filter(
+        (sn) => !oldBooking.seatNumbers.includes(sn)
+      );
+
+      updateData((prev) => ({
+        ...prev,
+        bookings: prev.bookings.map((b) =>
+          b.id === bookingId ? { ...updatedBooking, id: bookingId } : b
+        ),
+        seats: prev.seats.map((seat) => {
+          if (seat.busId !== oldBooking.busId) return seat;
+          if (releasedSeats.includes(seat.seatNumber)) return { ...seat, status: "available" };
+          if (claimedSeats.includes(seat.seatNumber)) return { ...seat, status: "booked" };
+          return seat;
+        }),
+      }));
+    },
+    [data.bookings, updateData]
+  );
+
   const resetData = useCallback(() => {
     const normalized = normalizeTravelData(initialData);
     setData(normalized);
@@ -323,6 +389,9 @@ export function TravelDataProvider({ children }) {
       upsertBookingFromServer,
       createBooking,
       getBookingById,
+      findBookings,
+      cancelBookingLocal,
+      modifyBookingLocal,
     }),
     [
       data,
@@ -338,6 +407,9 @@ export function TravelDataProvider({ children }) {
       upsertBookingFromServer,
       createBooking,
       getBookingById,
+      findBookings,
+      cancelBookingLocal,
+      modifyBookingLocal,
     ]
   );
 
