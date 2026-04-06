@@ -1,25 +1,52 @@
 "use client";
 
-import { Button } from "antd";
+import { Button, Tooltip, Dropdown } from "antd";
+import { BulbOutlined, BulbFilled, EyeOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme, THEMES } from "@/context/ThemeContext";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { theme, setTheme, isDark, isHighContrast, mounted } = useTheme();
 
-  // TODO: BACKEND - Implement user authentication state
-  // Use auth context/hook to check if user is logged in
-  // const { user, isAuthenticated, logout } = useAuth();
-
-  // TODO: BACKEND - Update nav items based on auth state
-  // If authenticated: show "My Bookings" and user profile dropdown
-  // If not authenticated: show "Login" and "Sign Up" buttons
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/trips", label: "Trips" },
-    { href: "/booking", label: "My Bookings" }, // TODO: BACKEND - Protect this route, require authentication
+    { href: "/my-bookings", label: "My Bookings" },
     { href: "/support", label: "Support" },
   ];
+
+  const themeMenuItems = [
+    {
+      key: THEMES.LIGHT,
+      label: "☀️  Light Mode",
+      onClick: () => setTheme(THEMES.LIGHT),
+    },
+    {
+      key: THEMES.DARK,
+      label: "🌙  Dark Mode",
+      onClick: () => setTheme(THEMES.DARK),
+    },
+    { type: "divider" },
+    {
+      key: THEMES.HIGH_CONTRAST,
+      label: "👁  High Contrast (Accessibility)",
+      onClick: () => setTheme(THEMES.HIGH_CONTRAST),
+    },
+  ];
+
+  const themeIcon = isHighContrast
+    ? <EyeOutlined style={{ fontSize: 18 }} />
+    : isDark
+      ? <BulbFilled style={{ fontSize: 18 }} />
+      : <BulbOutlined style={{ fontSize: 18 }} />;
+
+  const themeLabel = isHighContrast
+    ? "High Contrast"
+    : isDark
+      ? "Dark"
+      : "Light";
 
   return (
     <div
@@ -27,10 +54,11 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 1000,
-        background: "rgba(255,255,255,0.75)",
+        background: "var(--ts-nav-bg)",
         backdropFilter: "blur(10px)",
         WebkitBackdropFilter: "blur(10px)",
-        borderBottom: "1px solid rgba(0,0,0,0.05)",
+        borderBottom: "1px solid var(--ts-nav-border)",
+        transition: "background 0.3s, border 0.3s",
       }}
     >
       <div
@@ -49,7 +77,7 @@ export default function Navbar() {
             style={{
               margin: 0,
               fontWeight: "700",
-              color: "#1677ff",
+              color: "var(--ts-accent)",
               letterSpacing: "0.5px",
             }}
           >
@@ -57,18 +85,50 @@ export default function Navbar() {
           </h2>
         </Link>
 
-        {/* NAVIGATION BUTTONS */}
-        <div style={{ display: "flex", gap: "8px" }}>
+        {/* NAVIGATION + THEME */}
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <Button
                 type={pathname === item.href ? "primary" : "text"}
-                style={{ fontWeight: 500 }}
+                style={{
+                  fontWeight: 500,
+                  ...(pathname !== item.href
+                    ? { color: "var(--ts-text-primary)" }
+                    : {}),
+                }}
               >
                 {item.label}
               </Button>
             </Link>
           ))}
+
+          {/* Theme Toggle */}
+          {mounted && (
+            <Dropdown
+              menu={{ items: themeMenuItems, selectedKeys: [theme] }}
+              placement="bottomRight"
+              trigger={["click"]}
+            >
+              <Tooltip title={`Theme: ${themeLabel}`}>
+                <Button
+                  type="text"
+                  icon={themeIcon}
+                  style={{
+                    marginLeft: 4,
+                    color: "var(--ts-text-primary)",
+                    border: "1px solid var(--ts-border)",
+                    borderRadius: 8,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  {themeLabel}
+                </Button>
+              </Tooltip>
+            </Dropdown>
+          )}
         </div>
       </div>
     </div>

@@ -55,17 +55,17 @@
     {
       "busId": "bus-1",
       "seatNumber": "A3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-1",
       "seatNumber": "B1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-1",
       "seatNumber": "B2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-1",
@@ -260,7 +260,7 @@
     {
       "busId": "bus-3",
       "seatNumber": "D2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-3",
@@ -390,7 +390,7 @@
     {
       "busId": "bus-4",
       "seatNumber": "D4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-4",
@@ -434,6 +434,151 @@
     }
   ],
   "bookings": [
+    {
+      "id": "booking-0899b735-6421-47c6-8a57-ea609627fb1c",
+      "reference": "TS-MNN7AS4O-520",
+      "busId": "bus-3",
+      "seatNumbers": [
+        "D2"
+      ],
+      "passenger": {
+        "firstName": "Benita",
+        "lastName": "Nettey",
+        "email": "benitaoluoch@gmail.com",
+        "phone": "+254740836067",
+        "idType": "national_id",
+        "idNumber": "401227"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Nakuru",
+        "departure": "10:00 AM",
+        "arrival": "01:00 PM",
+        "duration": "3h"
+      },
+      "total": 1400,
+      "pricePerSeat": 1200,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T13:03:06.216Z"
+    },
+    {
+      "id": "booking-13fd9331-bccc-499d-9965-80f164ea30de",
+      "reference": "TS-MNN6Y3LD-757",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "D4"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T12:53:14.545Z"
+    },
+    {
+      "id": "booking-e1b1d62a-de85-4700-b022-94ed93f923ca",
+      "reference": "TS-MNN61YVP-282",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "B2"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T12:28:15.445Z"
+    },
+    {
+      "id": "booking-c799753a-79f8-44fd-be2a-b9efb1f4a2c8",
+      "reference": "TS-MNN5KRE7-912",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "B1"
+      ],
+      "passenger": {
+        "firstName": "Kevin",
+        "lastName": "Maingi",
+        "email": "kevinmaingi470@gmail.com",
+        "phone": "+254 712 345 678",
+        "idType": "national_id",
+        "idNumber": "12345678"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T12:14:52.591Z"
+    },
+    {
+      "id": "booking-33430773-901e-4a92-a221-e377f6579d35",
+      "reference": "TS-MNN4P812-828",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "A3"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "michael17musyoki@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T11:50:21.159Z"
+    },
     {
       "id": "booking-8401daa2-42d8-4423-b89b-aef671262600",
       "reference": "TS-MNN1RHFD-384",

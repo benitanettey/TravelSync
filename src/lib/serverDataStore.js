@@ -213,3 +213,111 @@ export async function createBookingInStore(payload) {
     seats: nextSeats.filter((seat) => seat.busId === busId),
   };
 }
+
+export async function cancelBookingInStore(bookingId) {
+  const data = await readStoreData();
+  const booking = data.bookings.find((b) => b.id === bookingId);
+
+  if (!booking) {
+    return { ok: false, status: 404, message: "Booking not found." };
+  }
+
+  if (booking.status === "cancelled") {
+    return { ok: false, status: 400, message: "Booking is already cancelled." };
+  }
+
+  const nextSeats = data.seats.map((seat) => {
+    if (seat.busId === booking.busId && booking.seatNumbers.includes(seat.seatNumber)) {
+      return { ...seat, status: "available" };
+    }
+    return seat;
+  });
+
+  const nextBookings = data.bookings.map((b) =>
+    b.id === bookingId ? { ...b, status: "cancelled" } : b
+  );
+
+  const nextData = { ...data, seats: nextSeats, bookings: nextBookings };
+  await writeStoreData(nextData);
+
+  return {
+    ok: true,
+    status: 200,
+    booking: nextBookings.find((b) => b.id === bookingId),
+    seats: nextSeats.filter((seat) => seat.busId === booking.busId),
+  };
+}
+
+export async function modifyBookingInStore(bookingId, payload) {
+  const { seatNumbers: newSeatNumbers, passenger: newPassenger } = payload;
+  const data = await readStoreData();
+  const booking = data.bookings.find((b) => b.id === bookingId);
+
+  if (!booking) {
+    return { ok: false, status: 404, message: "Booking not found.", conflictSeats: [] };
+  }
+
+  if (booking.status === "cancelled") {
+    return { ok: false, status: 400, message: "Cannot modify a cancelled booking.", conflictSeats: [] };
+  }
+
+  const wantsSeatChange = Array.isArray(newSeatNumbers) && newSeatNumbers.length > 0;
+  const uniqueNewSeats = wantsSeatChange ? [...new Set(newSeatNumbers.map(String))] : booking.seatNumbers;
+
+  // Check if new seats (excluding currently held seats) are available
+  if (wantsSeatChange) {
+    const busSeats = data.seats.filter((s) => s.busId === booking.busId);
+    const conflictSeats = uniqueNewSeats.filter((sn) => {
+      if (booking.seatNumbers.includes(sn)) return false; // already ours
+      const found = busSeats.find((s) => s.seatNumber === sn);
+      return !found || found.status !== "available";
+    });
+
+    if (conflictSeats.length > 0) {
+      return {
+        ok: false,
+        status: 409,
+        message: `Seat(s) no longer available: ${conflictSeats.join(", ")}`,
+        conflictSeats,
+        seats: busSeats,
+      };
+    }
+  }
+
+  // Release old seats that are no longer needed
+  const releasedSeats = booking.seatNumbers.filter((sn) => !uniqueNewSeats.includes(sn));
+  // Claim new seats that weren't previously held
+  const claimedSeats = uniqueNewSeats.filter((sn) => !booking.seatNumbers.includes(sn));
+
+  const nextSeats = data.seats.map((seat) => {
+    if (seat.busId !== booking.busId) return seat;
+    if (releasedSeats.includes(seat.seatNumber)) return { ...seat, status: "available" };
+    if (claimedSeats.includes(seat.seatNumber)) return { ...seat, status: "booked" };
+    return seat;
+  });
+
+  const updatedPassenger = newPassenger && typeof newPassenger === "object"
+    ? { ...booking.passenger, ...newPassenger }
+    : booking.passenger;
+
+  const updatedBooking = {
+    ...booking,
+    seatNumbers: uniqueNewSeats,
+    passenger: updatedPassenger,
+    total: booking.pricePerSeat * uniqueNewSeats.length + booking.taxesFees,
+  };
+
+  const nextBookings = data.bookings.map((b) =>
+    b.id === bookingId ? updatedBooking : b
+  );
+
+  const nextData = { ...data, seats: nextSeats, bookings: nextBookings };
+  await writeStoreData(nextData);
+
+  return {
+    ok: true,
+    status: 200,
+    booking: updatedBooking,
+    seats: nextSeats.filter((seat) => seat.busId === booking.busId),
+  };
+}
