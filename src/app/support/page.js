@@ -111,15 +111,15 @@ export default function SupportPage() {
 
   const handleSubmit = async (values) => {
     setLoading(true);
-    
+
     // TODO: BACKEND - Submit contact form to API
     // Endpoint: POST /api/support/contact
     // Body: { name, email, subject, message }
     // Should: create support ticket, send confirmation email to user
-    
+
     // TODO: BACKEND - Integrate with ticketing system (e.g., Zendesk, Freshdesk)
     // or internal support dashboard for agents to respond
-    
+
     // Simulate API call (remove when backend is ready)
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
@@ -162,10 +162,19 @@ export default function SupportPage() {
           >
             <QuestionCircleOutlined style={{ fontSize: 32, color: "#7FE3C5" }} />
           </div>
-          <Title level={1} style={{ color: "white", margin: 0, fontStyle: "italic" }}>
+          <Title
+            level={1}
+            style={{ color: "white", margin: 0, fontStyle: "italic" }}
+          >
             How can we help?
           </Title>
-          <Paragraph style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 12 }}>
+          <Paragraph
+            style={{
+              color: "rgba(255,255,255,0.7)",
+              fontSize: 16,
+              marginTop: 12,
+            }}
+          >
             Find answers to common questions or reach out to our support team.
           </Paragraph>
         </div>
@@ -228,7 +237,10 @@ export default function SupportPage() {
           {/* FAQs Section */}
           <Col xs={24} lg={14}>
             <div style={{ marginBottom: 24 }}>
-              <Title level={3} style={{ color: "#0d1f3c", fontStyle: "italic", margin: 0 }}>
+              <Title
+                level={3}
+                style={{ color: "#0d1f3c", fontStyle: "italic", margin: 0 }}
+              >
                 Frequently Asked Questions
               </Title>
               <Paragraph type="secondary">
@@ -238,7 +250,7 @@ export default function SupportPage() {
 
             <Collapse
               accordion
-              expandIconPlacement="end"
+              expandIconPosition="end"
               style={{
                 background: "white",
                 borderRadius: 12,
@@ -252,7 +264,9 @@ export default function SupportPage() {
                   </Text>
                 ),
                 children: (
-                  <Paragraph style={{ margin: 0, color: "#64748b", lineHeight: 1.7 }}>
+                  <Paragraph
+                    style={{ margin: 0, color: "#64748b", lineHeight: 1.7 }}
+                  >
                     {faq.children}
                   </Paragraph>
                 ),
@@ -274,29 +288,51 @@ export default function SupportPage() {
                   Send us a message
                 </Title>
                 <Text type="secondary">
-                  Can&apos;t find what you&apos;re looking for? We&apos;re here to help.
+                  Can&apos;t find what you&apos;re looking for? We&apos;re here
+                  to help.
                 </Text>
               </div>
 
               {submitted ? (
                 <div style={{ textAlign: "center", padding: "40px 0" }}>
-                  <CheckCircleFilled style={{ fontSize: 48, color: "#7FE3C5", marginBottom: 16 }} />
-                  <Title level={5} style={{ color: "#0d1f3c" }}>Message Sent!</Title>
-                  <Text type="secondary">We&apos;ll get back to you within 24 hours.</Text>
+                  <CheckCircleFilled
+                    style={{ fontSize: 48, color: "#7FE3C5", marginBottom: 16 }}
+                  />
+                  <Title level={5} style={{ color: "#0d1f3c" }}>
+                    Message Sent!
+                  </Title>
+                  <Text type="secondary">
+                    We&apos;ll get back to you within 24 hours.
+                  </Text>
                 </div>
               ) : (
-                <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false}>
+                <Form
+                  form={form}
+                  layout="vertical"
+                  onFinish={handleSubmit}
+                  requiredMark={false}
+                >
                   <Form.Item
                     name="name"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Full Name</Text>}
-                    rules={[{ required: true, message: "Please enter your name" }]}
+                    label={
+                      <Text style={{ fontWeight: 500, color: "#334155" }}>
+                        Full Name
+                      </Text>
+                    }
+                    rules={[
+                      { required: true, message: "Please enter your name" },
+                    ]}
                   >
                     <Input placeholder="John Doe" style={inputStyle} />
                   </Form.Item>
 
                   <Form.Item
                     name="email"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Email Address</Text>}
+                    label={
+                      <Text style={{ fontWeight: 500, color: "#334155" }}>
+                        Email Address
+                      </Text>
+                    }
                     rules={[
                       { required: true, message: "Please enter your email" },
                       { type: "email", message: "Enter a valid email" },
@@ -307,16 +343,31 @@ export default function SupportPage() {
 
                   <Form.Item
                     name="subject"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Subject</Text>}
-                    rules={[{ required: true, message: "Please enter a subject" }]}
+                    label={
+                      <Text style={{ fontWeight: 500, color: "#334155" }}>
+                        Subject
+                      </Text>
+                    }
+                    rules={[
+                      { required: true, message: "Please enter a subject" },
+                    ]}
                   >
-                    <Input placeholder="Booking inquiry, refund request, etc." style={inputStyle} />
+                    <Input
+                      placeholder="Booking inquiry, refund request, etc."
+                      style={inputStyle}
+                    />
                   </Form.Item>
 
                   <Form.Item
                     name="message"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Message</Text>}
-                    rules={[{ required: true, message: "Please enter your message" }]}
+                    label={
+                      <Text style={{ fontWeight: 500, color: "#334155" }}>
+                        Message
+                      </Text>
+                    }
+                    rules={[
+                      { required: true, message: "Please enter your message" },
+                    ]}
                   >
                     <TextArea
                       rows={4}
@@ -351,7 +402,8 @@ export default function SupportPage() {
             <Card
               style={{
                 borderRadius: 16,
-                background: "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
+                background:
+                  "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
                 marginTop: 24,
                 border: "none",
               }}
@@ -360,8 +412,11 @@ export default function SupportPage() {
               <Title level={5} style={{ color: "white", margin: "0 0 8px" }}>
                 Need urgent assistance?
               </Title>
-              <Paragraph style={{ color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
-                For time-sensitive issues like same-day bookings or emergencies, call us directly.
+              <Paragraph
+                style={{ color: "rgba(255,255,255,0.7)", marginBottom: 16 }}
+              >
+                For time-sensitive issues like same-day bookings or emergencies,
+                call us directly.
               </Paragraph>
               <Button
                 size="large"
