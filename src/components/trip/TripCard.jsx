@@ -83,11 +83,16 @@ const TripCard = ({ trip }) => {
                 borderRadius: 8,
                 fontWeight: 600,
               }}
-              onClick={() =>
-                router.push(
-                  `/seats?from=${trip.from}&to=${trip.to}&departure=${trip.departure}&price=${trip.price}`
-                )
-              }
+              onClick={() => {
+                const params = new URLSearchParams();
+                params.set("busId", trip.id);
+                params.set("from", trip.from);
+                params.set("to", trip.to);
+                params.set("departure", trip.departure);
+                params.set("price", String(trip.price));
+                params.set("busType", (trip.type || "Standard").toLowerCase());
+                router.push(`/seats?${params.toString()}`);
+              }}
             >
               Select Seats
             </Button>

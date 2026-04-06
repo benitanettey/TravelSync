@@ -1,0 +1,551 @@
+{
+  "buses": [
+    {
+      "id": "bus-1",
+      "from": "Nairobi",
+      "to": "Mombasa",
+      "departure": "08:00 AM",
+      "arrival": "02:00 PM",
+      "duration": "6h",
+      "price": 2500,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-2",
+      "from": "Nairobi",
+      "to": "Kisumu",
+      "departure": "09:30 AM",
+      "arrival": "03:30 PM",
+      "duration": "6h",
+      "price": 2200,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-3",
+      "from": "Nairobi",
+      "to": "Nakuru",
+      "departure": "10:00 AM",
+      "arrival": "01:00 PM",
+      "duration": "3h",
+      "price": 1200,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-4",
+      "from": "Nairobi",
+      "to": "Eldoret",
+      "departure": "07:00 AM",
+      "arrival": "01:30 PM",
+      "duration": "6h 30m",
+      "price": 1800,
+      "type": "Standard"
+    }
+  ],
+  "seats": [
+    {
+      "busId": "bus-1",
+      "seatNumber": "A1",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "B3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "C1",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "C2",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "C3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "D3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-1",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "A2",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "B2",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "B3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-2",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "B1",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "C3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "A4",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "D2",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "F1",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4",
+      "seatNumber": "F4",
+      "status": "available"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "booking-8401daa2-42d8-4423-b89b-aef671262600",
+      "reference": "TS-MNN1RHFD-384",
+      "busId": "bus-2",
+      "seatNumbers": [
+        "B2"
+      ],
+      "passenger": {
+        "firstName": "Kelvin",
+        "lastName": "Musila",
+        "email": "maingikevin13@gmail.com",
+        "phone": "+254733780652",
+        "idType": "national_id",
+        "idNumber": "7789876"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Kisumu",
+        "departure": "09:30 AM",
+        "arrival": "03:30 PM",
+        "duration": "6h"
+      },
+      "total": 2550,
+      "pricePerSeat": 2200,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T10:28:07.802Z"
+    },
+    {
+      "id": "booking-71fd7c08-60ae-463e-a3ef-a658c4c06ad8",
+      "reference": "TS-MNN1LTNW-796",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "C3"
+      ],
+      "passenger": {
+        "firstName": "Kelvin",
+        "lastName": "Musila",
+        "email": "kevinmaingi470@gmail.com",
+        "phone": "+254733780652",
+        "idType": "national_id",
+        "idNumber": "12345678"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T10:23:43.724Z"
+    },
+    {
+      "id": "booking-1312cb1c-dd8e-4c1b-b61f-929b1d1f9aee",
+      "reference": "TS-MNN19DL6-850",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "B3"
+      ],
+      "passenger": {
+        "firstName": "Kelvin",
+        "lastName": "Musila",
+        "email": "kevinmaingi470@gmail.com",
+        "phone": "+254733780652",
+        "idType": "national_id",
+        "idNumber": "12345678"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T10:14:03.018Z"
+    },
+    {
+      "id": "booking-5549fd30-068c-4f41-b353-d728ac8b7c68",
+      "reference": "TS-MNMZJ1TW-000",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "A1"
+      ],
+      "passenger": {
+        "firstName": "Test",
+        "lastName": "User",
+        "email": "test@example.com"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-06T09:25:35.108Z"
+    }
+  ]
+}

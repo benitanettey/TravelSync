@@ -86,7 +86,7 @@ export default function PassengerForm({ onSubmit, disabled }) {
             >
               <Select
                 style={{ ...inputStyle, height: "auto" }}
-                popupClassName="rounded-dropdown"
+                classNames={{ popup: { root: "rounded-dropdown" } }}
               >
                 <Option value="national_id">National ID</Option>
                 <Option value="passport">Passport</Option>
