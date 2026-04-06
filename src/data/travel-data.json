@@ -65,7 +65,7 @@
     {
       "busId": "bus-1",
       "seatNumber": "B2",
-      "status": "booked"
+      "status": "available"
     },
     {
       "busId": "bus-1",
@@ -390,7 +390,7 @@
     {
       "busId": "bus-4",
       "seatNumber": "D4",
-      "status": "booked"
+      "status": "available"
     },
     {
       "busId": "bus-4",
@@ -434,6 +434,238 @@
     }
   ],
   "bookings": [
+    {
+      "id": "booking-f2a3d2b2-958f-4357-a54d-a5d91360b942",
+      "reference": "TS-MNNA9EI2-145",
+      "busId": "bus-3",
+      "seatNumbers": [
+        "A1"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Nakuru",
+        "departure": "10:00 AM",
+        "arrival": "01:00 PM",
+        "duration": "3h"
+      },
+      "total": 1400,
+      "pricePerSeat": 1200,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:26:00.746Z"
+    },
+    {
+      "id": "booking-3ac009f1-e504-467a-b9e2-c70a4c25dfe5",
+      "reference": "TS-MNNA7A7P-399",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "F2"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:24:21.877Z"
+    },
+    {
+      "id": "booking-9b6c4f56-f0c9-42d9-a7ca-5d331d3802a7",
+      "reference": "TS-MNNA500U-044",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "E2"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:22:35.358Z"
+    },
+    {
+      "id": "booking-e7079e2d-0a6d-4b37-98bb-437858a3775c",
+      "reference": "TS-MNNA29TM-313",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "F3"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "777222"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:20:28.090Z"
+    },
+    {
+      "id": "booking-b2614aa2-1394-43bf-a77c-b1dbf3553f68",
+      "reference": "TS-MNNA1OW3-738",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "E3"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "667225"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:20:00.963Z"
+    },
+    {
+      "id": "booking-a1cd5932-ad88-43de-af19-845d32c18f0b",
+      "reference": "TS-MNN9YZQ0-299",
+      "busId": "bus-3",
+      "seatNumbers": [
+        "E1"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "401227"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Nakuru",
+        "departure": "10:00 AM",
+        "arrival": "01:00 PM",
+        "duration": "3h"
+      },
+      "total": 1400,
+      "pricePerSeat": 1200,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:17:55.032Z"
+    },
+    {
+      "id": "booking-65d6a96d-eda1-4e94-805a-43c78f1ac54a",
+      "reference": "TS-MNN9KT1C-627",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "E4"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "401227"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T14:06:53.184Z"
+    },
+    {
+      "id": "booking-dc7dfaf5-7bfc-4ade-84e0-2971c09deaa9",
+      "reference": "TS-MNN948T9-323",
+      "busId": "bus-4",
+      "seatNumbers": [
+        "F4"
+      ],
+      "passenger": {
+        "firstName": "Michael",
+        "lastName": "Masai",
+        "email": "mmichael200317@gmail.com",
+        "phone": "+254740129267",
+        "idType": "national_id",
+        "idNumber": "40507137"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Eldoret",
+        "departure": "07:00 AM",
+        "arrival": "01:30 PM",
+        "duration": "6h 30m"
+      },
+      "total": 2000,
+      "pricePerSeat": 1800,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "cancelled",
+      "createdAt": "2026-04-06T13:54:00.477Z"
+    },
     {
       "id": "booking-0899b735-6421-47c6-8a57-ea609627fb1c",
       "reference": "TS-MNN7AS4O-520",
@@ -489,7 +721,7 @@
       "pricePerSeat": 1800,
       "taxesFees": 200,
       "busType": "standard",
-      "status": "confirmed",
+      "status": "cancelled",
       "createdAt": "2026-04-06T12:53:14.545Z"
     },
     {
@@ -518,7 +750,7 @@
       "pricePerSeat": 2500,
       "taxesFees": 350,
       "busType": "premium",
-      "status": "confirmed",
+      "status": "cancelled",
       "createdAt": "2026-04-06T12:28:15.445Z"
     },
     {

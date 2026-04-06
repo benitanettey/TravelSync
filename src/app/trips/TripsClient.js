@@ -22,7 +22,7 @@ export default function TripsPage() {
   );
 
   return (
-    <div>
+    <div style={{ background: "var(--ts-bg)", minHeight: "100vh" }}>
 
       {/* HERO SECTION */}
       <div
@@ -87,11 +87,11 @@ export default function TripsPage() {
             style={{
               width: "100%",
               maxWidth: "1200px",
-              background: "#fff",
+              background: "var(--ts-bg-card)",
               padding: "20px 24px",
               borderRadius: "12px",
               boxShadow: "0 10px 40px rgba(13, 31, 60, 0.15)",
-              border: "1px solid rgba(13, 31, 60, 0.08)",
+              border: "1px solid var(--ts-border)",
             }}
           >
             <SearchForm />
@@ -110,7 +110,7 @@ export default function TripsPage() {
 
         {/* TRIPS */}
         <Col xs={24} md={18}>
-          <Title level={4} style={{ marginBottom: 20, color: "#0d1f3c" }}>
+          <Title level={4} style={{ marginBottom: 20, color: "var(--ts-text-primary)" }}>
             {trips.length} Trips Available
           </Title>
 

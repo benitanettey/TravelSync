@@ -98,8 +98,8 @@ const contactCards = [
 ];
 
 const inputStyle = {
-  background: "#f5f7fa",
-  border: "1px solid #e8ecf1",
+  background: "var(--ts-input-bg)",
+  border: "1px solid var(--ts-input-border)",
   borderRadius: 8,
   height: 48,
 };
@@ -138,11 +138,11 @@ export default function SupportPage() {
   // Integrate with chat service (e.g., Intercom, Tawk.to, custom WebSocket)
 
   return (
-    <div style={{ background: "#f8fafc", minHeight: "100vh" }}>
+    <div style={{ background: "var(--ts-bg)", minHeight: "100vh" }}>
       {/* Hero Section */}
       <div
         style={{
-          background: "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
+          background: "var(--ts-bg-hero)",
           padding: "60px 20px",
           textAlign: "center",
         }}
@@ -160,9 +160,9 @@ export default function SupportPage() {
               margin: "0 auto 20px",
             }}
           >
-            <QuestionCircleOutlined style={{ fontSize: 32, color: "#7FE3C5" }} />
+            <QuestionCircleOutlined style={{ fontSize: 32, color: "var(--ts-accent-green)" }} />
           </div>
-          <Title level={1} style={{ color: "white", margin: 0, fontStyle: "italic" }}>
+          <Title level={1} style={{ color: "var(--ts-text-on-hero)", margin: 0, fontStyle: "italic" }}>
             How can we help?
           </Title>
           <Paragraph style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 12 }}>
