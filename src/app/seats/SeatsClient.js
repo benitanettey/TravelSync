@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { Row, Col, Card, Button, Typography, Select, Tag, Segmented } from "antd";
+import { Row, Col, Card, Button, Typography, Select, Tag, Segmented, message } from "antd";
 import {
   ArrowLeftOutlined,
   CalendarOutlined,
@@ -31,6 +31,7 @@ function SeatsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { getBusById, getBookedSeats, syncSeatStatuses } = useTravelData();
+  const [messageApi, messageContextHolder] = message.useMessage();
 
   const busId = searchParams.get("busId") || "";
   const bus = getBusById(busId);
@@ -92,7 +93,28 @@ function SeatsPageContent() {
   const price = busType === "premium" ? basePrice : Math.round(basePrice * 0.7);
   const duration = "6h 45m";
 
-  const handleProceed = () => {
+  const handleProceed = async () => {
+    if (selectedSeats.length === 0) {
+      messageApi.warning("Please select at least one seat to continue.");
+      return;
+    }
+
+    const latestStatuses = await fetchSeatStatuses(busId);
+    if (latestStatuses && latestStatuses.length > 0) {
+      syncSeatStatuses(busId, latestStatuses);
+
+      const unavailableNow = latestStatuses
+        .filter((seat) => seat.status === "booked" || seat.status === "reserved")
+        .map((seat) => seat.seatNumber);
+
+      const conflicting = selectedSeats.filter((seat) => unavailableNow.includes(seat));
+      if (conflicting.length > 0) {
+        setSelectedSeats((prev) => prev.filter((seat) => !conflicting.includes(seat)));
+        messageApi.error(`Seat(s) no longer available: ${conflicting.join(", ")}. Please choose another seat.`);
+        return;
+      }
+    }
+
     // TODO: BACKEND - Temporarily reserve selected seats before proceeding to booking
     // Endpoint: POST /api/trips/:tripId/reserve-seats
     // Body: { seatNumbers: [...], sessionId: "..." }
@@ -110,6 +132,7 @@ function SeatsPageContent() {
 
   return (
     <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 20px", background: "var(--ts-bg)", minHeight: "100vh" }}>
+      {messageContextHolder}
       {/* BACK LINK */}
       <Button
         type="link"
@@ -117,13 +140,13 @@ function SeatsPageContent() {
         style={{ padding: 0, marginBottom: 16, color: "var(--ts-text-primary)" }}
         onClick={() => router.push("/trips")}
       >
-        Back to Trips
+        Back to journeys
       </Button>
 
       {/* HEADER CARD */}
       <Card
         style={{
-          borderRadius: 12,
+          borderRadius: 18,
           marginBottom: 24,
           background: "var(--ts-bg-card)",
           border: "1px solid var(--ts-border)",
@@ -133,7 +156,7 @@ function SeatsPageContent() {
         <Row justify="space-between" align="middle" wrap>
           <Col>
             <Text type="success" style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1 }}>
-              ACTIVE JOURNEY
+              SELECTED JOURNEY
             </Text>
             <Title level={2} style={{ margin: "4px 0 8px", color: "var(--ts-text-primary)" }}>
               {from} to {to}
@@ -166,12 +189,12 @@ function SeatsPageContent() {
                     minWidth: 100,
                   }}
                 >
-                  <Text style={{ color: "#8a9ab0", fontSize: 10, display: "block" }}>
+                  <span style={{ color: "#eaf8fc", fontSize: 10, display: "block", letterSpacing: 0.4, fontWeight: 700 }}>
                     EST. DURATION
-                  </Text>
-                  <Text style={{ color: "white", fontSize: 20, fontWeight: 700 }}>
+                  </span>
+                  <span style={{ color: "#f4fcff", fontSize: 20, fontWeight: 700, lineHeight: 1.1 }}>
                     {duration}
-                  </Text>
+                  </span>
                 </div>
               </Col>
               <Col>
@@ -186,7 +209,7 @@ function SeatsPageContent() {
                   }}
                 >
                   <Text style={{ color: "var(--ts-text-secondary)", fontSize: 10, display: "block" }}>
-                    FARES FROM
+                    FARE PER SEAT
                   </Text>
                   <Text style={{ color: "var(--ts-text-primary)", fontSize: 20, fontWeight: 700 }}>
                     KES {price}
@@ -199,15 +222,15 @@ function SeatsPageContent() {
       </Card>
 
       {/* CUSTOMIZE SEGMENT */}
-      <Card style={{ borderRadius: 12, marginBottom: 24 }}>
-        <Text style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1, color: "#64748b" }}>
-          CUSTOMIZE SEGMENT
+      <Card style={{ borderRadius: 18, marginBottom: 24 }}>
+        <Text style={{ fontSize: 11, fontWeight: 600, letterSpacing: 1, color: "var(--ts-text-secondary)" }}>
+          Customize Your Segment
         </Text>
 
         <Row gutter={24} style={{ marginTop: 16 }}>
           <Col xs={24} sm={8}>
             <Text type="secondary" style={{ fontSize: 12, display: "block", marginBottom: 6 }}>
-              BOARDING FROM
+              Boarding Point
             </Text>
             <Select
               defaultValue="main"
@@ -220,7 +243,7 @@ function SeatsPageContent() {
           </Col>
           <Col xs={24} sm={8}>
             <Text type="secondary" style={{ fontSize: 12, display: "block", marginBottom: 6 }}>
-              ARRIVING AT
+              Arrival Point
             </Text>
             <Select
               defaultValue="main"
@@ -233,7 +256,7 @@ function SeatsPageContent() {
           </Col>
           <Col xs={24} sm={8}>
             <Text type="secondary" style={{ fontSize: 12, display: "block", marginBottom: 6 }}>
-              BUS TYPE
+              Travel Class
             </Text>
             <Segmented
               value={busType}
@@ -257,8 +280,8 @@ function SeatsPageContent() {
         <Col xs={24} lg={14}>
           <Card
             style={{
-              borderRadius: 12,
-              background: busType === "premium" ? "#fff" : "#fafafa",
+              borderRadius: 18,
+              background: busType === "premium" ? "var(--ts-bg-card)" : "var(--ts-bg-elevated)",
             }}
             styles={{ body: { padding: "24px" } }}
           >
@@ -276,11 +299,11 @@ function SeatsPageContent() {
                   {busType === "premium" ? "Executive Deck" : "Standard Deck"}
                 </Title>
                 <Text type="secondary" style={{ fontSize: 13 }}>
-                  Select your preferred seat.{" "}
+                  Pick your preferred seat.{" "}
                   {busType === "premium" ? "2×1 Premium Layout." : "2×2 Standard Layout."}
                 </Text>
               </div>
-              <Button type="text" icon={<SettingOutlined />} style={{ color: "#64748b" }} />
+              <Button type="text" icon={<SettingOutlined />} style={{ color: "var(--ts-text-secondary)" }} />
             </div>
 
             {/* SEAT LEGEND */}
@@ -355,18 +378,18 @@ function SeatsPageContent() {
                   gap: 24,
                   marginTop: 24,
                   padding: "12px 16px",
-                  background: "#f0fdf4",
+                  background: "var(--ts-bg-elevated)",
                   borderRadius: 8,
                 }}
               >
-                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#16a34a" }}>
-                  <WifiOutlined /> Free Wi-Fi
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--ts-text-secondary)" }}>
+                  <WifiOutlined /> Fast Wi-Fi
                 </span>
-                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#16a34a" }}>
-                  🔌 USB Charging
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--ts-text-secondary)" }}>
+                  🔌 USB charging
                 </span>
-                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#16a34a" }}>
-                  ❄️ Air Conditioning
+                <span style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--ts-text-secondary)" }}>
+                  ❄️ Climate control
                 </span>
               </div>
             )}

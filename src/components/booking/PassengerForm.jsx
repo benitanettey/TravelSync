@@ -5,15 +5,15 @@ import { Form, Input, Select, Row, Col } from "antd";
 const { Option } = Select;
 
 const inputStyle = {
-  background: "#f5f7fa",
-  border: "1px solid #e8ecf1",
-  borderRadius: 8,
+  background: "var(--ts-input-bg)",
+  border: "1px solid var(--ts-input-border)",
+  borderRadius: 10,
   height: 48,
 };
 
 const labelStyle = {
-  fontWeight: 500,
-  color: "#334155",
+  fontWeight: 600,
+  color: "var(--ts-text-primary)",
   fontSize: 13,
 };
 
@@ -100,7 +100,7 @@ export default function PassengerForm({ onSubmit, disabled }) {
               name="idNumber"
               rules={[{ required: true, message: "Required" }]}
             >
-              <Input placeholder="Enter ID number" style={inputStyle} />
+              <Input placeholder="Enter identification number" style={inputStyle} />
             </Form.Item>
           </Col>
         </Row>
@@ -109,11 +109,11 @@ export default function PassengerForm({ onSubmit, disabled }) {
       <style jsx global>{`
         .ant-input::placeholder,
         .ant-select-selection-placeholder {
-          color: #94a3b8 !important;
+          color: var(--ts-text-secondary) !important;
         }
         .ant-select-selector {
-          background: #f5f7fa !important;
-          border: 1px solid #e8ecf1 !important;
+          background: var(--ts-input-bg) !important;
+          border: 1px solid var(--ts-input-border) !important;
           border-radius: 8px !important;
           height: 48px !important;
         }

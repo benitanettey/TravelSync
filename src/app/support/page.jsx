@@ -78,19 +78,19 @@ const faqs = [
 
 const contactCards = [
   {
-    icon: <PhoneOutlined style={{ fontSize: 28, color: "#1677ff" }} />,
+    icon: <PhoneOutlined style={{ fontSize: 28, color: "var(--ts-accent)" }} />,
     title: "Phone Support",
     detail: "+254 700 123 456",
     subtext: "Mon-Fri, 8AM - 8PM",
   },
   {
-    icon: <MailOutlined style={{ fontSize: 28, color: "#7FE3C5" }} />,
+    icon: <MailOutlined style={{ fontSize: 28, color: "var(--ts-accent-green)" }} />,
     title: "Email Us",
     detail: "support@travelsync.co.ke",
     subtext: "Response within 24 hours",
   },
   {
-    icon: <MessageOutlined style={{ fontSize: 28, color: "#f59e0b" }} />,
+    icon: <MessageOutlined style={{ fontSize: 28, color: "#d99a32" }} />,
     title: "Live Chat",
     detail: "Chat with us",
     subtext: "Available 24/7",
@@ -140,36 +140,17 @@ export default function SupportPage() {
   return (
     <div style={{ background: "var(--ts-bg)", minHeight: "100vh" }}>
       {/* Hero Section */}
-      <div
-        style={{
-          background: "var(--ts-bg-hero)",
-          padding: "60px 20px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ maxWidth: 700, margin: "0 auto" }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "rgba(127, 227, 197, 0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto 20px",
-            }}
-          >
-            <QuestionCircleOutlined style={{ fontSize: 32, color: "var(--ts-accent-green)" }} />
+      <section className="support-hero">
+        <div className="support-hero-inner">
+          <div className="support-hero-icon">
+            <QuestionCircleOutlined style={{ fontSize: 30, color: "#d8fff4" }} />
           </div>
-          <Title level={1} style={{ color: "var(--ts-text-on-hero)", margin: 0, fontStyle: "italic" }}>
-            How can we help?
-          </Title>
-          <Paragraph style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 12 }}>
-            Find answers to common questions or reach out to our support team.
-          </Paragraph>
+          <h1 className="support-hero-title ts-display">We&apos;re Here to Help</h1>
+          <p className="support-hero-subcopy">
+            Browse quick answers or send us a message for tailored assistance.
+          </p>
         </div>
-      </div>
+      </section>
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "48px 20px" }}>
         {/* Contact Cards */}
@@ -177,10 +158,11 @@ export default function SupportPage() {
           {contactCards.map((card, idx) => (
             <Col xs={24} md={8} key={idx}>
               <Card
+                className="support-contact-card"
                 hoverable
                 style={{
-                  borderRadius: 16,
-                  border: "1px solid #e2e8f0",
+                  borderRadius: 18,
+                  border: "1px solid var(--ts-border)",
                   textAlign: "center",
                   height: "100%",
                 }}
@@ -191,7 +173,7 @@ export default function SupportPage() {
                     width: 56,
                     height: 56,
                     borderRadius: 12,
-                    background: "#f1f5f9",
+                    background: "var(--ts-bg-elevated)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -203,7 +185,7 @@ export default function SupportPage() {
                 <Text
                   style={{
                     display: "block",
-                    color: "#64748b",
+                    color: "var(--ts-text-secondary)",
                     fontSize: 12,
                     textTransform: "uppercase",
                     letterSpacing: 0.5,
@@ -212,7 +194,7 @@ export default function SupportPage() {
                 >
                   {card.title}
                 </Text>
-                <Title level={5} style={{ margin: "0 0 4px", color: "#0d1f3c" }}>
+                <Title level={5} style={{ margin: "0 0 4px", color: "var(--ts-text-primary)" }}>
                   {card.detail}
                 </Title>
                 <Text type="secondary" style={{ fontSize: 13 }}>
@@ -228,31 +210,32 @@ export default function SupportPage() {
           {/* FAQs Section */}
           <Col xs={24} lg={14}>
             <div style={{ marginBottom: 24 }}>
-              <Title level={3} style={{ color: "#0d1f3c", fontStyle: "italic", margin: 0 }}>
+              <Title level={3} style={{ color: "var(--ts-text-primary)", fontStyle: "italic", margin: 0 }}>
                 Frequently Asked Questions
               </Title>
               <Paragraph type="secondary">
-                Quick answers to common queries about TravelSync.
+                Clear answers to the most common TravelSync questions.
               </Paragraph>
             </div>
 
             <Collapse
+              className="support-faq"
               accordion
               expandIconPlacement="end"
               style={{
-                background: "white",
+                background: "var(--ts-bg-card)",
                 borderRadius: 12,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--ts-border)",
               }}
               items={faqs.map((faq) => ({
                 key: faq.key,
                 label: (
-                  <Text strong style={{ color: "#0d1f3c", fontSize: 15 }}>
+                  <Text strong style={{ color: "var(--ts-text-secondary)", fontSize: 15 }}>
                     {faq.label}
                   </Text>
                 ),
                 children: (
-                  <Paragraph style={{ margin: 0, color: "#64748b", lineHeight: 1.7 }}>
+                  <Paragraph style={{ margin: 0, color: "var(--ts-text-secondary)", lineHeight: 1.7 }}>
                     {faq.children}
                   </Paragraph>
                 ),
@@ -263,32 +246,33 @@ export default function SupportPage() {
           {/* Contact Form */}
           <Col xs={24} lg={10}>
             <Card
+              className="support-form-card"
               style={{
                 borderRadius: 16,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--ts-border)",
               }}
               styles={{ body: { padding: 28 } }}
             >
               <div style={{ marginBottom: 24 }}>
-                <Title level={4} style={{ color: "#0d1f3c", margin: 0 }}>
-                  Send us a message
+                <Title level={4} style={{ color: "var(--ts-text-primary)", margin: 0 }}>
+                  Send a Message
                 </Title>
                 <Text type="secondary">
-                  Can&apos;t find what you&apos;re looking for? We&apos;re here to help.
+                  Share the details and we&apos;ll get back with practical next steps.
                 </Text>
               </div>
 
               {submitted ? (
                 <div style={{ textAlign: "center", padding: "40px 0" }}>
-                  <CheckCircleFilled style={{ fontSize: 48, color: "#7FE3C5", marginBottom: 16 }} />
-                  <Title level={5} style={{ color: "#0d1f3c" }}>Message Sent!</Title>
+                  <CheckCircleFilled style={{ fontSize: 48, color: "var(--ts-accent-green)", marginBottom: 16 }} />
+                  <Title level={5} style={{ color: "var(--ts-text-primary)" }}>Message Sent</Title>
                   <Text type="secondary">We&apos;ll get back to you within 24 hours.</Text>
                 </div>
               ) : (
                 <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false}>
                   <Form.Item
                     name="name"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Full Name</Text>}
+                    label={<Text style={{ fontWeight: 500, color: "var(--ts-text-primary)" }}>Full Name</Text>}
                     rules={[{ required: true, message: "Please enter your name" }]}
                   >
                     <Input placeholder="John Doe" style={inputStyle} />
@@ -296,7 +280,7 @@ export default function SupportPage() {
 
                   <Form.Item
                     name="email"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Email Address</Text>}
+                    label={<Text style={{ fontWeight: 500, color: "var(--ts-text-primary)" }}>Email Address</Text>}
                     rules={[
                       { required: true, message: "Please enter your email" },
                       { type: "email", message: "Enter a valid email" },
@@ -307,7 +291,7 @@ export default function SupportPage() {
 
                   <Form.Item
                     name="subject"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Subject</Text>}
+                    label={<Text style={{ fontWeight: 500, color: "var(--ts-text-primary)" }}>Subject</Text>}
                     rules={[{ required: true, message: "Please enter a subject" }]}
                   >
                     <Input placeholder="Booking inquiry, refund request, etc." style={inputStyle} />
@@ -315,7 +299,7 @@ export default function SupportPage() {
 
                   <Form.Item
                     name="message"
-                    label={<Text style={{ fontWeight: 500, color: "#334155" }}>Message</Text>}
+                    label={<Text style={{ fontWeight: 500, color: "var(--ts-text-primary)" }}>Message</Text>}
                     rules={[{ required: true, message: "Please enter your message" }]}
                   >
                     <TextArea
@@ -337,7 +321,7 @@ export default function SupportPage() {
                         height: 52,
                         borderRadius: 8,
                         fontWeight: 600,
-                        background: "#1677ff",
+                        background: "var(--ts-accent)",
                       }}
                     >
                       Send Message
@@ -349,6 +333,7 @@ export default function SupportPage() {
 
             {/* Additional Help Card */}
             <Card
+              className="support-urgent-card"
               style={{
                 borderRadius: 16,
                 background: "linear-gradient(135deg, #0d1f3c 0%, #1e3a5f 100%)",
@@ -358,18 +343,18 @@ export default function SupportPage() {
               styles={{ body: { padding: 24 } }}
             >
               <Title level={5} style={{ color: "white", margin: "0 0 8px" }}>
-                Need urgent assistance?
+                Need urgent help?
               </Title>
               <Paragraph style={{ color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>
-                For time-sensitive issues like same-day bookings or emergencies, call us directly.
+                For same-day booking issues or travel disruptions, call us directly.
               </Paragraph>
               <Button
                 size="large"
                 icon={<PhoneOutlined />}
                 style={{
-                  background: "#7FE3C5",
+                  background: "var(--ts-accent-green)",
                   border: "none",
-                  color: "#0d1f3c",
+                  color: "var(--ts-text-primary)",
                   fontWeight: 600,
                   borderRadius: 8,
                   height: 44,
@@ -381,6 +366,81 @@ export default function SupportPage() {
           </Col>
         </Row>
       </div>
+
+      <style jsx>{`
+        .support-hero {
+          position: relative;
+          overflow: hidden;
+          padding: 70px 20px 86px;
+          text-align: center;
+          border-radius: 0 0 30px 30px;
+          background:
+            radial-gradient(circle at 12% 22%, rgba(155, 255, 226, 0.22), transparent 30%),
+            radial-gradient(circle at 86% 14%, rgba(109, 196, 255, 0.2), transparent 28%),
+            linear-gradient(145deg, #13212d, #173746 56%, #1b4b5a);
+        }
+
+        .support-hero-inner {
+          max-width: 760px;
+          margin: 0 auto;
+        }
+
+        .support-hero-icon {
+          width: 66px;
+          height: 66px;
+          border-radius: 50%;
+          margin: 0 auto 18px;
+          background: rgba(127, 227, 197, 0.18);
+          border: 1px solid rgba(208, 255, 246, 0.34);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .support-hero-title {
+          margin: 0;
+          color: #f3fcff;
+          font-size: clamp(2rem, 4.6vw, 3.2rem);
+          line-height: 1.05;
+          letter-spacing: 0.01em;
+          text-shadow: 0 4px 22px rgba(0, 0, 0, 0.28);
+        }
+
+        .support-hero-subcopy {
+          margin: 12px auto 0;
+          color: #e4fbff;
+          font-size: 1.05rem;
+          max-width: 640px;
+          line-height: 1.68;
+        }
+
+        :global(.support-contact-card.ant-card) {
+          background: var(--ts-bg-card) !important;
+          box-shadow: 0 16px 34px rgba(18, 28, 36, 0.12);
+          transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        :global(.support-contact-card.ant-card:hover) {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 40px rgba(18, 28, 36, 0.18);
+        }
+
+        :global(.support-faq.ant-collapse) {
+          border-radius: 14px;
+          border: 1px solid var(--ts-border) !important;
+          box-shadow: 0 12px 28px rgba(18, 28, 36, 0.08);
+        }
+
+        :global(.support-form-card.ant-card) {
+          box-shadow: 0 14px 32px rgba(18, 28, 36, 0.1);
+          border-radius: 18px !important;
+        }
+
+        :global(.support-urgent-card.ant-card) {
+          box-shadow: 0 18px 38px rgba(8, 18, 26, 0.32);
+          border-radius: 18px !important;
+        }
+      `}</style>
     </div>
   );
 }

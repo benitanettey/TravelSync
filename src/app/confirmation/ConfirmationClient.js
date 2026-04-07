@@ -229,10 +229,10 @@ ${isPremium ? "Executive" : "Standard"}`;
   };
 
   return (
-    <div style={{ background: "var(--ts-bg)", minHeight: "100vh", paddingBottom: 60 }}>
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "48px 20px" }}>
+    <div className="confirmation-page" style={{ background: "var(--ts-bg)", minHeight: "100vh", paddingBottom: 60 }}>
+      <div className="confirmation-shell" style={{ maxWidth: 1000, margin: "0 auto", padding: "48px 20px" }}>
         {/* HEADER */}
-        <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div className="print-hide" style={{ textAlign: "center", marginBottom: 40 }}>
           <div
             style={{
               width: 56,
@@ -248,17 +248,18 @@ ${isPremium ? "Executive" : "Standard"}`;
             <CheckCircleFilled style={{ fontSize: 28, color: "white" }} />
           </div>
           <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "var(--ts-text-primary)" }}>
-            Booking Confirmed
+            You&apos;re Confirmed
           </Title>
           <Paragraph style={{ marginBottom: 0, color: "var(--ts-text-secondary)" }}>
-            Your journey with TravelSync is ready. Safe travels!
+            Your boarding pass is ready. Arrive early and travel easy.
           </Paragraph>
         </div>
 
         <Row gutter={24}>
           {/* LEFT - TICKET CARD */}
-          <Col xs={24} lg={15}>
+          <Col xs={24} lg={15} className="print-ticket-col">
             <Card
+              className="ticket-print-target"
               ref={ticketRef}
               style={{
                 borderRadius: 16,
@@ -428,7 +429,7 @@ ${isPremium ? "Executive" : "Standard"}`;
                     />
                   </div>
                   <Text style={{ fontSize: 11, color: "var(--ts-text-secondary)", textAlign: "center", lineHeight: 1.4 }}>
-                    Present this code to the driver upon boarding.
+                    Show this QR code at boarding.
                   </Text>
                 </div>
               </div>
@@ -436,7 +437,7 @@ ${isPremium ? "Executive" : "Standard"}`;
           </Col>
 
           {/* RIGHT - ACTION BUTTONS + TIPS */}
-          <Col xs={24} lg={9}>
+          <Col xs={24} lg={9} className="print-hide">
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
               <Button
                 type="primary"
@@ -452,7 +453,7 @@ ${isPremium ? "Executive" : "Standard"}`;
                 block
                 onClick={handleDownloadTicket}
               >
-                Download Ticket
+                Download boarding pass
               </Button>
               <Button
                 size="large"
@@ -484,7 +485,7 @@ ${isPremium ? "Executive" : "Standard"}`;
                 block
                 onClick={handleAddToCalendar}
               >
-                Add to Calendar
+                Save to calendar
               </Button>
               <Button
                 size="large"
@@ -501,7 +502,7 @@ ${isPremium ? "Executive" : "Standard"}`;
                 block
                 onClick={handleBackToHome}
               >
-                Back to Home
+                Return home
               </Button>
             </div>
 
@@ -516,7 +517,7 @@ ${isPremium ? "Executive" : "Standard"}`;
             >
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
                 <InfoCircleOutlined style={{ color: "var(--ts-accent-green)", fontSize: 16 }} />
-                <Text strong style={{ color: "var(--ts-text-primary)" }}>Travel Tips</Text>
+                <Text strong style={{ color: "var(--ts-text-primary)" }}>Before You Board</Text>
               </div>
               <ul style={{ margin: 0, paddingLeft: 20, color: "var(--ts-text-secondary)", fontSize: 13, lineHeight: 1.8 }}>
                 <li>Arrive at the station at least <strong>20 minutes</strong> before departure.</li>
@@ -528,9 +529,9 @@ ${isPremium ? "Executive" : "Standard"}`;
         </Row>
 
         {/* DEPARTURE POINT MAP */}
-        <div style={{ marginTop: 40 }}>
+        <div className="print-hide" style={{ marginTop: 40 }}>
           <Title level={4} style={{ color: "var(--ts-text-primary)", fontStyle: "italic", marginBottom: 16 }}>
-            Departure Point
+            Departure Station
           </Title>
           <Card
             style={{
@@ -592,6 +593,70 @@ ${isPremium ? "Executive" : "Standard"}`;
           </Card>
         </div>
       </div>
+
+      <style jsx global>{`
+        @media print {
+          @page {
+            size: A4 landscape;
+            margin: 12mm;
+          }
+
+          html,
+          body {
+            background: #ffffff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+
+          .confirmation-page {
+            background: #ffffff !important;
+            min-height: auto !important;
+            padding: 0 !important;
+          }
+
+          .confirmation-shell {
+            max-width: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+
+          .nav-wrap,
+          footer {
+            display: none !important;
+          }
+
+          .print-hide {
+            display: none !important;
+          }
+
+          .print-ticket-col {
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
+            flex: 0 0 100% !important;
+          }
+
+          .ticket-print-target {
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            width: 100% !important;
+            max-width: none !important;
+            border: 1px solid #d8dee8 !important;
+            border-radius: 10px !important;
+            box-shadow: none !important;
+            background: #ffffff !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+          }
+
+          .ticket-print-target .ant-card-body {
+            padding: 0 !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { initialData } from "@/constants/initialData";
+import { buildSeatsForBuses, initialData } from "@/constants/initialData";
 
 const DATA_DIR = path.join(process.cwd(), "src", "data");
 const DATA_FILE = path.join(DATA_DIR, "travel-data.json");
@@ -25,46 +25,83 @@ function normalizeStore(data) {
     return fallback;
   }
 
-  const buses = Array.isArray(data.buses) ? data.buses : fallback.buses;
+  const buses = Array.isArray(data.buses) ? data.buses : [];
   const seats = Array.isArray(data.seats) ? data.seats : fallback.seats;
   const bookings = Array.isArray(data.bookings) ? data.bookings : [];
 
-  return {
-    buses: buses
-      .filter((bus) => bus && bus.id)
-      .map((bus) => ({
-        id: String(bus.id),
-        from: String(bus.from || ""),
-        to: String(bus.to || ""),
-        departure: String(bus.departure || ""),
-        arrival: String(bus.arrival || ""),
-        duration: String(bus.duration || ""),
-        price: Number(bus.price || 0),
-        type: bus.type === "Premium" ? "Premium" : "Standard",
-      })),
-    seats: seats
-      .filter((seat) => seat && seat.busId && seat.seatNumber)
-      .map((seat) => ({
+  const normalizedInputBuses = buses
+    .filter((bus) => bus && bus.id)
+    .map((bus) => ({
+      id: String(bus.id),
+      from: String(bus.from || ""),
+      to: String(bus.to || ""),
+      departure: String(bus.departure || ""),
+      arrival: String(bus.arrival || ""),
+      duration: String(bus.duration || ""),
+      price: Number(bus.price || 0),
+      type: bus.type === "Premium" ? "Premium" : "Standard",
+    }));
+
+  const busMap = new Map(fallback.buses.map((bus) => [bus.id, bus]));
+  normalizedInputBuses.forEach((bus) => {
+    busMap.set(bus.id, bus);
+  });
+  const mergedBuses = Array.from(busMap.values());
+
+  const defaultSeats = buildSeatsForBuses(mergedBuses);
+  const seatMap = new Map(
+    defaultSeats.map((seat) => [`${seat.busId}:${seat.seatNumber}`, seat])
+  );
+
+  seats
+    .filter((seat) => seat && seat.busId && seat.seatNumber)
+    .forEach((seat) => {
+      const normalizedSeat = {
         busId: String(seat.busId),
         seatNumber: String(seat.seatNumber),
         status: normalizeStatus(seat.status),
-      })),
-    bookings: bookings
-      .filter((booking) => booking && booking.id && booking.busId && Array.isArray(booking.seatNumbers))
-      .map((booking) => ({
-        id: String(booking.id),
-        reference: String(booking.reference || booking.id),
-        busId: String(booking.busId),
-        seatNumbers: booking.seatNumbers.map(String),
-        passenger: booking.passenger && typeof booking.passenger === "object" ? booking.passenger : {},
-        route: booking.route && typeof booking.route === "object" ? booking.route : {},
-        total: Number(booking.total || 0),
-        pricePerSeat: Number(booking.pricePerSeat || 0),
-        taxesFees: Number(booking.taxesFees || 0),
-        busType: String(booking.busType || "standard"),
-        status: String(booking.status || "confirmed"),
-        createdAt: String(booking.createdAt || new Date().toISOString()),
-      })),
+      };
+      seatMap.set(`${normalizedSeat.busId}:${normalizedSeat.seatNumber}`, normalizedSeat);
+    });
+
+  const normalizedBookings = bookings
+    .filter((booking) => booking && booking.id && booking.busId && Array.isArray(booking.seatNumbers))
+    .map((booking) => ({
+      id: String(booking.id),
+      reference: String(booking.reference || booking.id),
+      busId: String(booking.busId),
+      seatNumbers: booking.seatNumbers.map(String),
+      passenger: booking.passenger && typeof booking.passenger === "object" ? booking.passenger : {},
+      route: booking.route && typeof booking.route === "object" ? booking.route : {},
+      total: Number(booking.total || 0),
+      pricePerSeat: Number(booking.pricePerSeat || 0),
+      taxesFees: Number(booking.taxesFees || 0),
+      busType: String(booking.busType || "standard"),
+      status: String(booking.status || "confirmed"),
+      createdAt: String(booking.createdAt || new Date().toISOString()),
+    }));
+
+  normalizedBookings.forEach((booking) => {
+    booking.seatNumbers.forEach((seatNumber) => {
+      const key = `${booking.busId}:${seatNumber}`;
+      const existing = seatMap.get(key);
+      if (existing) {
+        seatMap.set(key, { ...existing, status: "booked" });
+        return;
+      }
+
+      seatMap.set(key, {
+        busId: booking.busId,
+        seatNumber,
+        status: "booked",
+      });
+    });
+  });
+
+  return {
+    buses: mergedBuses,
+    seats: Array.from(seatMap.values()),
+    bookings: normalizedBookings,
   };
 }
 

@@ -179,42 +179,25 @@ export default function MyBookingsPage() {
       {ctx}
 
       {/* Hero */}
-      <div
-        style={{
-          background: "var(--ts-bg-hero)",
-          padding: "60px 20px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ maxWidth: 700, margin: "0 auto" }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "rgba(127, 227, 197, 0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto 20px",
-            }}
-          >
-            <SearchOutlined style={{ fontSize: 32, color: "var(--ts-accent-green)" }} />
+      <div className="manage-hero">
+        <div className="manage-hero-overlay" />
+        <div className="manage-hero-inner">
+          <div className="manage-hero-icon">
+            <SearchOutlined style={{ fontSize: 30, color: "#d8fff4" }} />
           </div>
-          <Title level={1} style={{ color: "var(--ts-text-on-hero)", margin: 0, fontStyle: "italic" }}>
-            My Bookings
-          </Title>
-          <Paragraph style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 12 }}>
-            Look up your booking by reference number or phone number.
-          </Paragraph>
+          <h1 className="manage-hero-title ts-display">Manage My Bookings</h1>
+          <p className="manage-hero-subcopy">
+            Search, modify, or cancel any reservation from one place.
+          </p>
         </div>
       </div>
 
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 20px" }}>
+      <div style={{ maxWidth: 940, margin: "0 auto", padding: "44px 20px" }}>
         {/* Search Card */}
         <Card
-          style={{ borderRadius: 16, border: "1px solid var(--ts-border)", background: "var(--ts-bg-card)", marginBottom: 32 }}
-          styles={{ body: { padding: 28 } }}
+          className="manage-search-card"
+          style={{ borderRadius: 18, border: "1px solid var(--ts-border)", background: "var(--ts-bg-card)", marginBottom: 32 }}
+          styles={{ body: { padding: 30 } }}
         >
           <Row gutter={16} align="bottom">
             <Col xs={24} sm={9}>
@@ -232,7 +215,7 @@ export default function MyBookingsPage() {
             <Col xs={24} sm={2} style={{ textAlign: "center", padding: "12px 0" }}>
               <Text style={{ fontSize: 13, color: "var(--ts-text-secondary)" }}>or</Text>
             </Col>
-            <Col xs={24} sm={9}>
+            <Col xs={24} sm={8}>
               <Text style={{ fontWeight: 500, color: "var(--ts-text-primary)", fontSize: 13, display: "block", marginBottom: 6 }}>
                 Phone Number
               </Text>
@@ -251,21 +234,22 @@ export default function MyBookingsPage() {
                 />
               </Space.Compact>
             </Col>
-            <Col xs={24} sm={4}>
+            <Col xs={24} sm={5}>
               <Button
                 type="primary"
                 icon={<SearchOutlined />}
                 size="large"
                 block
                 onClick={handleSearch}
+                className="manage-search-button"
                 style={{
                   height: 48,
-                  borderRadius: 8,
-                  fontWeight: 600,
+                  borderRadius: 10,
+                  fontWeight: 700,
                   background: "var(--ts-accent)",
                 }}
               >
-                Search
+                Find Bookings
               </Button>
             </Col>
           </Row>
@@ -283,8 +267,8 @@ export default function MyBookingsPage() {
 
         {results.length > 0 && (
           <>
-            <Title level={4} style={{ color: "#0d1f3c", marginBottom: 16, fontStyle: "italic" }}>
-              {results.length} Booking{results.length > 1 ? "s" : ""} Found
+            <Title level={4} style={{ color: "var(--ts-text-primary)", marginBottom: 16, fontStyle: "italic" }}>
+              {results.length} Matching Booking{results.length > 1 ? "s" : ""}
             </Title>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -295,7 +279,7 @@ export default function MyBookingsPage() {
                     key={booking.id}
                     style={{
                       borderRadius: 16,
-                      border: isCancelled ? "1px solid #fca5a5" : "1px solid #e2e8f0",
+                      border: isCancelled ? "1px solid #fca5a5" : "1px solid var(--ts-border)",
                       opacity: isCancelled ? 0.7 : 1,
                     }}
                     styles={{ body: { padding: 24 } }}
@@ -310,15 +294,15 @@ export default function MyBookingsPage() {
                           >
                             {isCancelled ? "CANCELLED" : "CONFIRMED"}
                           </Tag>
-                          <Text strong style={{ color: "#0d1f3c", fontSize: 15 }}>
+                          <Text strong style={{ color: "var(--ts-text-primary)", fontSize: 15 }}>
                             #{booking.reference}
                           </Text>
                         </div>
 
                         {/* Route */}
                         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                          <EnvironmentOutlined style={{ color: "#64748b" }} />
-                          <Text style={{ fontSize: 16, fontWeight: 600, color: "#0d1f3c" }}>
+                          <EnvironmentOutlined style={{ color: "var(--ts-text-secondary)" }} />
+                          <Text style={{ fontSize: 16, fontWeight: 600, color: "var(--ts-text-primary)" }}>
                             {booking.route?.from || "—"} → {booking.route?.to || "—"}
                           </Text>
                         </div>
@@ -326,11 +310,11 @@ export default function MyBookingsPage() {
                         {/* Details */}
                         <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 8 }}>
                           <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                            <CalendarOutlined style={{ color: "#64748b" }} />
+                            <CalendarOutlined style={{ color: "var(--ts-text-secondary)" }} />
                             <Text type="secondary">{booking.route?.departure || "—"}</Text>
                           </span>
                           <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                            <UserOutlined style={{ color: "#64748b" }} />
+                            <UserOutlined style={{ color: "var(--ts-text-secondary)" }} />
                             <Text type="secondary">
                               {booking.passenger?.firstName} {booking.passenger?.lastName}
                             </Text>
@@ -340,14 +324,23 @@ export default function MyBookingsPage() {
                         {/* Seats */}
                         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                           {booking.seatNumbers.map((sn) => (
-                            <Tag key={sn} color="#0d1f3c" style={{ borderRadius: 4, fontWeight: 600 }}>
+                            <Tag
+                              key={sn}
+                              style={{
+                                borderRadius: 4,
+                                fontWeight: 600,
+                                border: "1px solid var(--ts-border)",
+                                background: "var(--ts-bg-elevated)",
+                                color: "var(--ts-text-secondary)",
+                              }}
+                            >
                               {sn}
                             </Tag>
                           ))}
                           <Tag
                             style={{
-                              background: booking.busType === "premium" ? "#7FE3C5" : "#fef3c7",
-                              color: booking.busType === "premium" ? "#0d1f3c" : "#92400e",
+                              background: booking.busType === "premium" ? "var(--ts-accent-green)" : "#fef3c7",
+                              color: booking.busType === "premium" ? "var(--ts-text-primary)" : "#92400e",
                               border: "none",
                               borderRadius: 4,
                               fontWeight: 600,
@@ -362,8 +355,8 @@ export default function MyBookingsPage() {
                       {/* Right side — price + actions */}
                       <Col>
                         <div style={{ textAlign: "right" }}>
-                          <Text type="secondary" style={{ fontSize: 12 }}>Total</Text>
-                          <div style={{ fontSize: 22, fontWeight: 700, color: "#0d1f3c", marginBottom: 12 }}>
+                          <Text type="secondary" style={{ fontSize: 12 }}>Total Paid</Text>
+                          <div style={{ fontSize: 22, fontWeight: 700, color: "var(--ts-text-primary)", marginBottom: 12 }}>
                             KES {(booking.total || 0).toLocaleString()}
                           </div>
 
@@ -374,7 +367,7 @@ export default function MyBookingsPage() {
                                 onClick={() => openModifyModal(booking)}
                                 style={{ borderRadius: 8, fontWeight: 500 }}
                               >
-                                Modify
+                                Edit
                               </Button>
                               <Button
                                 danger
@@ -433,7 +426,7 @@ export default function MyBookingsPage() {
             </Paragraph>
 
             {/* Seat picker */}
-            <Text strong style={{ display: "block", marginBottom: 8, color: "#0d1f3c" }}>
+            <Text strong style={{ display: "block", marginBottom: 8, color: "var(--ts-text-primary)" }}>
               Select Seats
             </Text>
             <div
@@ -443,9 +436,9 @@ export default function MyBookingsPage() {
                 gap: 8,
                 marginBottom: 24,
                 padding: 16,
-                background: "#f8fafc",
+                background: "var(--ts-bg-elevated)",
                 borderRadius: 12,
-                border: "1px solid #e2e8f0",
+                border: "1px solid var(--ts-border)",
               }}
             >
               {modifyBusSeats.map(({ seatNumber, isBooked }) => {
@@ -464,9 +457,9 @@ export default function MyBookingsPage() {
                       fontWeight: 600,
                       fontSize: 12,
                       ...(isSelected
-                        ? { background: "#1677ff", borderColor: "#1677ff" }
+                        ? { background: "var(--ts-accent)", borderColor: "var(--ts-accent)" }
                         : isBooked
-                          ? { background: "#e2e8f0", color: "#94a3b8" }
+                          ? { background: "var(--ts-border)", color: "var(--ts-text-secondary)" }
                           : {}),
                     }}
                   >
@@ -482,7 +475,7 @@ export default function MyBookingsPage() {
             </div>
 
             {/* Passenger form */}
-            <Text strong style={{ display: "block", marginBottom: 8, color: "#0d1f3c" }}>
+            <Text strong style={{ display: "block", marginBottom: 8, color: "var(--ts-text-primary)" }}>
               Passenger Details
             </Text>
             <Form form={modifyForm} layout="vertical" requiredMark={false}>
@@ -514,6 +507,84 @@ export default function MyBookingsPage() {
           </>
         )}
       </Modal>
+
+      <style jsx>{`
+        .manage-hero {
+          position: relative;
+          overflow: hidden;
+          border-radius: 0 0 28px 28px;
+          padding: 68px 20px 92px;
+          text-align: center;
+          background:
+            radial-gradient(circle at 12% 20%, rgba(148, 255, 233, 0.2), transparent 32%),
+            radial-gradient(circle at 85% 10%, rgba(106, 202, 255, 0.16), transparent 28%),
+            linear-gradient(145deg, #13222d, #1d3a48 62%, #184d5a);
+        }
+
+        .manage-hero-overlay {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 38%);
+        }
+
+        .manage-hero-inner {
+          position: relative;
+          z-index: 1;
+          max-width: 760px;
+          margin: 0 auto;
+        }
+
+        .manage-hero-icon {
+          width: 66px;
+          height: 66px;
+          border-radius: 50%;
+          background: rgba(127, 227, 197, 0.18);
+          border: 1px solid rgba(208, 255, 246, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 18px;
+        }
+
+        .manage-hero-title {
+          margin: 0;
+          color: #f2fdff;
+          font-size: clamp(2rem, 4.6vw, 3.2rem);
+          line-height: 1.05;
+          letter-spacing: 0.01em;
+          text-shadow: 0 4px 22px rgba(0, 0, 0, 0.28);
+        }
+
+        .manage-hero-subcopy {
+          margin: 12px auto 0;
+          color: #e4fbff;
+          font-size: 1.04rem;
+          max-width: 620px;
+          line-height: 1.68;
+        }
+
+        :global(.manage-search-card.ant-card) {
+          margin-top: -54px;
+          box-shadow: 0 20px 36px rgba(16, 24, 32, 0.14);
+        }
+
+        :global(.manage-search-button.ant-btn) {
+          white-space: nowrap;
+          letter-spacing: 0.01em;
+          padding: 0 16px;
+        }
+
+        @media (max-width: 768px) {
+          .manage-hero {
+            padding: 56px 16px 74px;
+          }
+
+          :global(.manage-search-card.ant-card) {
+            margin-top: -32px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
