@@ -1,6 +1,99 @@
 import { buildSeatsForBuses, initialData, getSeatNumbersByBusType } from "@/constants/initialData";
 
 export const TRAVEL_DATA_STORAGE_KEY = "travelsync-data";
+export const RESERVATION_KEY = "travelsync-reservation";
+
+function parseDepartureMinutes(timeStr) {
+  const match = (timeStr || "").match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!match) return null;
+  let hours = Number(match[1]) % 12;
+  const minutes = Number(match[2]);
+  if (match[3].toUpperCase() === "PM") hours += 12;
+  return hours * 60 + minutes;
+}
+
+export function hasDeparted(timeStr) {
+  const depMinutes = parseDepartureMinutes(timeStr);
+  if (depMinutes === null) return false;
+  const now = new Date();
+  return now.getHours() * 60 + now.getMinutes() >= depMinutes;
+}
+
+// Determines whether a bus should be shown in the trips list.
+// Return buses (with activeFrom) have an overnight-aware visibility window.
+export function isBusVisible(bus, selectedDate) {
+  const now = new Date();
+  
+  // Get today's date in Kenya/Local time (YYYY-MM-DD)
+  const today = now.toLocaleDateString('en-CA'); // 'en-CA' gives YYYY-MM-DD format
+
+  // If searching for a future date, always show the bus
+  if (selectedDate > today) {
+    return true;
+  }
+
+  // If searching for today's date, hide only if it has already departed
+  if (selectedDate === today) {
+    const depMinutes = parseDepartureMinutes(bus.departure);
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Show if departure is at least 5 minutes in the future
+    return nowMinutes < (depMinutes - 5);
+  }
+
+  // If it's a past date, don't show any buses
+  return false;
+}
+
+export function getTodayString() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function clearStaleReservation(data) {
+  if (typeof window === "undefined") return data;
+  try {
+    const raw = window.localStorage.getItem(RESERVATION_KEY);
+    if (!raw) return data;
+    const reservation = JSON.parse(raw);
+    if (!reservation || !reservation.expiresAt || Date.now() < reservation.expiresAt) return data;
+    window.localStorage.removeItem(RESERVATION_KEY);
+    const { busId, seatNumbers } = reservation;
+    if (!busId || !Array.isArray(seatNumbers)) return data;
+    return {
+      ...data,
+      seats: data.seats.map((seat) =>
+        seat.busId === busId && seatNumbers.includes(seat.seatNumber) && seat.status === "reserved"
+          ? { ...seat, status: "available" }
+          : seat
+      ),
+    };
+  } catch {
+    return data;
+  }
+}
+
+function resetDepartedBuses(data) {
+  const today = getTodayString();
+  const toResetIds = new Set(
+    data.buses
+      .filter((bus) => hasDeparted(bus.departure) && bus.lastResetDate !== today)
+      .map((bus) => bus.id)
+  );
+  if (toResetIds.size === 0) return data;
+  return {
+    buses: data.buses.map((bus) =>
+      toResetIds.has(bus.id) ? { ...bus, lastResetDate: today } : bus
+    ),
+    seats: data.seats.map((seat) =>
+      toResetIds.has(seat.busId) ? { ...seat, status: "available" } : seat
+    ),
+    bookings: data.bookings.map((booking) =>
+      toResetIds.has(booking.busId) && booking.status === "confirmed"
+        ? { ...booking, status: "completed" }
+        : booking
+    ),
+  };
+}
 
 function cloneData(data) {
   return JSON.parse(JSON.stringify(data));
@@ -116,6 +209,8 @@ export function normalizeTravelData(rawData) {
       duration: String(bus.duration || ""),
       price: Number(bus.price || 0),
       type: bus.type === "Premium" ? "Premium" : "Standard",
+      lastResetDate: bus.lastResetDate || null,
+      activeFrom: bus.activeFrom || null,
     }));
 
   const busMap = new Map(fallback.buses.map((bus) => [bus.id, bus]));
@@ -159,7 +254,12 @@ export function loadTravelData() {
       return normalizeTravelData(initialData);
     }
 
-    return normalizeTravelData(JSON.parse(raw));
+    const normalized = normalizeTravelData(JSON.parse(raw));
+    const reset = resetDepartedBuses(normalized);
+    if (reset !== normalized) {
+      saveTravelData(reset);
+    }
+    return clearStaleReservation(reset);
   } catch (_error) {
     return normalizeTravelData(initialData);
   }
@@ -175,9 +275,17 @@ export function saveTravelData(data) {
 }
 
 export function getAvailableSeatCount(data, busId) {
-  return data.seats.filter(
-    (seat) => seat.busId === busId && seat.status === "available"
-  ).length;
+  const busSeats = data.seats.filter((seat) => seat.busId === busId);
+  if (busSeats.length === 0) {
+    // No seat records — could be a future-date trip with no bookings yet.
+    // Strip the date suffix and look up the base bus to get its capacity.
+    const baseBusId = busId.replace(/_\d{4}-\d{2}-\d{2}$/, "");
+    if (baseBusId === busId) return 0; // not date-scoped, genuinely no seats
+    const bus = data.buses.find((b) => b.id === baseBusId);
+    if (!bus) return 0;
+    return getSeatNumbersForBusType(bus.type === "Premium" ? "Premium" : "Standard").length;
+  }
+  return busSeats.filter((seat) => seat.status === "available").length;
 }
 
 export function getSeatNumbersForBusType(busType) {

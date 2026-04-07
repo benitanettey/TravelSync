@@ -274,13 +274,25 @@ export default function MyBookingsPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {results.map((booking) => {
                 const isCancelled = booking.status === "cancelled";
+                const isCompleted = booking.status === "completed";
+                const isActive = !isCancelled && !isCompleted;
+
+                const cardBorder = isCancelled
+                  ? "1px solid #fca5a5"
+                  : isCompleted
+                    ? "1px solid #93c5fd"
+                    : "1px solid var(--ts-border)";
+
+                const statusColor = isCancelled ? "red" : isCompleted ? "blue" : "green";
+                const statusLabel = isCancelled ? "CANCELLED" : isCompleted ? "COMPLETED" : "CONFIRMED";
+
                 return (
                   <Card
                     key={booking.id}
                     style={{
                       borderRadius: 16,
-                      border: isCancelled ? "1px solid #fca5a5" : "1px solid var(--ts-border)",
-                      opacity: isCancelled ? 0.7 : 1,
+                      border: cardBorder,
+                      opacity: isCancelled || isCompleted ? 0.75 : 1,
                     }}
                     styles={{ body: { padding: 24 } }}
                   >
@@ -289,10 +301,10 @@ export default function MyBookingsPage() {
                         {/* Status + ref */}
                         <div style={{ display: "flex", gap: 8, marginBottom: 12, alignItems: "center" }}>
                           <Tag
-                            color={isCancelled ? "red" : "green"}
+                            color={statusColor}
                             style={{ borderRadius: 4, fontWeight: 600, fontSize: 11 }}
                           >
-                            {isCancelled ? "CANCELLED" : "CONFIRMED"}
+                            {statusLabel}
                           </Tag>
                           <Text strong style={{ color: "var(--ts-text-primary)", fontSize: 15 }}>
                             #{booking.reference}
@@ -360,7 +372,7 @@ export default function MyBookingsPage() {
                             KES {(booking.total || 0).toLocaleString()}
                           </div>
 
-                          {!isCancelled && (
+                          {isActive && (
                             <div style={{ display: "flex", gap: 8 }}>
                               <Button
                                 icon={<EditOutlined />}
@@ -378,6 +390,9 @@ export default function MyBookingsPage() {
                                 Cancel
                               </Button>
                             </div>
+                          )}
+                          {isCompleted && (
+                            <Text type="secondary" style={{ fontSize: 12 }}>Journey completed</Text>
                           )}
                         </div>
                       </Col>

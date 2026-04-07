@@ -139,6 +139,356 @@
       "duration": "1h",
       "price": 500,
       "type": "Standard"
+    },
+    {
+      "id": "bus-3b",
+      "from": "Nairobi",
+      "to": "Nakuru",
+      "departure": "04:00 PM",
+      "arrival": "07:00 PM",
+      "duration": "3h",
+      "price": 1200,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-5b",
+      "from": "Nairobi",
+      "to": "Nyeri",
+      "departure": "01:00 PM",
+      "arrival": "03:30 PM",
+      "duration": "2h 30m",
+      "price": 900,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-7b",
+      "from": "Nairobi",
+      "to": "Machakos",
+      "departure": "07:00 AM",
+      "arrival": "08:30 AM",
+      "duration": "1h 30m",
+      "price": 700,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-14b",
+      "from": "Nairobi",
+      "to": "Thika",
+      "departure": "02:00 PM",
+      "arrival": "03:00 PM",
+      "duration": "1h",
+      "price": 500,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-4-return",
+      "from": "Eldoret",
+      "to": "Nairobi",
+      "departure": "01:30 PM",
+      "arrival": "08:00 PM",
+      "duration": "6h 30m",
+      "price": 1800,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-5-return",
+      "from": "Nyeri",
+      "to": "Nairobi",
+      "departure": "09:00 AM",
+      "arrival": "11:30 AM",
+      "duration": "2h 30m",
+      "price": 900,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-6-return",
+      "from": "Meru",
+      "to": "Nairobi",
+      "departure": "12:45 PM",
+      "arrival": "05:45 PM",
+      "duration": "5h",
+      "price": 1600,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-7-return",
+      "from": "Machakos",
+      "to": "Nairobi",
+      "departure": "03:00 PM",
+      "arrival": "04:30 PM",
+      "duration": "1h 30m",
+      "price": 700,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-8-return",
+      "from": "Kisii",
+      "to": "Nairobi",
+      "departure": "11:30 PM",
+      "arrival": "05:00 AM",
+      "duration": "5h 30m",
+      "price": 1700,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-9-return",
+      "from": "Malindi",
+      "to": "Nairobi",
+      "departure": "06:00 AM",
+      "arrival": "03:00 PM",
+      "duration": "9h",
+      "price": 3200,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-10-return",
+      "from": "Nairobi",
+      "to": "Mombasa",
+      "departure": "01:00 PM",
+      "arrival": "07:00 PM",
+      "duration": "6h",
+      "price": 2400,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-11-return",
+      "from": "Nairobi",
+      "to": "Kisumu",
+      "departure": "03:00 AM",
+      "arrival": "09:30 AM",
+      "duration": "6h 30m",
+      "price": 2100,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-12-return",
+      "from": "Nairobi",
+      "to": "Nakuru",
+      "departure": "07:30 PM",
+      "arrival": "10:30 PM",
+      "duration": "3h",
+      "price": 1200,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-13-return",
+      "from": "Kakamega",
+      "to": "Nairobi",
+      "departure": "09:15 PM",
+      "arrival": "04:15 AM",
+      "duration": "7h",
+      "price": 2300,
+      "type": "Premium"
+    },
+    {
+      "id": "bus-14-return",
+      "from": "Thika",
+      "to": "Nairobi",
+      "departure": "06:30 AM",
+      "arrival": "07:30 AM",
+      "duration": "1h",
+      "price": 500,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-3b-return",
+      "from": "Nakuru",
+      "to": "Nairobi",
+      "departure": "07:00 PM",
+      "arrival": "10:00 PM",
+      "duration": "3h",
+      "price": 1200,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-5b-return",
+      "from": "Nyeri",
+      "to": "Nairobi",
+      "departure": "03:30 PM",
+      "arrival": "06:00 PM",
+      "duration": "2h 30m",
+      "price": 900,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-7b-return",
+      "from": "Machakos",
+      "to": "Nairobi",
+      "departure": "08:30 AM",
+      "arrival": "10:00 AM",
+      "duration": "1h 30m",
+      "price": 700,
+      "type": "Standard"
+    },
+    {
+      "id": "bus-14b-return",
+      "from": "Thika",
+      "to": "Nairobi",
+      "departure": "03:00 PM",
+      "arrival": "04:00 PM",
+      "duration": "1h",
+      "price": 500,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-thi-am",
+      "from": "Nairobi",
+      "to": "Thika",
+      "departure": "08:00 AM",
+      "arrival": "09:00 AM",
+      "duration": "1h",
+      "price": 200,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-thi-pm",
+      "from": "Nairobi",
+      "to": "Thika",
+      "departure": "04:00 PM",
+      "arrival": "05:00 PM",
+      "duration": "1h",
+      "price": 200,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-nye-am",
+      "from": "Nairobi",
+      "to": "Nyeri",
+      "departure": "07:00 AM",
+      "arrival": "10:00 AM",
+      "duration": "3h",
+      "price": 600,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-nye-pm",
+      "from": "Nairobi",
+      "to": "Nyeri",
+      "departure": "02:00 PM",
+      "arrival": "05:00 PM",
+      "duration": "3h",
+      "price": 600,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-mac-am",
+      "from": "Nairobi",
+      "to": "Machakos",
+      "departure": "09:00 AM",
+      "arrival": "10:30 AM",
+      "duration": "1h 30m",
+      "price": 300,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-mac-pm",
+      "from": "Nairobi",
+      "to": "Machakos",
+      "departure": "05:30 PM",
+      "arrival": "07:00 PM",
+      "duration": "1h 30m",
+      "price": 300,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-nak-am",
+      "from": "Nairobi",
+      "to": "Nakuru",
+      "departure": "07:30 AM",
+      "arrival": "10:30 AM",
+      "duration": "3h",
+      "price": 800,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-nak-pm",
+      "from": "Nairobi",
+      "to": "Nakuru",
+      "departure": "01:30 PM",
+      "arrival": "04:30 PM",
+      "duration": "3h",
+      "price": 800,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-thi-am-return",
+      "from": "Thika",
+      "to": "Nairobi",
+      "departure": "09:00 AM",
+      "arrival": "10:00 AM",
+      "duration": "1h",
+      "price": 200,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-thi-pm-return",
+      "from": "Thika",
+      "to": "Nairobi",
+      "departure": "05:00 PM",
+      "arrival": "06:00 PM",
+      "duration": "1h",
+      "price": 200,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-nye-am-return",
+      "from": "Nyeri",
+      "to": "Nairobi",
+      "departure": "10:00 AM",
+      "arrival": "01:00 PM",
+      "duration": "3h",
+      "price": 600,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-nye-pm-return",
+      "from": "Nyeri",
+      "to": "Nairobi",
+      "departure": "05:00 PM",
+      "arrival": "08:00 PM",
+      "duration": "3h",
+      "price": 600,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-mac-am-return",
+      "from": "Machakos",
+      "to": "Nairobi",
+      "departure": "10:30 AM",
+      "arrival": "12:00 PM",
+      "duration": "1h 30m",
+      "price": 300,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-mac-pm-return",
+      "from": "Machakos",
+      "to": "Nairobi",
+      "departure": "07:00 PM",
+      "arrival": "08:30 PM",
+      "duration": "1h 30m",
+      "price": 300,
+      "type": "Standard"
+    },
+    {
+      "id": "nai-nak-am-return",
+      "from": "Nakuru",
+      "to": "Nairobi",
+      "departure": "10:30 AM",
+      "arrival": "01:30 PM",
+      "duration": "3h",
+      "price": 800,
+      "type": "Premium"
+    },
+    {
+      "id": "nai-nak-pm-return",
+      "from": "Nakuru",
+      "to": "Nairobi",
+      "departure": "04:30 PM",
+      "arrival": "07:30 PM",
+      "duration": "3h",
+      "price": 800,
+      "type": "Premium"
     }
   ],
   "seats": [
@@ -215,7 +565,7 @@
     {
       "busId": "bus-1",
       "seatNumber": "E3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-2",
@@ -855,12 +1205,12 @@
     {
       "busId": "bus-8",
       "seatNumber": "A2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-8",
       "seatNumber": "A3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-8",
@@ -950,17 +1300,17 @@
     {
       "busId": "bus-9",
       "seatNumber": "B3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-9",
       "seatNumber": "C1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-9",
       "seatNumber": "C2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-9",
@@ -1110,7 +1460,7 @@
     {
       "busId": "bus-11",
       "seatNumber": "B4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-11",
@@ -1195,82 +1545,82 @@
     {
       "busId": "bus-12",
       "seatNumber": "A1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "A2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "A3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "A4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "B1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "B2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "B3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "B4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "C1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "C2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "C3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "C4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "D1",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "D2",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "D3",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
       "seatNumber": "D4",
-      "status": "available"
+      "status": "booked"
     },
     {
       "busId": "bus-12",
@@ -1506,9 +1856,3936 @@
       "busId": "bus-14",
       "seatNumber": "F4",
       "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-4-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "B3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "C3",
+      "status": "booked"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-8-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-9-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-10-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-11-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-12-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-13-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-3b-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-5b-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-7b-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-14b-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-am-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-thi-pm-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-am-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nye-pm-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-am-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "A4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "B4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "C4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "D4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "E4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "F1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "F2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "F3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-mac-pm-return",
+      "seatNumber": "F4",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-am-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "A1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "A2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "A3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "B1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "B2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "B3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "C1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "C2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "C3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "D1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "D2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "D3",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "E1",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "E2",
+      "status": "available"
+    },
+    {
+      "busId": "nai-nak-pm-return",
+      "seatNumber": "E3",
+      "status": "available"
+    },
+    {
+      "busId": "bus-6-return_2026-04-08",
+      "seatNumber": "C3",
+      "status": "booked"
     }
   ],
   "bookings": [
+    {
+      "id": "booking-5420dfa2-d126-4088-aef3-f57944c4c516",
+      "reference": "TS-MNOXIMG5-330",
+      "busId": "bus-8-return",
+      "seatNumbers": [
+        "C3"
+      ],
+      "passenger": {
+        "firstName": "Marsha",
+        "lastName": "Njami",
+        "email": "arshar.njami@gmail.com",
+        "phone": "+254781210162",
+        "idType": "national_id",
+        "idNumber": "34567785"
+      },
+      "route": {
+        "from": "Kisii",
+        "to": "Nairobi",
+        "departure": "11:30 PM",
+        "arrival": "05:00 AM",
+        "duration": "5h 30m"
+      },
+      "total": 2050,
+      "pricePerSeat": 1700,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T18:04:48.294Z"
+    },
+    {
+      "id": "booking-d60c2023-09bc-4f88-b68b-ab25abe6e40f",
+      "reference": "TS-MNOWOPNP-554",
+      "busId": "bus-8-return",
+      "seatNumbers": [
+        "B3"
+      ],
+      "passenger": {
+        "firstName": "Grace",
+        "lastName": "Doe",
+        "email": "marshanjami@gmail.com",
+        "phone": "+245722505050",
+        "idType": "national_id",
+        "idNumber": "34567785"
+      },
+      "route": {
+        "from": "Kisii",
+        "to": "Nairobi",
+        "departure": "11:30 PM",
+        "arrival": "05:00 AM",
+        "duration": "5h 30m"
+      },
+      "total": 2050,
+      "pricePerSeat": 1700,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T17:41:32.773Z"
+    },
+    {
+      "id": "booking-df24af79-bf39-4717-8349-06f0bd7a3421",
+      "reference": "TS-MNOUV8OH-597",
+      "busId": "bus-6-return_2026-04-08",
+      "seatNumbers": [
+        "C3"
+      ],
+      "passenger": {
+        "firstName": "Lucy",
+        "lastName": "Nduta",
+        "email": "dru@gmail.com",
+        "phone": "+254785656160",
+        "idType": "national_id",
+        "idNumber": "35678905"
+      },
+      "route": {
+        "from": "Meru",
+        "to": "Nairobi",
+        "departure": "12:45 PM",
+        "arrival": "05:45 PM",
+        "duration": "5h",
+        "travelDate": "2026-04-08"
+      },
+      "total": 1950,
+      "pricePerSeat": 1600,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T16:50:38.129Z"
+    },
+    {
+      "id": "booking-9d5d67df-5d75-4853-9561-9e49a4cc7bcf",
+      "reference": "TS-MNOSKOUE-924",
+      "busId": "bus-9",
+      "seatNumbers": [
+        "C2"
+      ],
+      "passenger": {
+        "firstName": "Dru",
+        "lastName": "Nyagz",
+        "email": "dru@gmail.com",
+        "phone": "+254781210162",
+        "idType": "national_id",
+        "idNumber": "35678905"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Malindi",
+        "departure": "09:00 PM",
+        "arrival": "06:00 AM",
+        "duration": "9h"
+      },
+      "total": 3550,
+      "pricePerSeat": 3200,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T15:46:26.630Z"
+    },
+    {
+      "id": "booking-5b6b090a-59d5-47f6-9b1e-b2103a0babc4",
+      "reference": "TS-MNORILLL-295",
+      "busId": "bus-11",
+      "seatNumbers": [
+        "B4"
+      ],
+      "passenger": {
+        "firstName": "Grace",
+        "lastName": "Doe",
+        "email": "graceb@gmail.com",
+        "phone": "+254785656160",
+        "idType": "national_id",
+        "idNumber": "12567846"
+      },
+      "route": {
+        "from": "Kisumu",
+        "to": "Nairobi",
+        "departure": "08:30 PM",
+        "arrival": "03:00 AM",
+        "duration": "6h 30m"
+      },
+      "total": 2300,
+      "pricePerSeat": 2100,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T15:16:49.497Z"
+    },
+    {
+      "id": "booking-6aaa1f33-9d16-419c-8603-d9464fb6dba8",
+      "reference": "TS-MNOR40T3-078",
+      "busId": "bus-9",
+      "seatNumbers": [
+        "B3",
+        "C1"
+      ],
+      "passenger": {
+        "firstName": "Lucy",
+        "lastName": "Brown",
+        "email": "arshar.njami@gmail.com",
+        "phone": "+254714574547",
+        "idType": "national_id",
+        "idNumber": "48579876"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Malindi",
+        "departure": "09:00 PM",
+        "arrival": "06:00 AM",
+        "duration": "9h"
+      },
+      "total": 6750,
+      "pricePerSeat": 3200,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T15:05:29.367Z"
+    },
+    {
+      "id": "booking-4f70adff-bbb1-47c7-b1f7-f240ec85a70c",
+      "reference": "TS-MNOPBADW-438",
+      "busId": "bus-8",
+      "seatNumbers": [
+        "A2"
+      ],
+      "passenger": {
+        "firstName": "Marsha",
+        "lastName": "Njami",
+        "email": "arshar.njami@gmail.com",
+        "phone": "+245722505050",
+        "idType": "national_id",
+        "idNumber": "34567785"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Kisii",
+        "departure": "06:00 PM",
+        "arrival": "11:30 PM",
+        "duration": "5h 30m"
+      },
+      "total": 2050,
+      "pricePerSeat": 1700,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T14:15:09.140Z"
+    },
+    {
+      "id": "booking-3f843bd7-afd6-4668-8acb-7674e1604363",
+      "reference": "TS-MNONU8TD-047",
+      "busId": "bus-8",
+      "seatNumbers": [
+        "A3"
+      ],
+      "passenger": {
+        "firstName": "Mary",
+        "lastName": "Wanjiku",
+        "email": "maryw@gmail.com",
+        "phone": "+254722345123",
+        "idType": "national_id",
+        "idNumber": "56734589"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Kisii",
+        "departure": "06:00 PM",
+        "arrival": "11:30 PM",
+        "duration": "5h 30m"
+      },
+      "total": 2050,
+      "pricePerSeat": 1700,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T13:33:54.337Z"
+    },
+    {
+      "id": "booking-b4465c2d-3593-4f6b-bd00-6fd885db821f",
+      "reference": "TS-MNONNLV3-889",
+      "busId": "bus-12",
+      "seatNumbers": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "B4",
+        "B3",
+        "B2",
+        "B1",
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "D1",
+        "D2",
+        "D3",
+        "D4"
+      ],
+      "passenger": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@gmail.com",
+        "phone": "0722345123",
+        "idType": "national_id",
+        "idNumber": "56734589"
+      },
+      "route": {
+        "from": "Nakuru",
+        "to": "Nairobi",
+        "departure": "04:30 PM",
+        "arrival": "07:30 PM",
+        "duration": "3h"
+      },
+      "total": 19400,
+      "pricePerSeat": 1200,
+      "taxesFees": 200,
+      "busType": "standard",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T13:28:44.655Z"
+    },
+    {
+      "id": "booking-87886d96-795f-49fd-86e5-4b6218179d1d",
+      "reference": "TS-MNOLXO4M-950",
+      "busId": "bus-1",
+      "seatNumbers": [
+        "E3"
+      ],
+      "passenger": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "maryw@gmail.com",
+        "phone": "0722345123",
+        "idType": "national_id",
+        "idNumber": "56734589"
+      },
+      "route": {
+        "from": "Nairobi",
+        "to": "Mombasa",
+        "departure": "08:00 AM",
+        "arrival": "02:00 PM",
+        "duration": "6h"
+      },
+      "total": 2850,
+      "pricePerSeat": 2500,
+      "taxesFees": 350,
+      "busType": "premium",
+      "status": "confirmed",
+      "createdAt": "2026-04-07T12:40:34.918Z"
+    },
     {
       "id": "booking-6fbc827e-6e01-4765-96a5-37fd9ddc73a6",
       "reference": "TS-MNOEPQ8S-560",

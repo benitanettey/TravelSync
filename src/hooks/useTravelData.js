@@ -71,7 +71,13 @@ export function TravelDataProvider({ children }) {
   }, []);
 
   const getBusById = useCallback(
-    (busId) => data.buses.find((bus) => bus.id === busId) || null,
+    (busId) => {
+      const direct = data.buses.find((bus) => bus.id === busId);
+      if (direct) return direct;
+      // Fall back to base bus for date-scoped IDs like "bus-1_2026-04-20"
+      const baseId = busId.replace(/_\d{4}-\d{2}-\d{2}$/, "");
+      return data.buses.find((bus) => bus.id === baseId) || null;
+    },
     [data.buses]
   );
 
@@ -129,9 +135,10 @@ export function TravelDataProvider({ children }) {
       }
 
       const busSeats = data.seats.filter((seat) => seat.busId === busId);
+      // If no record exists for a seat, treat it as available (handles future-date trips)
       const conflictSeats = requestedSeats.filter((seatNumber) => {
         const seat = busSeats.find((item) => item.seatNumber === seatNumber);
-        return !seat || seat.status !== "available";
+        return seat && seat.status !== "available";
       });
 
       if (conflictSeats.length > 0) {
@@ -142,19 +149,22 @@ export function TravelDataProvider({ children }) {
         };
       }
 
-      updateData((previousData) => ({
-        ...previousData,
-        seats: previousData.seats.map((seat) => {
+      updateData((previousData) => {
+        const existingSeatNums = new Set(
+          previousData.seats.filter((s) => s.busId === busId).map((s) => s.seatNumber)
+        );
+        const updatedSeats = previousData.seats.map((seat) => {
           if (seat.busId === busId && requestedSeats.includes(seat.seatNumber)) {
-            return {
-              ...seat,
-              status: "reserved",
-            };
+            return { ...seat, status: "reserved" };
           }
-
           return seat;
-        }),
-      }));
+        });
+        // Create records for seats that had no record yet (future-date trips)
+        const newRecords = requestedSeats
+          .filter((sn) => !existingSeatNums.has(sn))
+          .map((sn) => ({ busId, seatNumber: sn, status: "reserved" }));
+        return { ...previousData, seats: [...updatedSeats, ...newRecords] };
+      });
 
       return { ok: true, conflictSeats: [] };
     },

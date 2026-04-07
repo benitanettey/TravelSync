@@ -10,6 +10,11 @@ function clone(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
+// Strip date suffix from date-scoped IDs like "bus-1_2026-04-20" → "bus-1"
+function getBaseBusId(busId) {
+  return busId.replace(/_\d{4}-\d{2}-\d{2}$/, "");
+}
+
 function normalizeStatus(status) {
   if (status === "booked" || status === "reserved") {
     return status;
@@ -168,29 +173,22 @@ export async function createBookingInStore(payload) {
   const uniqueSeatNumbers = [...new Set((seatNumbers || []).map(String))];
   const data = await readStoreData();
 
-  const bus = data.buses.find((item) => item.id === busId);
+  // Support date-scoped busIds like "bus-1_2026-04-20" by looking up the base bus
+  const baseBusId = getBaseBusId(busId);
+  const bus = data.buses.find((item) => item.id === baseBusId);
   if (!bus) {
-    return {
-      ok: false,
-      status: 404,
-      message: "Trip not found.",
-      conflictSeats: [],
-    };
+    return { ok: false, status: 404, message: "Trip not found.", conflictSeats: [] };
   }
 
   if (uniqueSeatNumbers.length === 0) {
-    return {
-      ok: false,
-      status: 400,
-      message: "Select at least one seat.",
-      conflictSeats: [],
-    };
+    return { ok: false, status: 400, message: "Select at least one seat.", conflictSeats: [] };
   }
 
   const busSeats = data.seats.filter((seat) => seat.busId === busId);
+  // If no seat records exist for this busId (future-date trip), all seats are available
   const conflictSeats = uniqueSeatNumbers.filter((seatNumber) => {
     const found = busSeats.find((seat) => seat.seatNumber === seatNumber);
-    return !found || found.status !== "available";
+    return found && found.status !== "available";
   });
 
   if (conflictSeats.length > 0) {
@@ -202,6 +200,10 @@ export async function createBookingInStore(payload) {
       seats: busSeats,
     };
   }
+
+  // Extract travel date from date-scoped busId if present
+  const dateSuffix = busId.match(/_(\d{4}-\d{2}-\d{2})$/);
+  const travelDate = dateSuffix ? dateSuffix[1] : null;
 
   const booking = {
     id: buildBookingId(),
@@ -215,6 +217,7 @@ export async function createBookingInStore(payload) {
       departure: bus.departure,
       arrival: bus.arrival,
       duration: bus.duration,
+      ...(travelDate ? { travelDate } : {}),
     },
     total: Number(pricePerSeat) * uniqueSeatNumbers.length + Number(taxesFees),
     pricePerSeat: Number(pricePerSeat),
@@ -224,23 +227,22 @@ export async function createBookingInStore(payload) {
     createdAt: new Date().toISOString(),
   };
 
-  const nextSeats = data.seats.map((seat) => {
+  // Update existing seat records to booked
+  const existingSeatNums = new Set(busSeats.map((s) => s.seatNumber));
+  const updatedSeats = data.seats.map((seat) => {
     if (seat.busId === busId && uniqueSeatNumbers.includes(seat.seatNumber)) {
-      return {
-        ...seat,
-        status: "booked",
-      };
+      return { ...seat, status: "booked" };
     }
-
     return seat;
   });
+  // Add new seat records for seats with no prior record (future-date trips)
+  const newSeatRecords = uniqueSeatNumbers
+    .filter((sn) => !existingSeatNums.has(sn))
+    .map((sn) => ({ busId, seatNumber: sn, status: "booked" }));
 
-  const nextData = {
-    ...data,
-    seats: nextSeats,
-    bookings: [booking, ...data.bookings],
-  };
+  const nextSeats = [...updatedSeats, ...newSeatRecords];
 
+  const nextData = { ...data, seats: nextSeats, bookings: [booking, ...data.bookings] };
   await writeStoreData(nextData);
 
   return {

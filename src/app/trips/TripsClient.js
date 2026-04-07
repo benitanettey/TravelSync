@@ -1,8 +1,9 @@
 "use client";
 
 import { Row, Col, Typography } from "antd";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { isBusVisible, getTodayString } from "@/services/travelDataStorage";
 import SearchForm from "../../components/trip/SearchForm";
 import TripCard from "../../components/trip/TripCard";
 import FiltersSidebar from "../../components/trip/FiltersSidebar";
@@ -13,6 +14,13 @@ const { Title } = Typography;
 export default function TripsPage() {
   const { buses, getAvailableSeatCount } = useTravelData();
   const searchParams = useSearchParams();
+
+  // Re-evaluate departed buses every minute so the list updates in real-time
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setTick((t) => t + 1), 60_000);
+    return () => clearInterval(timer);
+  }, []);
 
   const fromParam = (searchParams.get("from") || "").trim();
   const toParam = (searchParams.get("to") || "").trim();
@@ -119,22 +127,36 @@ export default function TripsPage() {
     return selectedAmenities.every((amenity) => supports[amenity]);
   };
 
+  const today = getTodayString();
+  const selectedDate = dateParam || today;
+  const isToday = selectedDate === today;
+  const isPast = selectedDate < today;
+
   const trips = useMemo(
-    () =>
-      buses.map((bus) => ({
-        ...bus,
-        seats: getAvailableSeatCount(bus.id),
-      }))
-      .filter((trip) => {
-        const matchesFrom = !fromQuery || trip.from.toLowerCase().includes(fromQuery);
-        const matchesTo = !toQuery || trip.to.toLowerCase().includes(toQuery);
-        const matchesDeparture = isDepartureMatch(trip.departure, departureWindows);
-        const matchesBusType = isBusTypeMatch(trip, busTypeFilter);
-        const matchesPrice = isPriceMatch(trip.price, priceRanges);
-        const matchesAmenities = hasAmenities(trip, amenities);
-        return matchesFrom && matchesTo && matchesDeparture && matchesBusType && matchesPrice && matchesAmenities;
-      }),
-    [amenities, buses, busTypeFilter, departureWindows, fromQuery, getAvailableSeatCount, priceRanges, toQuery]
+    () => {
+      if (isPast) return [];
+
+      return buses
+        .map((bus) => {
+          // For future dates use a date-scoped ID so seat availability is per-date
+          const tripId = isToday ? bus.id : `${bus.id}_${selectedDate}`;
+          const seatCount = getAvailableSeatCount(tripId);
+          return { ...bus, id: tripId, seats: seatCount };
+        })
+        .filter((trip) => {
+          // Use the new date-aware visibility check
+          if (!isBusVisible(trip, selectedDate)) return false;
+
+          const matchesFrom = !fromQuery || trip.from.toLowerCase().includes(fromQuery);
+          const matchesTo = !toQuery || trip.to.toLowerCase().includes(toQuery);
+          const matchesDeparture = isDepartureMatch(trip.departure, departureWindows);
+          const matchesBusType = isBusTypeMatch(trip, busTypeFilter);
+          const matchesPrice = isPriceMatch(trip.price, priceRanges);
+          const matchesAmenities = hasAmenities(trip, amenities);
+          return matchesFrom && matchesTo && matchesDeparture && matchesBusType && matchesPrice && matchesAmenities;
+        });
+    },
+    [amenities, buses, busTypeFilter, departureWindows, fromQuery, getAvailableSeatCount, isToday, isPast, priceRanges, selectedDate, toQuery, tick]
   );
 
   return (

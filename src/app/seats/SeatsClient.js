@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { Row, Col, Card, Button, Typography, Select, Tag, Segmented, message } from "antd";
+import { Row, Col, Card, Button, Typography, Select, Tag, Segmented, message, Modal } from "antd";
 import {
   ArrowLeftOutlined,
   CalendarOutlined,
@@ -16,6 +16,7 @@ import SeatMap from "@/components/seat/SeatMap";
 import BookingSummary from "@/components/booking/BookingSummary";
 import { useTravelData } from "@/hooks/useTravelData";
 import { fetchSeatStatuses } from "@/services/seatDataService";
+import { hasDeparted, RESERVATION_KEY, getTodayString } from "@/services/travelDataStorage";
 
 const { Text, Title } = Typography;
 
@@ -30,10 +31,15 @@ export default function SeatsPage() {
 function SeatsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { getBusById, getBookedSeats, syncSeatStatuses } = useTravelData();
+  const { buses, getBusById, getBookedSeats, syncSeatStatuses, reserveSeatsOptimistic } = useTravelData();
   const [messageApi, messageContextHolder] = message.useMessage();
 
   const busId = searchParams.get("busId") || "";
+  // For date-scoped trips (e.g. "bus-1_2026-04-20"), extract date and base bus
+  const dateSuffix = busId.match(/_(\d{4}-\d{2}-\d{2})$/);
+  const travelDate = dateSuffix ? dateSuffix[1] : getTodayString();
+  const isToday = travelDate === getTodayString();
+
   const bus = getBusById(busId);
 
   const from = bus?.from || searchParams.get("from") || "Nairobi";
@@ -50,6 +56,14 @@ function SeatsPageContent() {
 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [busType, setBusType] = useState(normalizedBusType);
+
+  // Redirect if today's bus has already departed (future-date trips are never redirected)
+  useEffect(() => {
+    if (!departure || !isToday) return;
+    if (hasDeparted(departure)) {
+      router.replace("/trips");
+    }
+  }, [departure, isToday, router]);
 
   useEffect(() => {
     if (!busId) {
@@ -91,7 +105,60 @@ function SeatsPageContent() {
   const bookedSeats = useMemo(() => getBookedSeats(busId), [busId, getBookedSeats]);
 
   const price = busType === "premium" ? basePrice : Math.round(basePrice * 0.7);
-  const duration = "6h 45m";
+  const duration = bus?.duration || "—";
+
+  const handleBusTypeChange = (targetType) => {
+    if (targetType === busType) return;
+
+    const targetTypeCap = targetType === "premium" ? "Premium" : "Standard";
+    const currentBusBaseId = busId.replace(/_\d{4}-\d{2}-\d{2}$/, "");
+
+    // Find buses on the same route with the target type (exclude current bus)
+    const alternatives = buses.filter(
+      (b) =>
+        b.from === from &&
+        b.to === to &&
+        b.type === targetTypeCap &&
+        b.id !== currentBusBaseId
+    );
+
+    if (alternatives.length === 0) {
+      messageApi.warning(
+        `No ${targetTypeCap} class available on the ${from} → ${to} route. Try searching for a different trip.`
+      );
+      return;
+    }
+
+    const alt = alternatives[0];
+    const sameTime = alt.departure === departure;
+
+    if (sameTime) {
+      // Same departure time, just switch the class view
+      setBusType(targetType);
+      setSelectedSeats([]);
+      return;
+    }
+
+    // Different departure time — confirm before switching
+    Modal.confirm({
+      title: `Switch to ${targetTypeCap} Class?`,
+      content: `${targetTypeCap} class on this route departs at ${alt.departure} instead of ${departure}. You'll be taken to that trip's seat selection.`,
+      okText: "Switch & Continue",
+      cancelText: "Stay here",
+      onOk: () => {
+        const altBusId = dateSuffix ? `${alt.id}_${travelDate}` : alt.id;
+        const params = new URLSearchParams();
+        params.set("busId", altBusId);
+        params.set("from", alt.from);
+        params.set("to", alt.to);
+        params.set("departure", alt.departure);
+        params.set("price", String(alt.price));
+        params.set("busType", targetType);
+        params.set("travelDate", travelDate);
+        router.push(`/seats?${params.toString()}`);
+      },
+    });
+  };
 
   const handleProceed = async () => {
     if (selectedSeats.length === 0) {
@@ -115,10 +182,20 @@ function SeatsPageContent() {
       }
     }
 
-    // TODO: BACKEND - Temporarily reserve selected seats before proceeding to booking
-    // Endpoint: POST /api/trips/:tripId/reserve-seats
-    // Body: { seatNumbers: [...], sessionId: "..." }
-    // Should reserve seats for 10-15 minutes while user completes booking
+    // Reserve seats for 5 minutes while passenger fills in details
+    const reservation = reserveSeatsOptimistic(busId, selectedSeats);
+    if (!reservation.ok) {
+      messageApi.error(reservation.message || "Could not hold your seats. Please try again.");
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(
+        RESERVATION_KEY,
+        JSON.stringify({ busId, seatNumbers: selectedSeats, expiresAt: Date.now() + 5 * 60 * 1000 })
+      );
+    } catch (_e) { /* ignore */ }
+
     const params = new URLSearchParams();
     params.set("from", from);
     params.set("to", to);
@@ -127,6 +204,7 @@ function SeatsPageContent() {
     params.set("seats", selectedSeats.join(","));
     params.set("busId", busId);
     params.set("busType", busType);
+    params.set("travelDate", travelDate);
     router.push(`/booking?${params.toString()}`);
   };
 
@@ -260,10 +338,7 @@ function SeatsPageContent() {
             </Text>
             <Segmented
               value={busType}
-              onChange={(val) => {
-                setBusType(val);
-                setSelectedSeats([]);
-              }}
+              onChange={handleBusTypeChange}
               options={[
                 { value: "premium", label: "Premium" },
                 { value: "standard", label: "Standard" },
