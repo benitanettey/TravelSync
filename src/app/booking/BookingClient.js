@@ -1,15 +1,17 @@
 "use client";
 
 import { Suspense } from "react";
-import { Row, Col, Card, Typography, Tag, Checkbox, message } from "antd";
-import { ArrowLeftOutlined, UserOutlined } from "@ant-design/icons";
+import { Row, Col, Card, Typography, Tag, Checkbox, message, Alert } from "antd";
+import { ArrowLeftOutlined, UserOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 import PassengerForm from "@/components/booking/PassengerForm";
 import BookingSummary from "@/components/booking/BookingSummary";
 import { useTravelData } from "@/hooks/useTravelData";
 import { createBookingRequest, fetchSeatStatuses } from "@/services/seatDataService";
+import { RESERVATION_KEY } from "@/services/travelDataStorage";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -47,6 +49,54 @@ function BookingPageContent() {
   const seatsParam = searchParams.get("seats") || "";
   const seats = seatsParam ? seatsParam.split(",") : [];
   const busType = searchParams.get("busType") || "premium";
+  const travelDate = searchParams.get("travelDate") || new Date().toISOString().slice(0, 10);
+
+  const [secsLeft, setSecsLeft] = useState(null);
+  const rollbackRef = useRef(rollbackReservedSeats);
+  useEffect(() => { rollbackRef.current = rollbackReservedSeats; }, [rollbackReservedSeats]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !busId) return;
+    try {
+      const raw = window.localStorage.getItem(RESERVATION_KEY);
+      if (!raw) return;
+      const reservation = JSON.parse(raw);
+      if (!reservation || reservation.busId !== busId) return;
+      const remaining = Math.floor((reservation.expiresAt - Date.now()) / 1000);
+      if (remaining <= 0) {
+  // Use setTimeout to push this update outside of the render cycle
+      setTimeout(() => {
+        rollbackRef.current(busId, seats);
+        window.localStorage.removeItem(RESERVATION_KEY);
+        messageApi.error("Your seat hold expired. Please reselect your seats.");
+        router.replace(`/seats?busId=${busId}`);
+      }, 0);
+      return;
+    }
+      setSecsLeft(remaining);
+      const interval = setInterval(() => {
+        
+        const now = Date.now();
+        const remaining = Math.max(0, Math.ceil((reservation.expiresAt - now) / 1000));
+        
+        setSecsLeft(remaining);
+
+        if (remaining <= 0) {
+          // Wrap the rollback in setTimeout to fix the "rendering" error
+          setTimeout(() => {
+            rollbackRef.current(busId, seats);
+            window.localStorage.removeItem(RESERVATION_KEY);
+            messageApi.error("Your seat hold expired. Please reselect your seats.");
+            router.replace(`/seats?busId=${busId}`);
+          }, 0);
+          
+          clearInterval(interval);
+        }
+      }, 1000);
+      return () => clearInterval(interval);
+    } catch (_e) { /* ignore */ }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [busId]);
 
   // TODO: BACKEND - If user is logged in, pre-fill passenger details from user profile
   // Endpoint: GET /api/users/me/profile
@@ -77,27 +127,7 @@ function BookingPageContent() {
       return;
     }
 
-    const latestStatuses = await fetchSeatStatuses(busId);
-    if (latestStatuses && latestStatuses.length > 0) {
-      syncSeatStatuses(busId, latestStatuses);
-
-      const unavailableNow = latestStatuses
-        .filter((seat) => seat.status === "booked" || seat.status === "reserved")
-        .map((seat) => seat.seatNumber);
-
-      const conflicting = seats.filter((seat) => unavailableNow.includes(seat));
-      if (conflicting.length > 0) {
-        messageApi.error(`Seat(s) no longer available: ${conflicting.join(", ")}. Please reselect.`);
-        return;
-      }
-    }
-
-    const optimistic = reserveSeatsOptimistic(busId, seats);
-    if (!optimistic.ok) {
-      messageApi.error(optimistic.message || "Seat selection is outdated. Please reselect.");
-      return;
-    }
-
+    // Seats are already reserved from the seat selection page — skip re-reserving
     const result = await createBookingRequest({
       busId,
       seatNumbers: seats,
@@ -136,6 +166,12 @@ function BookingPageContent() {
       return;
     }
 
+    // Clear the seat hold now that booking is confirmed
+    try { window.localStorage.removeItem(RESERVATION_KEY); } catch (_e) { /* ignore */ }
+
+    const formattedDate = new Date(travelDate + "T00:00:00").toLocaleDateString("en-US", {
+      month: "short", day: "numeric", year: "numeric",
+    });
     const params = new URLSearchParams();
     params.set("bookingId", booking.id);
     params.set("from", from);
@@ -144,12 +180,7 @@ function BookingPageContent() {
     params.set("seats", seats.join(","));
     params.set("busType", busType);
     params.set("name", `${passengerData.firstName || ""} ${passengerData.lastName || ""}`.trim());
-    params.set("date", new Date().toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      timeZone: "UTC",
-    }));
+    params.set("date", formattedDate);
     router.push(`/confirmation?${params.toString()}`);
   };
 
@@ -181,6 +212,16 @@ function BookingPageContent() {
           Add traveler details to secure your {isPremium ? "executive" : "standard"} seats instantly.
         </Paragraph>
       </div>
+
+      {secsLeft !== null && (
+        <Alert
+          icon={<ClockCircleOutlined />}
+          showIcon
+          type={secsLeft <= 60 ? "error" : "warning"}
+          title={`Your seats are held for ${Math.floor(secsLeft / 60)}:${String(secsLeft % 60).padStart(2, "0")} — complete your booking before the hold expires.`}
+          style={{ marginBottom: 20, borderRadius: 10 }}
+        />
+      )}
 
       <Row gutter={24}>
         {/* LEFT COLUMN */}

@@ -184,6 +184,47 @@ export const busesSeed = [
     price: 500,
     type: "Standard",
   },
+  // Second daily trips for short/medium routes
+  {
+    id: "bus-3b",
+    from: "Nairobi",
+    to: "Nakuru",
+    departure: "04:00 PM",
+    arrival: "07:00 PM",
+    duration: "3h",
+    price: 1200,
+    type: "Standard",
+  },
+  {
+    id: "bus-5b",
+    from: "Nairobi",
+    to: "Nyeri",
+    departure: "01:00 PM",
+    arrival: "03:30 PM",
+    duration: "2h 30m",
+    price: 900,
+    type: "Standard",
+  },
+  {
+    id: "bus-7b",
+    from: "Nairobi",
+    to: "Machakos",
+    departure: "07:00 AM",
+    arrival: "08:30 AM",
+    duration: "1h 30m",
+    price: 700,
+    type: "Standard",
+  },
+  {
+    id: "bus-14b",
+    from: "Nairobi",
+    to: "Thika",
+    departure: "02:00 PM",
+    arrival: "03:00 PM",
+    duration: "1h",
+    price: 500,
+    type: "Standard",
+  },
 ];
 
 const initialBookedByBus = {
@@ -192,6 +233,51 @@ const initialBookedByBus = {
   "bus-3": ["B1", "C3"],
   "bus-4": ["A4", "D2", "F1"],
 };
+
+// bus-1, bus-2, bus-3 already have explicit return routes (bus-10, bus-11, bus-12)
+const SKIP_RETURN_IDS = new Set(["bus-1", "bus-2", "bus-3"]);
+
+function parseTimeToMinutes(timeStr) {
+  const match = (timeStr || "").match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if (!match) return 0;
+  let hours = Number(match[1]) % 12;
+  if (match[3].toUpperCase() === "PM") hours += 12;
+  return hours * 60 + Number(match[2]);
+}
+
+function minutesToTimeStr(totalMinutes) {
+  const m = ((totalMinutes % (24 * 60)) + 24 * 60) % (24 * 60);
+  const h24 = Math.floor(m / 60);
+  const mins = m % 60;
+  const period = h24 >= 12 ? "PM" : "AM";
+  let h = h24 % 12;
+  if (h === 0) h = 12;
+  return `${String(h).padStart(2, "0")}:${String(mins).padStart(2, "0")} ${period}`;
+}
+
+function addDurationToTime(timeStr, durationStr) {
+  const base = parseTimeToMinutes(timeStr);
+  const dm = (durationStr || "").match(/(?:(\d+)h)?\s*(?:(\d+)m)?/);
+  const added = Number(dm?.[1] || 0) * 60 + Number(dm?.[2] || 0);
+  return minutesToTimeStr(base + added);
+}
+
+function buildReturnBuses(buses) {
+  return buses
+    .filter((bus) => !SKIP_RETURN_IDS.has(bus.id))
+    .map((bus) => ({
+      id: `${bus.id}-return`,
+      from: bus.to,
+      to: bus.from,
+      departure: bus.arrival, // Return trip starts when going arrives
+      arrival: addDurationToTime(bus.arrival, bus.duration),
+      duration: bus.duration,
+      price: bus.price,
+      type: bus.type,
+      
+      // This allows return buses to be visible independently.
+    }));
+}
 
 export function getSeatNumbersByBusType(busType) {
   if (busType === "Premium") {
@@ -214,8 +300,10 @@ export function buildSeatsForBuses(buses) {
   });
 }
 
+const allBuses = [...busesSeed, ...buildReturnBuses(busesSeed)];
+
 export const initialData = {
-  buses: busesSeed,
-  seats: buildSeatsForBuses(busesSeed),
+  buses: allBuses,
+  seats: buildSeatsForBuses(allBuses),
   bookings: [],
 };

@@ -86,6 +86,12 @@ const SearchForm = ({ cities = [] }) => {
           onChange={(d) => setDate(d)}
           format="YYYY-MM-DD"
           placeholder="Travel date"
+          disabledDate={(d) => {
+            if (!d) return false;
+            const today = dayjs().startOf("day");
+            const maxDate = today.add(30, "day");
+            return d.isBefore(today) || d.isAfter(maxDate);
+          }}
         />
       </Col>
 

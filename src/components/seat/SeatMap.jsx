@@ -6,7 +6,7 @@ export default function SeatMap({
   selectedSeats,
   setSelectedSeats,
   busType = "premium",
-  bookedSeats = ["A2", "C1", "C2", "D3"],
+  bookedSeats = [],
 }) {
   // TODO: BACKEND - Fetch booked seats from API in real-time
   // Endpoint: GET /api/trips/:tripId/seats
