@@ -41,7 +41,7 @@ export default function SeatItem({ seat, status, busType, onClick }) {
           height: 62px;
           background: linear-gradient(180deg, #a7f3d0 0%, #6ee7b7 100%);
           border: 2px solid #34d399;
-          border-radius: 10px 10px 6px 6px;
+          border-radius: 12px 12px 8px 8px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -53,6 +53,7 @@ export default function SeatItem({ seat, status, busType, onClick }) {
           transition: all 0.2s ease;
           position: relative;
           gap: 2px;
+          box-shadow: 0 5px 14px rgba(16, 120, 95, 0.22);
         }
 
         .seat::before {
@@ -78,6 +79,7 @@ export default function SeatItem({ seat, status, busType, onClick }) {
           background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
           border-color: #f59e0b;
           color: #92400e;
+          box-shadow: 0 5px 14px rgba(168, 110, 20, 0.2);
         }
 
         .seat.standard::before {

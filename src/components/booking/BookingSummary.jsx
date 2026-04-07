@@ -35,7 +35,7 @@ export default function BookingSummary({
           <div className="bs-header">
             <FileTextOutlined style={{ fontSize: 18 }} />
             <Title level={5} style={{ margin: 0, color: "var(--ts-text-primary)" }}>
-              Booking Summary
+              Fare Summary
             </Title>
           </div>
 
@@ -108,13 +108,13 @@ export default function BookingSummary({
               fontWeight: 600,
             }}
           >
-            Confirm Booking
+            Continue to Confirmation
           </Button>
 
           <div className="bs-terms">
-            BY CLICKING CONFIRM, YOU AGREE TO OUR{" "}
+            BY CONTINUING, YOU AGREE TO OUR{" "}
             <Link href="/support" style={{ color: "var(--ts-accent)", textDecoration: "underline" }}>
-              TERMS & CONDITIONS
+              TERMS AND CONDITIONS
             </Link>
             .
           </div>
@@ -122,12 +122,12 @@ export default function BookingSummary({
 
         {/* SECURE CHECKOUT CARD */}
         <div className="bs-secure-card">
-          <SafetyOutlined style={{ fontSize: 20, color: "#16a34a" }} />
+          <SafetyOutlined style={{ fontSize: 20, color: "var(--ts-text-secondary)" }} />
           <div>
-            <Text strong style={{ color: "#16a34a", display: "block" }}>
+            <Text strong style={{ color: "var(--ts-text-secondary)", display: "block" }}>
               Secure Checkout
             </Text>
-            <Text style={{ color: "#16a34a", fontSize: 13 }}>
+            <Text style={{ color: "var(--ts-text-secondary)", fontSize: 13 }}>
               SSL Encrypted Transaction
             </Text>
           </div>
@@ -140,7 +140,7 @@ export default function BookingSummary({
             <div>
               <Text strong style={{ color: "var(--ts-text-primary)" }}>Need assistance?</Text>
               <br />
-              <Text style={{ color: "var(--ts-text-secondary)" }}>Talk to a concierge expert.</Text>
+              <Text style={{ color: "var(--ts-text-secondary)" }}>Talk to a support specialist.</Text>
             </div>
           </div>
         </Link>
@@ -155,10 +155,11 @@ export default function BookingSummary({
         }
 
         .bs-card {
-          border-radius: 12px;
+          border-radius: 18px;
           padding: 20px;
           background: var(--ts-bg-card);
           border: 1px solid var(--ts-border);
+          box-shadow: var(--ts-shadow);
         }
 
         .bs-card.standard {
@@ -199,15 +200,15 @@ export default function BookingSummary({
           align-items: center;
           gap: 12px;
           padding: 16px;
-          background: #f0fdf4;
-          border: 1px solid #bbf7d0;
-          border-radius: 12px;
+          background: var(--ts-bg-elevated);
+          border: 1px solid var(--ts-border);
+          border-radius: 16px;
         }
 
         .bs-assist {
           padding: 16px;
           border: 1px solid var(--ts-border);
-          border-radius: 12px;
+          border-radius: 16px;
           display: flex;
           gap: 12px;
           align-items: center;

@@ -86,17 +86,18 @@ export default function SeatMap({
       </div>
 
       {/* AVAILABLE COUNT */}
-      <p className="available-count">{availableCount} seats available</p>
+      <p className="available-count">{availableCount} seats currently available</p>
 
       <style jsx>{`
         .bus-layout {
-          background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-          border: 2px solid #e2e8f0;
+          background: linear-gradient(180deg, #f8f3e8 0%, #f1e7d7 100%);
+          border: 2px solid #d9ccb8;
           border-radius: 40px 40px 16px 16px;
           padding: 24px 20px;
           max-width: 340px;
           margin: 0 auto;
           position: relative;
+          box-shadow: var(--ts-shadow);
         }
 
         .bus-layout.standard {

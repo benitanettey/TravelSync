@@ -101,20 +101,28 @@ export function normalizeTravelData(rawData) {
     return fallback;
   }
 
-  const buses = Array.isArray(rawData.buses) && rawData.buses.length > 0
+  const rawBuses = Array.isArray(rawData.buses) && rawData.buses.length > 0
     ? rawData.buses
-        .filter((bus) => bus && typeof bus === "object" && bus.id)
-        .map((bus) => ({
-          id: String(bus.id),
-          from: String(bus.from || ""),
-          to: String(bus.to || ""),
-          departure: String(bus.departure || ""),
-          arrival: String(bus.arrival || ""),
-          duration: String(bus.duration || ""),
-          price: Number(bus.price || 0),
-          type: bus.type === "Premium" ? "Premium" : "Standard",
-        }))
-    : fallback.buses;
+    : [];
+
+  const parsedBuses = rawBuses
+    .filter((bus) => bus && typeof bus === "object" && bus.id)
+    .map((bus) => ({
+      id: String(bus.id),
+      from: String(bus.from || ""),
+      to: String(bus.to || ""),
+      departure: String(bus.departure || ""),
+      arrival: String(bus.arrival || ""),
+      duration: String(bus.duration || ""),
+      price: Number(bus.price || 0),
+      type: bus.type === "Premium" ? "Premium" : "Standard",
+    }));
+
+  const busMap = new Map(fallback.buses.map((bus) => [bus.id, bus]));
+  parsedBuses.forEach((bus) => {
+    busMap.set(bus.id, bus);
+  });
+  const buses = Array.from(busMap.values());
 
   const seats = Array.isArray(rawData.seats)
     ? rawData.seats.map(normalizeSeatRecord).filter(Boolean)
@@ -124,10 +132,18 @@ export function normalizeTravelData(rawData) {
     ? rawData.bookings.map(normalizeBookingRecord).filter(Boolean)
     : [];
 
+  const bookingSet = new Set(bookings.map((booking) => booking.id));
+  const mergedBookings = [...bookings];
+  fallback.bookings.forEach((booking) => {
+    if (!bookingSet.has(booking.id)) {
+      mergedBookings.push(booking);
+    }
+  });
+
   return {
     buses,
-    seats: mergeRequiredSeats(buses, seats, bookings),
-    bookings,
+    seats: mergeRequiredSeats(buses, seats, mergedBookings),
+    bookings: mergedBookings,
   };
 }
 

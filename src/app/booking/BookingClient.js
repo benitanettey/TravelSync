@@ -9,7 +9,7 @@ import Link from "next/link";
 import PassengerForm from "@/components/booking/PassengerForm";
 import BookingSummary from "@/components/booking/BookingSummary";
 import { useTravelData } from "@/hooks/useTravelData";
-import { createBookingRequest } from "@/services/seatDataService";
+import { createBookingRequest, fetchSeatStatuses } from "@/services/seatDataService";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -71,6 +71,26 @@ function BookingPageContent() {
     // Trigger email with booking details, QR code, and e-ticket PDF
 
     const taxesFees = busType === "premium" ? 350 : 200;
+
+    if (!busId || seats.length === 0) {
+      messageApi.error("No seat selected. Please return to seat selection.");
+      return;
+    }
+
+    const latestStatuses = await fetchSeatStatuses(busId);
+    if (latestStatuses && latestStatuses.length > 0) {
+      syncSeatStatuses(busId, latestStatuses);
+
+      const unavailableNow = latestStatuses
+        .filter((seat) => seat.status === "booked" || seat.status === "reserved")
+        .map((seat) => seat.seatNumber);
+
+      const conflicting = seats.filter((seat) => unavailableNow.includes(seat));
+      if (conflicting.length > 0) {
+        messageApi.error(`Seat(s) no longer available: ${conflicting.join(", ")}. Please reselect.`);
+        return;
+      }
+    }
 
     const optimistic = reserveSeatsOptimistic(busId, seats);
     if (!optimistic.ok) {
@@ -151,14 +171,14 @@ function BookingPageContent() {
             marginBottom: 16,
           }}
         >
-          <ArrowLeftOutlined /> Back to seat selection
+          <ArrowLeftOutlined /> Return to seat selection
         </Link>
 
-        <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "var(--ts-text-primary)" }}>
-          Review Your Journey
+        <Title level={2} style={{ margin: 0, fontStyle: "italic", color: "var(--ts-text-primary)", letterSpacing: "0.01em" }}>
+          Finalize Your Journey
         </Title>
         <Paragraph style={{ marginBottom: 0, color: "var(--ts-text-secondary)" }}>
-          Complete your passenger details to secure your {isPremium ? "executive" : "standard"} seat.
+          Add traveler details to secure your {isPremium ? "executive" : "standard"} seats instantly.
         </Paragraph>
       </div>
 
@@ -167,7 +187,7 @@ function BookingPageContent() {
         <Col xs={24} lg={14}>
           {/* PASSENGER FORM CARD */}
           <Card
-            style={{ borderRadius: 12, marginBottom: 24, background: "var(--ts-bg-card)", border: "1px solid var(--ts-border)" }}
+            style={{ borderRadius: 18, marginBottom: 24, background: "var(--ts-bg-card)", border: "1px solid var(--ts-border)" }}
             styles={{ body: { padding: 24 } }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
@@ -180,7 +200,7 @@ function BookingPageContent() {
             <PassengerForm onSubmit={handleConfirm} disabled={seats.length === 0} />
 
             <Checkbox style={{ marginTop: 8 }}>
-              Save this information for future bookings
+              Save traveler profile for future bookings
             </Checkbox>
           </Card>
 
@@ -206,7 +226,7 @@ function BookingPageContent() {
                   marginBottom: 16,
                 }}
               >
-                {isPremium ? "EXECUTIVE CLASS TICKET" : "STANDARD CLASS TICKET"}
+                {isPremium ? "EXECUTIVE CLASS BOARDING PASS" : "STANDARD CLASS BOARDING PASS"}
               </Tag>
 
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
@@ -215,7 +235,7 @@ function BookingPageContent() {
                     {from.substring(0, 3).toUpperCase()} → {to.substring(0, 3).toUpperCase()}
                   </Title>
                   <Text style={{ color: "#8a9ab0", fontSize: 13 }}>
-                    Departure: Today, {departure}
+                    Departure today, {departure}
                   </Text>
                 </div>
 
@@ -253,7 +273,7 @@ function BookingPageContent() {
               }}
             >
               <Text style={{ color: "#8a9ab0", fontSize: 11, letterSpacing: 0.5 }}>
-                TRAVELSYNC PRECISION TRANSIT
+                TRAVELSYNC INTERCITY NETWORK
               </Text>
               <div
                 style={{

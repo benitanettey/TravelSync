@@ -1,16 +1,26 @@
 "use client";
 
-import { Input, DatePicker, Button, Row, Col } from "antd";
-import { useState } from "react";
+import { DatePicker, Button, Row, Col, AutoComplete, Input } from "antd";
+import dayjs from "dayjs";
+import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const SearchForm = () => {
+const SearchForm = ({ cities = [] }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [from, setFrom] = useState(searchParams.get("from") || "");
-  const [to, setTo] = useState(searchParams.get("to") || "");
-  const [date, setDate] = useState(null);
+  const fromParam = searchParams.get("from") || "";
+  const toParam = searchParams.get("to") || "";
+  const dateParam = searchParams.get("date") || "";
+
+  const [from, setFrom] = useState(fromParam);
+  const [to, setTo] = useState(toParam);
+  const [date, setDate] = useState(() => (dateParam ? dayjs(dateParam, "YYYY-MM-DD") : null));
+
+  const cityOptions = useMemo(
+    () => cities.map((city) => ({ label: city, value: city })),
+    [cities]
+  );
 
   // TODO: BACKEND - Replace text inputs with autocomplete dropdowns
   // Fetch cities/stations from API as user types
@@ -24,35 +34,49 @@ const SearchForm = () => {
   // const [returnDate, setReturnDate] = useState(null);
 
   const handleSearch = () => {
-    // TODO: BACKEND - Validate search inputs
-    // Check that from !== to, date is not in the past, etc.
-    
-    // TODO: BACKEND - Track search analytics
-    // Log popular routes, search patterns for business insights
-    
     const params = new URLSearchParams();
-    if (from) params.set("from", from);
-    if (to) params.set("to", to);
+    if (from.trim()) params.set("from", from.trim());
+    if (to.trim()) params.set("to", to.trim());
     if (date) params.set("date", date.format("YYYY-MM-DD"));
+
+    const existingTimeFilter = searchParams.get("departureWindow");
+    if (existingTimeFilter) {
+      params.set("departureWindow", existingTimeFilter);
+    }
+
     router.push(`/trips?${params.toString()}`);
   };
 
   return (
-    <Row gutter={16} style={{ marginTop: "20px" }}>
+    <Row gutter={[12, 12]} align="middle">
       <Col xs={24} sm={6}>
-        <Input
-          placeholder="From where?"
+        <AutoComplete
+          options={cityOptions}
           value={from}
-          onChange={(e) => setFrom(e.target.value)}
-        />
+          onChange={(value) => setFrom(value || "")}
+          onSelect={(value) => setFrom(String(value))}
+          filterOption={(inputValue, option) =>
+            String(option?.value || "").toLowerCase().includes(inputValue.toLowerCase())
+          }
+          style={{ width: "100%" }}
+        >
+          <Input allowClear placeholder="Departure city" />
+        </AutoComplete>
       </Col>
 
       <Col xs={24} sm={6}>
-        <Input
-          placeholder="Going to?"
+        <AutoComplete
+          options={cityOptions}
           value={to}
-          onChange={(e) => setTo(e.target.value)}
-        />
+          onChange={(value) => setTo(value || "")}
+          onSelect={(value) => setTo(String(value))}
+          filterOption={(inputValue, option) =>
+            String(option?.value || "").toLowerCase().includes(inputValue.toLowerCase())
+          }
+          style={{ width: "100%" }}
+        >
+          <Input allowClear placeholder="Destination city" />
+        </AutoComplete>
       </Col>
 
       <Col xs={24} sm={6}>
@@ -60,12 +84,19 @@ const SearchForm = () => {
           style={{ width: "100%" }}
           value={date}
           onChange={(d) => setDate(d)}
+          format="YYYY-MM-DD"
+          placeholder="Travel date"
         />
       </Col>
 
       <Col xs={24} sm={6}>
-        <Button type="primary" block onClick={handleSearch}>
-          Find Trips
+        <Button
+          type="primary"
+          block
+          onClick={handleSearch}
+          disabled={from.trim() && to.trim() && from.trim().toLowerCase() === to.trim().toLowerCase()}
+        >
+          Explore Departures
         </Button>
       </Col>
     </Row>
